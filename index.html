@@ -65,10 +65,169 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-aotuManLady-编码规范" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/24/aotuManLady-编码规范/" class="article-date">
+  <time datetime="2015-11-24T09:38:02.000Z" itemprop="datePublished">2015-11-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/24/aotuManLady-编码规范/">AotumanLady 编程规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="64_位支持">64 位支持</h3><ul>
+<li><p>优先使用 NSInteger，而不是 int、 long。</p>
+</li>
+<li><p>format 字符串中，禁止使用 %zd %tu。</p>
+</li>
+<li><p>使用 %ld+ (long) 类型转换 或者使用 %@ 形式，以 @() 转换成 NSNumber 类型。</p>
+</li>
+</ul>
+<blockquote>
+<p>更多 64 位支持，阅读博客：<a href="http://blog.sunnyxx.com/2014/12/20/64-bit-tips/" target="_blank" rel="external">64 位支持</a></p>
+</blockquote>
+<h3 id="命名">命名</h3><ul>
+<li><p>禁止使用拼音，实在搞不定的英文单词可以查字典。</p>
+</li>
+<li><p>遵循驼峰式命名规则。</p>
+</li>
+<li><p>点击事件，以 didTapxxx、didClickxxx 形式命名。</p>
+</li>
+<li><p>命名要有意义，禁止 int i，a，b 这种形式命名。</p>
+</li>
+<li><p>使用 Modern ObjectiveC 语义。<a href="http://blog.devtang.com/blog/2012/08/05/use-modern-objective-c/" target="_blank" rel="external">Modern Objective-C 详情</a></p>
+</li>
+<li><p>使用字面量，如@(YES) @42 @”abc” @[ @1, @2, @3 ] @{ @”key1” : @”value1” } 。</p>
+</li>
+<li><p>访问容器类成员尽量使用新的语法，如 dictionary[@”key”] array[0]</p>
+</li>
+<li><p>构造函数返回类型为 instancetype</p>
+</li>
+<li><p>枚举使用 NS_ENUM 或者 NS_OPTIONS</p>
+</li>
+</ul>
+<h3 id="花括号">花括号</h3><ul>
+<li><p>函数、方法、语句块的花括号独占一行，其他的左花括号跟在前一个语法单元后面，中间加一个空格。</p>
+</li>
+<li><p>if 和 while 后面必须有花括号，即使只有一个空语句。</p>
+</li>
+</ul>
+<h3 id="缩写">缩写</h3><ul>
+<li>尽量不使用缩写，对于众所周知的缩写，必须全部大写，比如 ID，URL，HTTP，对于不是众所周知的缩写，需要在项目中维护一个词汇表。</li>
+</ul>
+<h3 id="类型转换">类型转换</h3><ul>
+<li>类型转换必须有注释。</li>
+</ul>
+<h3 id="特殊关键字">特殊关键字</h3><ul>
+<li>除开特殊情况，不得使用 goto。特殊情况是指项目 leader 发起投票，多数项目成员同意。</li>
+</ul>
+<h3 id="注释">注释</h3><ul>
+<li><p>不得嵌套注释。</p>
+</li>
+<li><p>不得用注释禁用代码块。</p>
+</li>
+<li><p>注释与对应的代码应该有相同缩进。</p>
+</li>
+<li><p>接口封装应该在注释中标明接口文档地址。</p>
+</li>
+<li><p>TODO后面必须加上能表明作者的信息，比如 TODO LC … 。</p>
+</li>
+<li><p>没有用的代码删掉，不要注释。</p>
+</li>
+</ul>
+<h3 id="空白符">空白符</h3><ul>
+<li><p>关键字 if、else、while、for、switch 和 return，后面都必须有一个空格。</p>
+</li>
+<li><p>赋值操作符 =、+=、-=、*=、/=、%=、&amp;=、|=、^=、~= 和 !=，前后都必须有一个空格。</p>
+</li>
+<li><p>二元操作符 +、-、*、/、%、&lt;、&lt;=、&gt;、&gt;=、==、!=、&lt;&lt;、&gt;&gt;、&amp;、|、^、&amp;&amp; 和 ||，前后都必须有一个空格。</p>
+</li>
+<li><p>一元操作符 +、-、++、–、!和 ~，操作符和操作数相邻一侧不得加空格，但操作符另一侧必须有一个空格。</p>
+</li>
+<li><p>指针操作符 * 与类型之间必须有一个空格，与变量之间不得有空格。</p>
+</li>
+<li><p>取地址操作符 &amp; 与变量之间不得有空格。</p>
+</li>
+<li><p>组成三元操作符的字符 ? 和 :，两侧必须有一个空格。</p>
+</li>
+<li><p>结构指针和成员操作符 -&gt; 和 .，两侧不得有空格。</p>
+</li>
+<li><p>数组角标的左右括号 [ 和 ]，两侧不得有空格。</p>
+</li>
+<li><p>含有小括号的表达式，与左右小括号相邻处不得有空格。</p>
+</li>
+<li><p>函数名和左括号之间不得有空格。</p>
+</li>
+<li><p>方法前面的 - 和 + 与返回值类型之间必须有一个空格，返回值类型与方法名之间不得有空格，方法签名中冒号两边不得有空格，除非冒号前面没有方法签名。</p>
+</li>
+<li><p>每个逗号分隔的函数 / 方法参数后面必须有一个空格。</p>
+</li>
+<li><p>每个用于分隔语句元素的分号后面加一个空格，每个用于结束语句的分号前面不得有空格。</p>
+</li>
+<li><p>每份代码文件在结尾必须有一个空行。</p>
+</li>
+<li><p>注意不允许提交只有一个空格或者空行的 pr 。</p>
+</li>
+</ul>
+<h3 id="函数和方法">函数和方法</h3><ul>
+<li><p>私有函数用 static 标明，私有方法在最后加下划线。</p>
+</li>
+<li><p>方法和函数名应该是表示动作的单词或短语。</p>
+</li>
+<li><p>指定初始化方法必须用编译器指令标出 NS_DESIGNATED_INITIALIZER 。</p>
+</li>
+<li><p>避免带有副作用的 getter 方法。</p>
+</li>
+</ul>
+<h3 id="表达式和语句">表达式和语句</h3><ul>
+<li>每个 case 中的 break，必须对齐关键字 case，而不是 case 的内容代码块。</li>
+</ul>
+<h3 id="类">类</h3><ul>
+<li><p>类成员变量必须以下划线开头。</p>
+</li>
+<li><p>@property 后面必须有一个空格，比如 @property (nonatomic, copy)，括号中分割属性的逗号后面必须有一个空格。</p>
+</li>
+<li><p>在 protocol 中声明的 property 必须在类实现中有对应的 synthesize。</p>
+</li>
+</ul>
+<h3 id="内存泄露">内存泄露</h3><ul>
+<li><p>Block类型的属性，必须用 @weakify。</p>
+</li>
+<li><p>ReactiveCocoa，必须有 @weakify。</p>
+</li>
+<li><p>xib 和 storyboard 绑定的变量，用 weak。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/aotuManLady-编码规范/" data-id="cihd6wmye000202s6l0boyblp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-AotumanLady-写作规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/24/AotumanLady-写作规范/" class="article-date">
-  <time datetime="2015-11-24T09:24:55.000Z" itemprop="datePublished">2015-11-24</time>
+  <time datetime="2015-11-24T09:27:24.000Z" itemprop="datePublished">2015-11-24</time>
 </a>
     
   </div>
@@ -100,7 +259,7 @@
 <li><p>数字与非标点的中文之间需要有一个空格</p>
 <p>  best:<br><code>我们一共有一百位员工。</code></p>
 <p>  right:<br><code>我们一共有 100 位员工。</code></p>
-<p>  error:<br><code>我们一共有 100 位员工。</code></p>
+<p>  error:<br><code>我们一共有100位员工。</code></p>
 </li>
 <li><p>数字与单位之间需要一个空格</p>
 <p>  best:<br><code>5 GB</code></p>
@@ -114,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="cihd6fayd0000yls6t7dtuhko" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="cihd6wmxy000002s66y9mu75a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -788,120 +947,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/Google-Objective-C-Style-Guide-中文版/" data-id="cihd6fays0003yls6qe7seom0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-aotuManLady-编码规范" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/24/aotuManLady-编码规范/" class="article-date">
-  <time datetime="2015-11-24T08:57:19.000Z" itemprop="datePublished">2015-11-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/24/aotuManLady-编码规范/">AotumanLady 编程规范</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="64_位支持">64 位支持</h3><ul>
-<li>优先使用 NSInteger，而不是 int、 long。</li>
-<li>format 字符串中，禁止使用 %zd %tu。</li>
-<li>使用 %ld+ (long) 类型转换 或者使用 %@ 形式，以 @() 转换成 NSNumber 类型。</li>
-</ul>
-<blockquote>
-<p>更多 64 位支持，阅读博客：<a href="http://blog.sunnyxx.com/2014/12/20/64-bit-tips/" target="_blank" rel="external">64 位支持</a></p>
-</blockquote>
-<h3 id="命名">命名</h3><ul>
-<li>禁止使用拼音，实在搞不定的英文单词可以查字典。</li>
-<li>遵循驼峰式命名规则。</li>
-<li>点击事件，以 didTapxxx、didClickxxx 形式命名。</li>
-<li>命名要有意义，禁止 int i，a，b 这种形式命名。</li>
-<li>使用 Modern ObjectiveC 语义。</li>
-<li>使用字面量，如@(YES) @42 @”abc” @[ @1, @2, @3 ] @{ @”key1” : @”value1” }</li>
-<li>访问容器类成员尽量使用新的语法，如 dictionary[@”key”] array[0]</li>
-<li>构造函数返回类型为 instancetype</li>
-<li>枚举使用 NS_ENUM 或者 NS_OPTIONS</li>
-</ul>
-<h3 id="花括号">花括号</h3><ul>
-<li>函数、方法、语句块的花括号独占一行，其他的左花括号跟在前一个语法单元后面，中间加一个空格。</li>
-<li>if 和 while 后面必须有花括号，即使只有一个空语句。</li>
-</ul>
-<h3 id="缩写">缩写</h3><ul>
-<li>尽量不使用缩写，对于众所周知的缩写，必须全部大写，比如 ID，URL，HTTP，对于不是众所周知的缩写，需要在项目中维护一个词汇表。</li>
-</ul>
-<h3 id="类型转换">类型转换</h3><ul>
-<li>类型转换必须有注释。</li>
-</ul>
-<h3 id="特殊关键字">特殊关键字</h3><ul>
-<li>除开特殊情况，不得使用 goto。特殊情况是指项目 leader 发起投票，多数项目成员同意。</li>
-</ul>
-<h3 id="注释">注释</h3><ul>
-<li>不得嵌套注释。</li>
-<li>不得用注释禁用代码块。</li>
-<li>注释与对应的代码应该有相同缩进。</li>
-<li>接口封装应该在注释中标明接口文档地址。</li>
-<li>TODO后面必须加上能表明作者的信息，比如 TODO CXL …</li>
-<li>没有用的代码删掉，不要注释</li>
-</ul>
-<h3 id="空白符">空白符</h3><ul>
-<li>关键字 if、else、while、for、switch 和 return，后面都必须有一个空格。</li>
-<li>赋值操作符 =、+=、-=、*=、/=、%=、&amp;=、|=、^=、~= 和 !=，前后都必须有一个空格。</li>
-<li>二元操作符 +、-、*、/、%、&lt;、&lt;=、&gt;、&gt;=、==、!=、&lt;&lt;、&gt;&gt;、&amp;、|、^、&amp;&amp; 和 ||，前后都必须有一个空格。</li>
-<li>一元操作符 +、-、++、–、!和 ~，操作符和操作数相邻一侧不得加空格，但操作符另一侧必须有一个空格。</li>
-<li>指针操作符 * 与类型之间必须有一个空格，与变量之间不得有空格。</li>
-<li>取地址操作符 &amp; 与变量之间不得有空格。</li>
-<li>组成三元操作符的字符 ? 和 :，两侧必须有一个空格。</li>
-<li>结构指针和成员操作符 -&gt; 和 .，两侧不得有空格</li>
-<li>数组角标的左右括号 [ 和 ]，两侧不得有空格。</li>
-<li>含有小括号的表达式，与左右小括号相邻处不得有空格。</li>
-<li>函数名和左括号之间不得有空格，</li>
-<li>方法前面的 - 和 + 与返回值类型之间必须有一个空格，返回值类型与方法名之间不得有空格，方法签名中冒号两边不得有空格，除非冒号前面没有方法签名。</li>
-<li>每个逗号分隔的函数 / 方法参数后面必须有一个空格</li>
-<li>每个用于分隔语句元素的分号后面加一个空格，每个用于结束语句的分号前面不得有空格</li>
-<li>每份代码文件在结尾必须有一个空行</li>
-<li>注意不允许提交只有一个空格或者空行的 pr</li>
-</ul>
-<h3 id="函数和方法">函数和方法</h3><ul>
-<li>私有函数用 static 标明，私有方法在最后加下划线</li>
-<li>方法和函数名应该是表示动作的单词或短语</li>
-<li>指定初始化方法必须用编译器指令标出 NS_DESIGNATED_INITIALIZER</li>
-<li>避免带有副作用的 getter 方法。</li>
-</ul>
-<h3 id="表达式和语句">表达式和语句</h3><ul>
-<li>每个 case 中的 break，必须对齐关键字 case，而不是 case 的内容代码块。</li>
-</ul>
-<h3 id="类">类</h3><ul>
-<li>类成员变量必须以下划线开头。</li>
-<li>@property 后面必须有一个空格，比如 @property (nonatomic, copy)，括号中分割属性的逗号后面必须有一个空格。</li>
-<li>在 protocol 中声明的 property 必须在类实现中有对应的 synthesize。</li>
-</ul>
-<h3 id="内存泄露">内存泄露</h3><ul>
-<li>Block类型的属性，必须用 @weakify</li>
-<li>ReactiveCocoa，必须有 @weakify</li>
-<li>xib 和 storyboard 绑定的变量，用 weak</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/aotuManLady-编码规范/" data-id="cihd6fayq0002yls6lsilb7l8" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/Google-Objective-C-Style-Guide-中文版/" data-id="cihd6wmyf000302s6oiwud4uu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -946,7 +992,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihd6fayo0001yls6pjlxobop" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihd6wmyb000102s6a0nhiqs2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -983,15 +1029,15 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       <ul>
         
           <li>
+            <a href="/2015/11/24/aotuManLady-编码规范/">AotumanLady 编程规范</a>
+          </li>
+        
+          <li>
             <a href="/2015/11/24/AotumanLady-写作规范/">AotumanLady 写作规范</a>
           </li>
         
           <li>
             <a href="/2015/11/24/Google-Objective-C-Style-Guide-中文版/">Google Objective C Style Guide 中文版</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/24/aotuManLady-编码规范/">AotumanLady 编程规范</a>
           </li>
         
           <li>
