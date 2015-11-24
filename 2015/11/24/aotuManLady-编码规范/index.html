@@ -9,14 +9,14 @@
 优先使用 NSInteger，而不是 int、 long。
 format 字符串中，禁止使用 %zd %tu。
 使用 %ld+ (long) 类型转换 或者使用 %@ 形式，以 @() 转换成 NSNumber 类型。
- 更多 64 位支持，阅读博客：64 位支持
 
 
-###命名
+更多 64 位支持，阅读博客：64 位支持
 
+命名
 禁止使用拼音，实在搞不定的英文单词可以查字典。
 遵循驼峰式命名规则。
-点击事件，以 didTapxxx">
+点击事件，以 didTapxxx、did">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AotumanLady 编程规范">
 <meta property="og:url" content="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/aotuManLady-编码规范/index.html">
@@ -25,29 +25,29 @@ format 字符串中，禁止使用 %zd %tu。
 优先使用 NSInteger，而不是 int、 long。
 format 字符串中，禁止使用 %zd %tu。
 使用 %ld+ (long) 类型转换 或者使用 %@ 形式，以 @() 转换成 NSNumber 类型。
- 更多 64 位支持，阅读博客：64 位支持
 
 
-###命名
+更多 64 位支持，阅读博客：64 位支持
 
+命名
 禁止使用拼音，实在搞不定的英文单词可以查字典。
 遵循驼峰式命名规则。
-点击事件，以 didTapxxx">
-<meta property="og:updated_time" content="2015-11-24T08:56:04.000Z">
+点击事件，以 didTapxxx、did">
+<meta property="og:updated_time" content="2015-11-24T08:57:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AotumanLady 编程规范">
 <meta name="twitter:description" content="64 位支持
 优先使用 NSInteger，而不是 int、 long。
 format 字符串中，禁止使用 %zd %tu。
 使用 %ld+ (long) 类型转换 或者使用 %@ 形式，以 @() 转换成 NSNumber 类型。
- 更多 64 位支持，阅读博客：64 位支持
 
 
-###命名
+更多 64 位支持，阅读博客：64 位支持
 
+命名
 禁止使用拼音，实在搞不定的英文单词可以查字典。
 遵循驼峰式命名规则。
-点击事件，以 didTapxxx">
+点击事件，以 didTapxxx、did">
   
     <link rel="alternative" href="/atom.xml" title="李二狗的技术博客" type="application/atom+xml">
   
@@ -100,7 +100,7 @@ format 字符串中，禁止使用 %zd %tu。
         <section id="main"><article id="post-aotuManLady-编码规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/24/aotuManLady-编码规范/" class="article-date">
-  <time datetime="2015-11-24T08:56:04.000Z" itemprop="datePublished">2015-11-24</time>
+  <time datetime="2015-11-24T08:57:19.000Z" itemprop="datePublished">2015-11-24</time>
 </a>
     
   </div>
@@ -122,12 +122,12 @@ format 字符串中，禁止使用 %zd %tu。
         <h3 id="64_位支持">64 位支持</h3><ul>
 <li>优先使用 NSInteger，而不是 int、 long。</li>
 <li>format 字符串中，禁止使用 %zd %tu。</li>
-<li><p>使用 %ld+ (long) 类型转换 或者使用 %@ 形式，以 @() 转换成 NSNumber 类型。</p>
-<p> 更多 64 位支持，阅读博客：<a href="http://blog.sunnyxx.com/2014/12/20/64-bit-tips/" target="_blank" rel="external">64 位支持</a></p>
-</li>
+<li>使用 %ld+ (long) 类型转换 或者使用 %@ 形式，以 @() 转换成 NSNumber 类型。</li>
 </ul>
-<p>###命名</p>
-<ul>
+<blockquote>
+<p>更多 64 位支持，阅读博客：<a href="http://blog.sunnyxx.com/2014/12/20/64-bit-tips/" target="_blank" rel="external">64 位支持</a></p>
+</blockquote>
+<h3 id="命名">命名</h3><ul>
 <li>禁止使用拼音，实在搞不定的英文单词可以查字典。</li>
 <li>遵循驼峰式命名规则。</li>
 <li>点击事件，以 didTapxxx、didClickxxx 形式命名。</li>
@@ -138,25 +138,20 @@ format 字符串中，禁止使用 %zd %tu。
 <li>构造函数返回类型为 instancetype</li>
 <li>枚举使用 NS_ENUM 或者 NS_OPTIONS</li>
 </ul>
-<p>###花括号</p>
-<ul>
+<h3 id="花括号">花括号</h3><ul>
 <li>函数、方法、语句块的花括号独占一行，其他的左花括号跟在前一个语法单元后面，中间加一个空格。</li>
 <li>if 和 while 后面必须有花括号，即使只有一个空语句。</li>
 </ul>
-<p>###缩写</p>
-<ul>
+<h3 id="缩写">缩写</h3><ul>
 <li>尽量不使用缩写，对于众所周知的缩写，必须全部大写，比如 ID，URL，HTTP，对于不是众所周知的缩写，需要在项目中维护一个词汇表。</li>
 </ul>
-<p>###类型转换</p>
-<ul>
+<h3 id="类型转换">类型转换</h3><ul>
 <li>类型转换必须有注释。</li>
 </ul>
-<p>###特殊关键字</p>
-<ul>
+<h3 id="特殊关键字">特殊关键字</h3><ul>
 <li>除开特殊情况，不得使用 goto。特殊情况是指项目 leader 发起投票，多数项目成员同意。</li>
 </ul>
-<p>###注释</p>
-<ul>
+<h3 id="注释">注释</h3><ul>
 <li>不得嵌套注释。</li>
 <li>不得用注释禁用代码块。</li>
 <li>注释与对应的代码应该有相同缩进。</li>
@@ -164,8 +159,7 @@ format 字符串中，禁止使用 %zd %tu。
 <li>TODO后面必须加上能表明作者的信息，比如 TODO CXL …</li>
 <li>没有用的代码删掉，不要注释</li>
 </ul>
-<p>###空白符</p>
-<ul>
+<h3 id="空白符">空白符</h3><ul>
 <li>关键字 if、else、while、for、switch 和 return，后面都必须有一个空格。</li>
 <li>赋值操作符 =、+=、-=、*=、/=、%=、&amp;=、|=、^=、~= 和 !=，前后都必须有一个空格。</li>
 <li>二元操作符 +、-、*、/、%、&lt;、&lt;=、&gt;、&gt;=、==、!=、&lt;&lt;、&gt;&gt;、&amp;、|、^、&amp;&amp; 和 ||，前后都必须有一个空格。</li>
@@ -183,25 +177,21 @@ format 字符串中，禁止使用 %zd %tu。
 <li>每份代码文件在结尾必须有一个空行</li>
 <li>注意不允许提交只有一个空格或者空行的 pr</li>
 </ul>
-<p>###函数和方法</p>
-<ul>
+<h3 id="函数和方法">函数和方法</h3><ul>
 <li>私有函数用 static 标明，私有方法在最后加下划线</li>
 <li>方法和函数名应该是表示动作的单词或短语</li>
 <li>指定初始化方法必须用编译器指令标出 NS_DESIGNATED_INITIALIZER</li>
 <li>避免带有副作用的 getter 方法。</li>
 </ul>
-<p>###表达式和语句</p>
-<ul>
+<h3 id="表达式和语句">表达式和语句</h3><ul>
 <li>每个 case 中的 break，必须对齐关键字 case，而不是 case 的内容代码块。</li>
 </ul>
-<p>###类</p>
-<ul>
+<h3 id="类">类</h3><ul>
 <li>类成员变量必须以下划线开头。</li>
 <li>@property 后面必须有一个空格，比如 @property (nonatomic, copy)，括号中分割属性的逗号后面必须有一个空格。</li>
 <li>在 protocol 中声明的 property 必须在类实现中有对应的 synthesize。</li>
 </ul>
-<p>###内存泄露</p>
-<ul>
+<h3 id="内存泄露">内存泄露</h3><ul>
 <li>Block类型的属性，必须用 @weakify</li>
 <li>ReactiveCocoa，必须有 @weakify</li>
 <li>xib 和 storyboard 绑定的变量，用 weak</li>
@@ -210,7 +200,7 @@ format 字符串中，禁止使用 %zd %tu。
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/aotuManLady-编码规范/" data-id="cihd5e1r00000ugs6zigu3b4q" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/aotuManLady-编码规范/" data-id="cihd5fo0u0000uus6cefitb9r" class="article-share-link">Share</a>
       
       
     </footer>
