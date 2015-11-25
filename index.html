@@ -65,10 +65,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-AotumanLady-代码分支管理规范" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Cocoa-编码规范中文版" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/25/AotumanLady-代码分支管理规范/" class="article-date">
-  <time datetime="2015-11-25T01:30:29.000Z" itemprop="datePublished">2015-11-25</time>
+    <a href="/2015/11/25/Cocoa-编码规范中文版/" class="article-date">
+  <time datetime="2015-11-25T05:57:27.000Z" itemprop="datePublished">2015-11-25</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/25/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
+      <a class="article-title" href="/2015/11/25/Cocoa-编码规范中文版/">Cocoa 编码规范中文版</a>
     </h1>
   
 
@@ -87,43 +87,181 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="介绍">介绍</h3><pre><code>这是我们团队的 Git 分支管理规范。每个人对工具的使用往往各有偏好，各种方法各有利弊，无所谓对错。但涉及团队协作的方面需要有一些一致的规范，所以请大家务必遵守。
-</code></pre><p>除了一致性之外，这个规范的目的是以下几点：</p>
+        <blockquote>
+<p>Code Naming Basics 代码命名基础<br>在面向对象软件库的设计过程中，开发人员经常忽视对类，方法，函数，常量以及其他编程接口元素的命名。本节讨论大多数Cocoa接口的一些命名约定。</p>
+<h3 id="General_Principles_一般性原则">General Principles 一般性原则</h3><h4 id="Clarity_清晰性">Clarity 清晰性</h4><ul>
+<li>最好是既清晰又简短，但不要为简短而丧失清晰性。</li>
+</ul>
+</blockquote>
+<p><code>insertObject:atIndex:</code> good</p>
+<p><code>insert:at:</code> bad（不清晰；要插入什么？“at”表示什么？）</p>
+<p><code>removeObjectAtIndex:</code> good</p>
+<p><code>removeObject:</code> ok<br>(这样也不错，因为方法是移除作为参数的对象)</p>
+<p><code>remove</code> bad (不清晰；要移除什么？)</p>
+<hr>
 <ul>
-<li><p>确保可以轻易确定特定时间发布或运行的版本。在新发布的程序存在重大缺陷时，可以尽快 rollback 到上一个稳定版本。</p>
+<li>名称通常不缩写，即使名称很长，也要拼写完全</li>
+</ul>
+<p><code>destinationSelection</code> good</p>
+<p><code>destSel</code> bad</p>
+<p><code>setBackgroundColor:</code> good</p>
+<p><code>setBkgdColor:</code> 不清晰</p>
+<hr>
+<blockquote>
+<p>你可能会认为某个缩写广为人知，但有可能并非如此，尤其是当你的代码被来自不同文化和语言背景的开发人员所使用时。</p>
+</blockquote>
+<ul>
+<li>然而，你可以使用少数非常常见，历史悠久的缩写。请参考：”可接受的缩略名“一节</li>
+<li>避免使用有歧义的 API 名称，如那些能被理解成多种意思的方法名称</li>
+</ul>
+<p><code>sendPort</code> bad 是发送端口还是返回一个发送端口？</p>
+<p><code>displayName</code> bad 是显示一个名称还是返回用户界面中控件的标题？</p>
+<h3 id="Consistency_一致性">Consistency 一致性</h3><ul>
+<li><p>尽可能使用与 Cocoa 编程接口命名保持一致的名称。如果你不太确定某个命名的一致性，请浏览一下头文件或参考文档中的范例</p>
 </li>
-<li><p>在需要修复紧急 bug 并尽快发布时，可以只发布必要的 bugfix 而不    同时发布还不应发布的其他改动。</p>
+<li><p>在使用多态方法的类中，命名的一致性非常重要。在不同类中实现相同功能的方法应该具有相同的名称</p>
 </li>
 </ul>
-<h3 id="branch_和_tag">branch 和 tag</h3><pre><code>每个官方的 repo 有且仅有以下的 <span class="keyword">branch </span>和 tag。
-</code></pre><ul>
-<li>Branch: master 和 release。其中 master 对应目前的开发分支，所有的 pull request 都应该发到这个分支。release 是当前发布的分支，在这个分支只能增加从 master cherrypick 过来的 commit。详见本文后面的说明。</li>
-<li>Tag: 对应每个发布版本的 tag。SDK 和应用程序的 tag 遵照 .. 的命名，如 2.5.1；服务端程序的 tag 以发布的日期命名，如 2014.11.13，如果有 bugfix，则在后面增加小写字母，如 2014.11.13 后是 2014.11.13a，然后是 2014.11.13b。<br>目前还有部分 repo 包含多个独立部署的项目（如 uluru-platform）。在这样的 repo 打 tag 时需要附上项目名做前缀，如 bigquery-2.5.1。但我们需要逐步把这些项目拆分到独立的 repo。</li>
+<p><code>- (int) tag</code> bad 在 NSView, NSCell, NSControl 中有定义</p>
+<p><code>- (void) setStringValue:(NSString *)</code> bad 在许多 Cocoa classes 中有定义</p>
+<p>请参考“方法参数”一节。</p>
+<h3 id="No_Self_Reference_不要自我指涉">No Self Reference 不要自我指涉</h3><ul>
+<li>不要名称自我指涉</li>
 </ul>
-<h3 id="发布新版流程">发布新版流程</h3><ol>
-<li>确保所有要发布的 pull request 都已经 merge 到 master；</li>
-<li>使用 master branch 的代码进行测试，如果发现 bug，把对应的 bugfix merge 到 master；</li>
-<li>删除旧的 release branch，并从当前的 master 创建新的 release branch；</li>
-<li>在 Jenkins 上从 release branch 发起新的 build 并发布；</li>
-<li>发布完成后在当前的 release branch 打上对应版本的 tag。</li>
-</ol>
-<h3 id="Bugfix_流程">Bugfix 流程</h3><pre><code>这里的 <span class="keyword">bugfix </span>指的是修复已经发布的程序（release <span class="keyword">branch）中的缺陷。</span>
-</code></pre><ol>
-<li>master 里的 bug 请直接 merge bugfix 到 master。<br>如果此缺陷在 master 中还存在，请先 merge bugfix 到 master，否则跳到下一步；</li>
-<li>在 release branch 从 master cherrypick 修复该缺陷的一个或多个 commit；</li>
-<li>在 Jenkins 上发布当前 release branch；</li>
-<li>发布完成后在当前的 release branch 打上递增的 tag。比如，如果上一个 tag 是 2.5.1，这个 tag 应该是 2.5.2；如果上一个是 2014.11.13，这个就是 2014.11.13a。</li>
-</ol>
-<h3 id="其他">其他</h3><ul>
-<li>并不是每个 bug 都有专门发布 bugfix 版的必要，对于不紧急的 bug，可以在 master 里 fix 后随下一个版本发布。</li>
-<li>在一个官方 repo 下只应该有以上说的 branch 和 tag，在开发过程中使用到的 feature branch 等请都放在个人的 fork，一律通过向 master 发 pull request 的方式给官方 repo 提交代码。</li>
+<p><code>NSString</code> okey</p>
+<p><code>NSStringObject</code> bad 自我指涉</p>
+<ul>
+<li>掩码（可使用位操作进行组合）和用作通知名称的常量不受该约定限制</li>
 </ul>
-<p>参考于 <a href="https://open.leancloud.cn/git-branch-guide.html" target="_blank" rel="external">代码分支管理指南</a></p>
+<p><code>NSUnderlineByWordMask</code> okey</p>
+<p><code>NSTableViewColumnDidMoveNotification</code> okey</p>
+<h3 id="Prefixes_前缀">Prefixes 前缀</h3><blockquote>
+<p>前缀是名称的重要组成部分。它们可以区分软件的功能范畴。通常，软件会被打包成一个框架或多个紧密相关的框架（如 Foundation 和 Application Kit 框架）。前缀可以防止第三方开发者与苹果公司之间的命名冲突（同样也可防止苹果内部不同框架之间的命名冲突）</p>
+</blockquote>
+<ul>
+<li>前缀有规定的格式。它由两到三个大写字符组成，不能使用下划线与子前缀<br>前缀</li>
+</ul>
+<p><code>Foundation NS</code></p>
+<p><code>Application Kit NS</code></p>
+<p><code>Address Book AB</code></p>
+<p><code>Interface Builder IB</code> </p>
+<ul>
+<li>命名 class，protocol，structure，函数，常量时使用前缀；命名成员方法时不使用前缀，因为方法已经在它所在类的命名空间种；同理，命名结构体字段时也不使用前缀</li>
+</ul>
+<h3 id="Typographic_Conventions_书写约定">Typographic Conventions 书写约定</h3><p>在为 API 元素命名时，请遵循如下一些简单的书写约定</p>
+<ul>
+<li>对于包含多个单词的名称，不要使用标点符号作为名称的一部分或作为分隔符（下划线，破折号等）；</li>
+<li><p>此外，大写每个单词的首字符并将这些单词连续拼写在一起。请注意以下限制：</p>
+<ol>
+<li>方法名小写第一个单词的首字符，大写后续所有单词的首字符。方法名不使用前缀。如： fileExistsAtPath:isDirectory: 如果方法名以一个广为人知的大写首字母缩略词开头，该规则不适用，如：NSImage 中的 TIFFRepresentation</li>
+<li><p>函数名和常量名使用与其关联类相同的前缀，并且要大写前缀后面所有单词的首字符。如：NSRunAlertPanel，NSCellDisabled<br>3.避免使用下划线来表示名称的私有属性。苹果公司保留该方式的使用。如果第三方这样使用可能会导致命名冲突，他们可能会在无意中用自己的方法覆盖掉已有的私有方法，这会导致严重的后果。</p>
+<p> 请参考“私有方法”一节以了解私有 API 的命名约定的建议</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="Class_and_Protocol_Names_类与协议命名">Class and Protocol Names 类与协议命名</h3><pre><code>类名应包含一个明确描述该类（或类的对象）是什么或做什么的名词。类名要有合适的前缀（请参考“前缀”一节）。Foundation 及 Application Kit 有很多这样例子，如：<span class="built_in">NSString</span>, <span class="built_in">NSData</span>, <span class="built_in">NSScanner</span>, <span class="built_in">NSApplication</span>, <span class="built_in">NSButton</span> 以及 <span class="built_in">NSEvent</span>。
+</code></pre><p>协议应该根据对方法的行为分组方式来命名。</p>
+<ul>
+<li>大多数协议仅组合一组相关的方法，而不关联任何类，这种协议的命名应该使用动名词(ing)，以不与类名混淆。<br>代码<br>点评<br>NSLocking<br>good<br>NSLock<br>糟糕，它看起来像类名<br>● 有些协议组合一些彼此无关的方法（这样做是避免创建多个独立的小协议）。这样的协议倾向于与某个类关联在一起，该类是协议的主要体现者。在这种情形，我们约定协议的名称与该类同名。NSObject 协议就是这样一个例子。这个协议组合一组彼此无关的方法，有用于查询对象在其类层次中位置的方法，有使之能调用特殊方法的方法以及用于增减引用计数的方法。由于 NSObject 是这些方法的主要体现者，所以我们用类的名称命名这个协议。</li>
+</ul>
+<h3 id="Header_Files_头文件">Header Files 头文件</h3><p>头文件的命名方式很重要，我们可以根据其命名知晓头文件的内容。</p>
+<ul>
+<li>声明孤立的类或协议：将孤立的类或协议声明放置在单独的头文件中，该头文件名称与类或协议同名<br>头文件<br>声明<br>NSApplication.h<br>NSApplication 类</li>
+<li>声明相关联的类或协议：将相关联的声明（类，类别及协议) 放置在一个头文件中，该头文件名称与主要的类/类别/协议的名字相同。<br>头文件<br>声明<br>NSString.h<br>NSString 和 NSMutableString 类<br>NSLock.h<br>NSLocking 协议和 NSLock, NSConditionLock, NSRecursiveLock 类</li>
+<li>包含框架头文件：每个框架应该包含一个与框架同名的头文件，该头文件包含该框架所有公开的头文件。<br>头文件<br>框架<br>Foundation.h<br>Foundation.framework</li>
+<li>为已有框架中的某个类扩展 API：如果要在一个框架中声明属于另一个框架某个类的范畴类的方法，该头文件的命名形式为：原类名+“Additions”。如 Application Kit 中的 NSBundleAdditions.h </li>
+<li>相关联的函数与数据类型：将相联的函数，常量，结构体以及其他数据类型放置到一个头文件中，并以合适的名字命名。如 Application Kit 中的 NSGraphics.h<br>Naming Methods 方法命名</li>
+</ul>
+<h3 id="General_Rules_一般性规则">General Rules 一般性规则</h3><p>为方法命名时，请考虑如下一些一般性规则：</p>
+<ul>
+<li><p>小写第一个单词的首字符，大写随后单词的首字符，不使用前缀。请参考“书写约定”一节。有两种例外情况：</p>
+<ol>
+<li>方法名以广为人知的大写字母缩略词（如TIFF or PDF）开头；</li>
+<li>私有方法可以使用统一的前缀来分组和辨识，请参考“私有方法”一节</li>
+</ol>
+<p>表示对象行为的方法，名称以动词开头：</p>
+</li>
+</ul>
+<p><code>- (void) invokeWithTarget:(id)target:</code><br><code>- (void) selectTabViewItem:(NSTableViewItem *)tableViewItem</code></p>
+<p>名称中不要出现 do 或 does，因为这些助动词没什么实际意义。也不要在动词前使用副词或形容词修饰</p>
+<ul>
+<li>如果方法返回方法接收者的某个属性，直接用属性名称命名。不要使用 get，除非是间接返回一个或多个值。请参考“访问方法”一节。</li>
+</ul>
+<p><code>- (NSSize) cellSize;</code> good</p>
+<p><code>- (NSSize) calcCellSize;</code> bad</p>
+<p><code>- (NSSize) getCellSize;</code> bad</p>
+<ul>
+<li>参数要用描述该参数的关键字命名</li>
+</ul>
+<p><code>- (void) sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;</code> good</p>
+<p><code>- (void) sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;</code> bad</p>
+<ul>
+<li>参数前面的单词要能描述该参数。</li>
+</ul>
+<p><code>- (id) viewWithTag:(int)aTag;</code> god</p>
+<p><code>- (id) taggedView:(int)aTag;</code>bad</p>
+<ul>
+<li>细化基类中的已有方法：创建一个新方法，其名称是在被细化方法名称后面追加参数关键词</li>
+</ul>
+<p><code>- (id) initWithFrame:(NSRect)frameRect;</code></p>
+<p>NSView</p>
+<figure class="highlight"><figcaption><span>(id) initWithFrame:(NSRect)frameRect mode:(ind)aMode cellClass:(Class)factoryId numberOfRows:(int)rowsHigh numberOfColumns:(int)colsWide;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;NSMatrix - NSView &#30340;&#23376;&#31867;&#10;&#10;* &#19981;&#35201;&#20351;&#29992; and &#26469;&#36830;&#25509;&#29992;&#23646;&#24615;&#20316;&#21442;&#25968;&#20851;&#38190;&#23383;&#10;&#10;``- (int) runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;`` god&#10;&#10;``- (int) runModalForDirectory:(NSString *)path addFile:(NSString *)name addTypes:(NSArray *)fileTypes;&#10; `` bad&#10;&#10;&#34429;&#28982;&#19978;&#38754;&#30340;&#20363;&#23376;&#20013;&#20351;&#29992; add &#30475;&#36215;&#26469;&#20063;&#19981;&#38169;&#65292;&#20294;&#24403;&#20320;&#26041;&#27861;&#26377;&#22826;&#22810;&#21442;&#25968;&#20851;&#38190;&#23383;&#26102;&#23601;&#26377;&#38382;&#39064;&#12290;&#10;&#10;* &#22914;&#26524;&#26041;&#27861;&#25551;&#36848;&#20004;&#31181;&#29420;&#31435;&#30340;&#34892;&#20026;&#65292;&#20351;&#29992; and &#26469;&#20018;&#25509;&#23427;&#20204;&#10; &#10; ``- (BOOL) openFile:(NSString *)fullPath withApplication:(NSString *)appName andDeactivate:(BOOL)flag;``&#10; &#10; NSWorkspace &#10;&#10;## Accessor Methods &#35775;&#38382;&#26041;&#27861;&#10;&#10;&#35775;&#38382;&#26041;&#27861;&#26159;&#23545;&#35937;&#23646;&#24615;&#30340;&#35835;&#21462;&#19982;&#35774;&#32622;&#26041;&#27861;&#12290;&#20854;&#21629;&#21517;&#26377;&#29305;&#23450;&#30340;&#26684;&#24335;&#20381;&#36182;&#20110;&#23646;&#24615;&#30340;&#25551;&#36848;&#20869;&#23481;&#12290;&#10;* &#22914;&#26524;&#23646;&#24615;&#26159;&#29992;&#21517;&#35789;&#25551;&#36848;&#30340;&#65292;&#21017;&#21629;&#21517;&#26684;&#24335;&#20026;&#65306;&#10;```- (void) setNoun:(type)aNoun;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><figcaption><span>(type) noun;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#20363;&#22914;&#65306;&#10;&#10;```- (void) setgColor:(NSColor *)aColor;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><figcaption><span>(NSColor *) color;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;* &#22914;&#26524;&#23646;&#24615;&#26159;&#29992;&#24418;&#23481;&#35789;&#25551;&#36848;&#30340;&#65292;&#21017;&#21629;&#21517;&#26684;&#24335;&#20026;&#65306;&#10;* &#10;``- (void) setAdjective:(BOOL)flag;``&#10;&#10;``- (BOOL) isAdjective;``&#10;&#10;&#20363;&#22914;&#65306;&#10;&#10;``- (void) setEditable:(BOOL)flag;``&#10;&#10;``- (BOOL) isEditable;``&#10;&#10;* &#22914;&#26524;&#23646;&#24615;&#26159;&#29992;&#21160;&#35789;&#25551;&#36848;&#30340;&#65292;&#21017;&#21629;&#21517;&#26684;&#24335;&#20026;&#65306;&#65288;&#21160;&#35789;&#35201;&#29992;&#29616;&#22312;&#26102;&#26102;&#24577;&#65289;&#10;&#10;``- (void) setVerbObject:(BOOL)flag;``&#10;&#10;``- (BOOL) verbObject;``&#10;&#10;&#20363;&#22914;&#65306;&#10;&#10;``- (void) setShowAlpha:(BOOL)flag;``&#10;&#10;``- (BOOL) showsAlpha;``&#10;&#10;* &#19981;&#35201;&#20351;&#29992;&#21160;&#35789;&#30340;&#36807;&#21435;&#20998;&#35789;&#24418;&#24335;&#20316;&#24418;&#23481;&#35789;&#20351;&#29992;&#10;&#10;``- (void) setAcceptsGlyphInfo:(BOOL)flag;`` god&#10;&#10;``- (BOOL) acceptsGlyphInfo;`` god&#10; &#10;``- (void) setGlyphInfoAccepted:(BOOL)flag;``bad&#10;&#10;``- (BOOL) glyphInfoAccepted;`` bad&#10; &#38169;&#10;* &#21487;&#20197;&#20351;&#29992;&#24773;&#24577;&#21160;&#35789;&#65288;can, should, will &#31561;&#65289;&#26469;&#25552;&#39640;&#28165;&#26224;&#24615;&#65292;&#20294;&#19981;&#35201;&#20351;&#10;&#29992; do &#25110; does&#10;&#10;``- (void) setCanHide:(BOOL)flag;``god&#10;&#10;``- (BOOL) canHide;`` god&#10;&#10;``- (void) setShouldCloseDocument:(BOOL)flag;`` god&#10;&#10;``- (void) shouldCloseDocument;`` god&#10; &#10;``- (void) setDoseAcceptGlyphInfo:(BOOL)flag;`` bad&#10;&#10;``- (BOOL) doseAcceptGlyphInfo;`` bad&#10; &#10;*  &#21482;&#26377;&#22312;&#26041;&#27861;&#38656;&#35201;&#38388;&#25509;&#36820;&#22238;&#22810;&#20010;&#20540;&#30340;&#24773;&#20917;&#19979;&#65292;&#25165;&#20351;&#29992; get&#10;&#10;``- (void) getLineDash:(float *)pattern count:(int *)count phase:(float *)phase;``&#10;&#10; NSBezierPath&#10;&#10;&#20687;&#19978;&#38754;&#36825;&#26679;&#30340;&#26041;&#27861;&#65292;&#22312;&#20854;&#23454;&#29616;&#37324;&#24212;&#20801;&#35768;&#25509;&#21463; NULL &#20316;&#20026;&#20854; in/out &#21442;&#25968;&#65292;&#20197;&#34920;&#31034;&#35843;&#29992;&#32773;&#23545;&#19968;&#20010;&#25110;&#22810;&#20010;&#36820;&#22238;&#20540;&#19981;&#24863;&#20852;&#36259;&#12290;&#10;&#10;### Delegate Methods &#22996;&#25176;&#26041;&#27861;&#10;&#10;&#9;&#22996;&#25176;&#26041;&#27861;&#26159;&#37027;&#20123;&#22312;&#29305;&#23450;&#20107;&#20214;&#21457;&#29983;&#26102;&#21487;&#34987;&#23545;&#35937;&#35843;&#29992;&#65292;&#24182;&#22768;&#26126;&#22312;&#23545;&#35937;&#30340;&#22996;&#25176;&#31867;&#20013;&#30340;&#26041;&#27861;&#12290;&#23427;&#20204;&#26377;&#29420;&#29305;&#30340;&#21629;&#21517;&#32422;&#23450;&#65292;&#36825;&#20123;&#21629;&#21517;&#32422;&#23450;&#21516;&#26679;&#20063;&#36866;&#29992;&#20110;&#23545;&#35937;&#30340;&#25968;&#25454;&#28304;&#26041;&#27861;&#12290;&#10; * &#21517;&#31216;&#20197;&#26631;&#31034;&#21457;&#36865;&#28040;&#24687;&#30340;&#23545;&#35937;&#30340;&#31867;&#21517;&#24320;&#22836;&#65292;&#30465;&#30053;&#31867;&#21517;&#30340;&#21069;&#32512;&#24182;&#23567;&#20889;&#31867;&#31532;&#19968;&#20010;&#23383;&#31526;&#10; &#10;``- (BOOL) tableView:(NSTableView *)tableView shouldSelectRow:(int)row;``&#10;&#10;``- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;``&#10;&#10;* &#20882;&#21495;&#32039;&#36319;&#22312;&#31867;&#21517;&#20043;&#21518;&#65288;&#38543;&#21518;&#30340;&#37027;&#20010;&#21442;&#25968;&#34920;&#31034;&#22996;&#27966;&#30340;&#23545;&#35937;&#65289;&#12290;&#35813;&#35268;&#21017;&#19981;&#36866;&#29992;&#20110;&#21482;&#26377;&#19968;&#20010; sender &#21442;&#25968;&#30340;&#26041;&#27861;&#10;&#10;``- (BOOL) applicationOpenUntitledFile:(NSApplication *)sender;``&#10;&#10;* &#19978;&#38754;&#30340;&#37027;&#26465;&#35268;&#21017;&#20063;&#19981;&#36866;&#29992;&#20110;&#21709;&#24212;&#36890;&#30693;&#30340;&#26041;&#27861;&#12290;&#22312;&#36825;&#31181;&#24773;&#20917;&#19979;&#65292;&#26041;&#27861;&#30340;&#21807;&#19968;&#21442;&#25968;&#34920;&#31034;&#36890;&#30693;&#23545;&#35937;&#10;&#10;``- (void) windowDidChangeScreen:(NSNotification *)notification;``&#10;&#10;* &#29992;&#20110;&#36890;&#30693;&#22996;&#25176;&#23545;&#35937;&#25805;&#20316;&#21363;&#23558;&#21457;&#29983;&#25110;&#24050;&#32463;&#21457;&#29983;&#30340;&#26041;&#27861;&#21517;&#20013;&#35201;&#20351;&#29992; did &#25110; will&#10;&#10;``- (void) browserDidScroll:(NSBrowser *)sender;``&#10;&#10;``- (NSUndoManager *) windowWillReturnUndoManager:(NSWindow *)window;``&#10;&#10;* &#29992;&#20110;&#35810;&#38382;&#22996;&#25176;&#23545;&#35937;&#21487;&#21542;&#25191;&#34892;&#26576;&#25805;&#20316;&#30340;&#26041;&#27861;&#21517;&#20013;&#21487;&#20351;&#29992; did &#25110; will&#65292;&#20294;&#26368;&#22909;&#20351;&#29992; should &#10;&#10;``- (BOOL) windowShouldClose:(id)sender;``&#10;&#10;### Collection Methods &#38598;&#21512;&#26041;&#27861;&#10;&#10;&#9;&#31649;&#29702;&#23545;&#35937;&#65288;&#38598;&#21512;&#20013;&#30340;&#23545;&#35937;&#34987;&#31216;&#20043;&#20026;&#20803;&#32032;&#65289;&#30340;&#38598;&#21512;&#31867;&#65292;&#32422;&#23450;&#35201;&#20855;&#22791;&#22914;&#19979;&#24418;&#24335;&#30340;&#26041;&#27861;&#65306;&#10;&#10;``- (void) addElement:(elementType)adObj;``&#10;&#10;``- (void) removeElement:(elementType)anObj;``&#10;&#10;``- (NSArray *)elements;``&#10;&#10;&#20363;&#22914;&#65306;&#10;&#10;``- (void) addLayoutManager:(NSLayoutManager *)adObj;``&#10;&#10;``- (void) removeLayoutManager:(NSLayoutManager *)anObj;``&#10;&#10;``- (NSArray *)layoutManagers;``&#10;&#10;&#38598;&#21512;&#26041;&#27861;&#21629;&#21517;&#26377;&#22914;&#19979;&#19968;&#20123;&#38480;&#21046;&#21644;&#32422;&#23450;&#65306;&#10;&#10;* &#22914;&#26524;&#38598;&#21512;&#20013;&#30340;&#20803;&#32032;&#26080;&#24207;&#65292;&#36820;&#22238; NSSet&#65292;&#32780;&#19981;&#26159; NSArray&#10; &#10;* &#22914;&#26524;&#23558;&#20803;&#32032;&#25554;&#20837;&#25351;&#23450;&#20301;&#32622;&#30340;&#21151;&#33021;&#24456;&#37325;&#35201;&#65292;&#21017;&#38656;&#20855;&#22791;&#22914;&#19979;&#26041;&#27861;&#65306;&#10;&#10;&#183;&#183;- (void) insertElement:(elementType)anObj atIndex:(int)index;``&#10;&#10;``- (void) removeElementAtIndex:(int)index;``&#10;&#10;&#38598;&#21512;&#26041;&#27861;&#30340;&#23454;&#29616;&#35201;&#32771;&#34385;&#22914;&#19979;&#32454;&#33410;&#65306;&#10;*  &#20197;&#19978;&#38598;&#21512;&#31867;&#26041;&#27861;&#36890;&#24120;&#36127;&#36131;&#31649;&#29702;&#20803;&#32032;&#30340;&#25152;&#26377;&#32773;&#20851;&#31995;&#65292;&#22312; add &#25110; insert &#30340;&#23454;&#29616;&#20195;&#30721;&#37324;&#20250; retain &#20803;&#32032;&#65292;&#22312; remove &#30340;&#23454;&#29616;&#20195;&#30721;&#20013;&#20250; release &#20803;&#32032;&#10;*  &#24403;&#34987;&#25554;&#20837;&#30340;&#23545;&#35937;&#38656;&#35201;&#25345;&#26377;&#25351;&#21521;&#38598;&#21512;&#23545;&#35937;&#30340;&#25351;&#38024;&#26102;&#65292;&#36890;&#24120;&#20351;&#29992; set... &#26469;&#21629;&#21517;&#20854;&#35774;&#32622;&#35813;&#25351;&#38024;&#30340;&#26041;&#27861;&#65292;&#19988;&#19981;&#35201; retain &#38598;&#21512;&#23545;&#35937;&#12290;&#27604;&#22914;&#19978;&#38754;&#30340;&#10;`` insertLayerManager:atIndex:`` &#36825;&#31181;&#24773;&#24418;&#65292;NSLayoutManager &#31867;&#20351;&#29992;&#22914;&#19979;&#26041;&#27861;&#65306;&#10;&#10;``- (void) setTextStorage:(NSTextStorage *)textStorage;``&#10;&#10;``- (NSTextStorage *)textStorage;``&#10;&#10;&#36890;&#24120;&#20320;&#19981;&#20250;&#30452;&#25509;&#35843;&#29992; setTextStorage:&#65292;&#32780;&#26159;&#35206;&#20889;&#23427;&#12290;&#10;&#10;&#21478;&#19968;&#20010;&#20851;&#20110;&#38598;&#21512;&#32422;&#23450;&#30340;&#20363;&#23376;&#26469;&#33258; NSWindow &#31867;&#65306;&#10;&#10;``- (void) addChildWindow:(NSWindow *)childWin ordered:(NSWindowOrderingMode)place;``&#10;&#10;``- (void) removeChildWindow:(NSWindow *)childWin;``&#10;&#10;``- (NSArray *)childWindows;``&#10;&#10;``- (NSWindow *) parentWindow;``&#10;&#10;``- (void) setParentWindow:(NSWindow *)window;``&#10;&#10;### Method Arguments &#26041;&#27861;&#21442;&#25968;&#10;&#10;&#21629;&#21517;&#26041;&#27861;&#21442;&#25968;&#26102;&#35201;&#32771;&#34385;&#22914;&#19979;&#35268;&#21017;&#65306;&#10;* &#22914;&#21516;&#26041;&#27861;&#21517;&#65292;&#21442;&#25968;&#21517;&#23567;&#20889;&#31532;&#19968;&#20010;&#21333;&#35789;&#30340;&#39318;&#23383;&#31526;&#65292;&#22823;&#20889;&#21518;&#32487;&#21333;&#35789;&#30340;&#39318;&#23383;&#31526;&#12290;&#22914;&#65306;``removeObject:(id)anObject``.() &#19981;&#35201;&#22312;&#21442;&#25968;&#21517;&#20013;&#20351;&#29992; pointer &#25110; ptr&#65292;&#35753;&#21442;&#25968;&#30340;&#31867;&#22411;&#26469;&#35828;&#26126;&#23427;&#26159;&#25351;&#38024;&#10;&#10;* &#36991;&#20813;&#20351;&#29992; one&#65292; two&#65292;...&#65292;&#20316;&#20026;&#21442;&#25968;&#21517;&#10;&#10;* &#36991;&#20813;&#20026;&#33410;&#30465;&#20960;&#20010;&#23383;&#31526;&#32780;&#32553;&#20889; &#10;&#10;&#25353;&#29031; Cocoa &#24815;&#20363;&#65292;&#20197;&#19979;&#20851;&#38190;&#23383;&#19982;&#21442;&#25968;&#32852;&#21512;&#20351;&#29992;&#65306;&#10;&#10;``...action:(SEL)aSelector``&#10;&#10;``..alignment:(int)mode``&#10;&#10;``...atIndex:(int)index``&#10;&#10;``...content:(NSRect)aRect``&#10;&#10;``...doubleValue:(double)aDouble``&#10;&#10;``...floatValue:(float)aFloat``&#10;&#10;``...font:(NSFont *)fontObj``&#10;&#10;``...frame:(NSRect)frameRect``&#10;&#10;``...intValue:(int)anInt``&#10;&#10;``...keyEquivalent:(NSString *0charCode``&#10;&#10;``...length:(int)numBytes``&#10;&#10;``...point:(NSPoint)aPoint``&#10;&#10;``...stringValue:(NSString *)aString``&#10;&#10;``...tag:(int)anInt``&#10;&#10;``...target:(id)anObject``&#10;&#10;``...title:(NSString *)aString``&#10;&#10;### Private Methods &#31169;&#26377;&#26041;&#27861;&#10;&#10;&#9;&#22823;&#22810;&#25968;&#24773;&#20917;&#19979;&#65292;&#31169;&#26377;&#26041;&#27861;&#21629;&#21517;&#30456;&#21516;&#19982;&#20844;&#20849;&#26041;&#27861;&#21629;&#21517;&#32422;&#23450;&#30456;&#21516;&#65292;&#20294;&#36890;&#24120;&#25105;&#20204;&#32422;&#23450;&#32473;&#31169;&#26377;&#26041;&#27861;&#28155;&#21152;&#21069;&#32512;&#65292;&#20197;&#20415;&#19982;&#20844;&#20849;&#26041;&#27861;&#21306;&#20998;&#24320;&#26469;&#12290;&#21363;&#20351;&#36825;&#26679;&#65292;&#31169;&#26377;&#26041;&#27861;&#30340;&#21517;&#31216;&#24456;&#23481;&#26131;&#23548;&#33268;&#29305;&#21035;&#30340;&#38382;&#39064;&#12290;&#24403;&#20320;&#35774;&#35745;&#19968;&#20010;&#32487;&#25215;&#33258; Cocoa framework &#26576;&#20010;&#31867;&#30340;&#23376;&#31867;&#26102;&#65292;&#20320;&#26080;&#27861;&#30693;&#36947;&#20320;&#30340;&#31169;&#26377;&#26041;&#27861;&#26159;&#21542;&#19981;&#23567;&#24515;&#35206;&#30422;&#20102;&#26694;&#26550;&#20013;&#22522;&#31867;&#30340;&#21516;&#21517;&#26041;&#27861;&#12290;&#10;&#9;&#10;Cocoa framework &#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#36890;&#24120;&#20197;&#19979;&#21010;&#32447;&#20316;&#20026;&#21069;&#32512;&#65288;&#22914;&#65306;_fooData&#65289;&#65292;&#20197;&#26631;&#31034;&#20854;&#31169;&#26377;&#23646;&#24615;&#12290;&#22522;&#20110;&#36825;&#26679;&#30340;&#20107;&#23454;&#65292;&#36981;&#24490;&#20197;&#19979;&#20004;&#26465;&#24314;&#35758;&#65306;&#10;&#10;*  &#19981;&#35201;&#20351;&#29992;&#19979;&#21010;&#32447;&#20316;&#20026;&#20320;&#33258;&#24049;&#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#30340;&#21069;&#32512;&#65292;Apple &#20445;&#30041;&#36825;&#31181;&#29992;&#27861;&#12290;&#10;*  &#33509;&#35201;&#32487;&#25215; Cocoa framework &#20013;&#19968;&#20010;&#36229;&#22823;&#30340;&#31867;&#65288;&#22914;&#65306;NSView&#65289;&#65292;&#24182;&#19988;&#24819;&#35201;&#20351;&#20320;&#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#19982;&#22522;&#31867;&#20013;&#30340;&#21306;&#21035;&#24320;&#26469;&#65292;&#20320;&#21487;&#20197;&#20026;&#20320;&#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#28155;&#21152;&#20320;&#33258;&#24049;&#30340;&#21069;&#32512;&#12290;&#36825;&#20010;&#21069;&#32512;&#24212;&#35813;&#20855;&#26377;&#21807;&#19968;&#24615;&#65292;&#22914;&#22522;&#20110;&#20320;&#20844;&#21496;&#30340;&#21517;&#31216;&#65292;&#25110;&#24037;&#31243;&#30340;&#21517;&#31216;&#65292;&#24182;&#20197;&#8220;XX_&#8221;&#24418;&#24335;&#32473;&#20986;&#12290;&#27604;&#22914;&#20320;&#30340;&#24037;&#31243;&#21517;&#20026;&#34;Byte Flogger&#34;&#65292;&#37027;&#20040;&#23601;&#21487;&#20197;&#26159;&#8220;BF_addObject:&#8221;&#10;&#10;&#23613;&#31649;&#20026;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#28155;&#21152;&#21069;&#32512;&#30340;&#24314;&#35758;&#19982;&#21069;&#38754;&#31867;&#20013;&#26041;&#27861;&#21629;&#21517;&#30340;&#32422;&#23450;&#20914;&#31361;&#65292;&#36825;&#37324;&#30340;&#24847;&#22270;&#26377;&#25152;&#19981;&#21516;&#65306;&#20026;&#20102;&#38450;&#27490;&#19981;&#23567;&#24515;&#22320;&#35206;&#30422;&#22522;&#31867;&#20013;&#30340;&#31169;&#26377;&#26041;&#27861;&#12290;&#10;&#10;### Naming Functions &#20989;&#25968;&#21629;&#21517;&#10;&#10;&#9;Objective-C &#20801;&#35768;&#36890;&#36807;&#20989;&#25968;&#65288;C&#24418;&#24335;&#30340;&#20989;&#25968;&#65289;&#25551;&#36848;&#34892;&#20026;&#65292;&#23601;&#22914;&#25104;&#21592;&#26041;&#27861;&#19968;&#26679;&#12290; &#20320;&#24212;&#24403;&#20248;&#20808;&#20351;&#29992;&#20989;&#25968;&#65292;&#32780;&#19981;&#26159;&#31867;&#26041;&#27861;&#65292;&#22914;&#26524;&#38544;&#21547;&#30340;&#31867;&#20026;&#21333;&#20363;&#25110;&#22312;&#22788;&#29702;&#20989;&#25968;&#23376;&#31995;&#32479;&#26102;&#12290;&#10;&#10;&#20989;&#25968;&#21629;&#21517;&#24212;&#35813;&#36981;&#24490;&#22914;&#19979;&#20960;&#26465;&#35268;&#21017;&#65306;&#10;&#9;&#10;*  &#20989;&#25968;&#21629;&#21517;&#19982;&#26041;&#27861;&#21629;&#21517;&#30456;&#20284;&#65292;&#20294;&#26377;&#20960;&#28857;&#19981;&#21516;&#65306;&#10;&#23427;&#20204;&#26377;&#21069;&#32512;&#65292;&#20854;&#21069;&#32512;&#19982;&#20320;&#20351;&#29992;&#30340;&#31867;&#21644;&#24120;&#37327;&#30340;&#21069;&#32512;&#30456;&#21516;&#10;&#22823;&#20889;&#21069;&#32512;&#21518;&#32039;&#36319;&#30340;&#31532;&#19968;&#20010;&#21333;&#35789;&#39318;&#23383;&#31526;&#10;* &#22823;&#22810;&#25968;&#20989;&#25968;&#21517;&#31216;&#20197;&#21160;&#35789;&#24320;&#22836;&#65292;&#36825;&#20010;&#21160;&#35789;&#25551;&#36848;&#35813;&#20989;&#25968;&#30340;&#34892;&#20026;&#10;NSHighlightRect&#10;NSDeallocateObject&#10;&#10;&#26597;&#35810;&#23646;&#24615;&#30340;&#20989;&#25968;&#26377;&#20010;&#26356;&#22810;&#30340;&#35268;&#21017;&#35201;&#36981;&#24490;&#65306;&#10;* &#26597;&#35810;&#31532;&#19968;&#20010;&#21442;&#25968;&#30340;&#23646;&#24615;&#30340;&#20989;&#25968;&#65292;&#30465;&#30053;&#21160;&#35789;&#10;&#10;```unsigned int NSEventMaskFromType(NSEventType type)&#10;float NSHeight(NSRect rect)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回值为引用的方法，使用 Get</li>
+</ul>
+<figure class="highlight"><figcaption><span>char *NSGetSizeAndAlignment(const char *typePtr, unsigned int *sizep, unsigned int *alignp)```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;* &#36820;&#22238; boolean &#20540;&#30340;&#20989;&#25968;&#65292;&#21517;&#31216;&#20351;&#29992;&#21028;&#26029;&#21160;&#35789; is/does &#24320;&#22836; &#10;&#10;```BOOL NSDecimalIsNotANumber(const NSDecimal *decimal)</span><br></pre></td></tr></table></figure>
+<h3 id="Naming_Instance_Variables_and_Data_Types_实例变量与数据类型命名">Naming Instance Variables and Data Types 实例变量与数据类型命名</h3><pre><code>这一节描述实例变量，常量，异常以及通知的命名约定。
+</code></pre><h3 id="Instance_Variables_实例变量">Instance Variables 实例变量</h3><p>在为类添加实例变量是要注意：</p>
+<ul>
+<li>避免创建 public 实例变量</li>
+<li>使用 @private，@protected 显式限定实例变量的访问权限</li>
+<li>确保实例变量名简明扼要地描述了它所代表的属性</li>
+</ul>
+<p>如果实例变量别设计为可被访问的，确保编写了访问方法</p>
+<h3 id="Constants_常量">Constants 常量</h3><p>常量命名规则根据常量创建的方式不同而大不同。</p>
+<h3 id="枚举常量">枚举常量</h3><ul>
+<li>使用枚举来定义一组相关的整数常量</li>
+<li><p>枚举常量与其 typedef 命名遵守函数命名规则。如：来自 NSMatrix.h 中的例子：（本例中的 typedef tag（_NSMatrixMode）不是必须的）</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	typedef <span class="class"><span class="keyword">enum</span> <span class="title">_NSMatrixMode</span> &#123;</span></span><br><span class="line">	<span class="constant">NSRadioModeMatrix</span>       = <span class="number">0</span>,</span><br><span class="line">    <span class="constant">NSHighlightModeMatrix</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="constant">NSListModeMatrix</span>           = <span class="number">2</span>,</span><br><span class="line">    <span class="constant">NSTrackModeMatrix</span>        = <span class="number">3</span></span><br><span class="line">&#125; <span class="constant">NSMatrixMode</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>位掩码常量可以使用不具名枚举。如：</p>
+</li>
+<li>enum {<br>  NSBorderlessWindowMask         = 0,<br>  NSTitledWindowMask                 = 1 &lt;&lt; 0,<br>  NSClosableWindowMask            = 1 &lt;&lt; 1,<br>  NSMiniaturizableWindowMask  = 1 &lt;&lt; 2,<br>  NSResizableWindowMask          = 1 &lt;&lt; 3<br>};</li>
+</ul>
+<h3 id="const_常量">const 常量</h3><ul>
+<li>使用 const 来修饰浮点常量或彼此没有关联的整数常量 </li>
+<li>枚举常量命名规则与函数命名规则相同。const 常量命名范例：<br>const float NSLightGray;</li>
+</ul>
+<h3 id="其他常量">其他常量</h3><ul>
+<li>通常不使用 #define 来创建常量。如上面所述，整数常量请使用枚举，浮点数常量请使用 const</li>
+<li>使用大写字母来定义预处理编译宏。如：#ifdef DEBUG</li>
+<li>编译器定义的宏名首尾都有双下划线。如：<strong>MACH</strong></li>
+<li>为 notification 名及 dictionary key 定义字符串常量，从而能够利用编译器的拼写检查，减少书写错误。Cocoa  框架提供了很多这样的范例：<br>APPKIT_EXTERN NSString *NSPrintCopies;<br>实际的字符串值在实现文件中赋予。（注意：APPKIT_EXTERN 宏等价于Objective-C 中 extern）</li>
+</ul>
+<h3 id="Exceptions_and_Notifications_异常与通知">Exceptions and Notifications 异常与通知</h3><p>异常与通知的命名遵循相似的规则，但是它们有各自推荐的使用模式。</p>
+<h3 id="异常">异常</h3><p>虽然你可以处于任何目的而使用异常（由 NSException 类及相关类实现），Cocoa 通常不使用异常来处理常规的，可预料的错误。在这些情形下，使用诸如 nil, NULL, NO或错误代码之类的返回值。异常的典型应用类似数组越界之类的编程错误。<br>异常由具有如下形式的全局 NSString 对象标识：<br>[Prefix] + UniquePartOfName + Exception<br>UniquePartOfName 部分是有连续的首字符大写的单词组成。例如：<br>NSColorListIOException<br>NSColorListNotEditableException<br>NSDraggingException<br>NSFontUnavailableException<br>NSIllegalSelectorException</p>
+<h3 id="通知">通知</h3><p>如果一个类有委托，那它的大部分通知可能由其委托的委托方法来处理。这些通知的名称应该能够反应其响应的委托方法。比如，当应用程序提交 NSApplicationDidBecomeActiveNotification 通知时，全局 NSApplication 对象的委托会注册从而能够接收 applicaitonDidBecomeActive: 消息。<br>通知由具有如下形式的全局 NSString 对象标识：<br>[相关联类的名称] + [Did 或 Will] + [UniquePartOfName] + Notification<br>例如：<br>NSApplicationDidBecomeActiveNotification<br>NSWindowDidMiniaturizeNotification<br>NSTextViewDidChangeSelectionNotification<br>NSColorPanelColorDidChangeNotification</p>
+<blockquote>
+<p>可接受的缩略语<br>在设计编程接口时，通常名称不要缩写。然而，下面列出的缩写要么是固定下来的要么是过去被广泛使用的，所以你可以继续使用。关于缩写有一些额外的注意事项：</p>
+<ul>
+<li>标准 C 库中长期使用的缩写形式是可以接受的。如：”alloc”，”getc”</li>
+<li>你可以在参数名中更自由地使用缩写。如：imageRep，col（column），obj，otherWin<br>alloc<br>Allocate<br>msg<br>Message<br>alt<br>Alternate<br>nib<br>Interface Builder archive<br>app<br>Application<br>pboard<br>Pasteboard<br>calc<br>Calculate<br>rect<br>Rectangle<br>dealloc<br>Deallocate<br>Rep<br>Representation<br>func<br>Function<br>temp<br>Temporary<br>horiz<br>Horizontal<br>vert<br>Vertical<br>info<br>Information<br>init<br>Initialize<br>max<br>Maximum</li>
+</ul>
+</blockquote>
+<p>常见的缩写：<br>ASCII，PDF，XML，HTML，URL，RTF，HTTP，TIFF<br>JPG，GIF，LZW，ROM，RGB，CMYK，MIDI，FTP</p>
+<h1 id="框架开发者小贴士与技巧">框架开发者小贴士与技巧</h1><h2 id="Initialize_初始化">Initialize 初始化</h2><h3 id="类初始化">类初始化</h3><p>在 initialize 类方法中，能够编写实现一些延迟执行且只被一次的代码，initialize 类方法是由运行时系统在该类响应任何其他消息之前调用的。典型的应用是在其中设置类的版本信息。运行时系统向每个类发送 initialize 消息，即使该类没有实现 initialize，也会调用其基类的某个 initialize 方法。因此一个类的 initialize 方法可能会因为存在继承类的缘故被执行多次。因此有必要使用一定的技巧来防止只执行一次的代码被多次执行。如：NSFoo 类的 initialize 方法实现可能如下：</p>
+<ul>
+<li>(id) initialize<br>{<br>  if (self == [NSFoo class])<br>  {<pre><code><span class="comment">// 初始化代码</span>
+</code></pre>  }<br>  return self;<br>}<br>不应当显式调用 initialize 方法。如果你需要激活 initialize 方法，使用 [NSFoo self] 形式的调用。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihe4wzwq0000ens6vcrc2w8s" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/Cocoa-编码规范中文版/" data-id="ciheeiybe0004nhs67fol8djz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,8 +273,8 @@
   
     <article id="post-aotuManLady-编码规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/24/aotuManLady-编码规范/" class="article-date">
-  <time datetime="2015-11-24T09:47:30.000Z" itemprop="datePublished">2015-11-24</time>
+    <a href="/2015/11/25/aotuManLady-编码规范/" class="article-date">
+  <time datetime="2015-11-25T01:36:02.000Z" itemprop="datePublished">2015-11-25</time>
 </a>
     
   </div>
@@ -147,7 +285,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/24/aotuManLady-编码规范/">AotumanLady 编程规范</a>
+      <a class="article-title" href="/2015/11/25/aotuManLady-编码规范/">AotumanLady 编程规范</a>
     </h1>
   
 
@@ -275,8 +413,6 @@
 </li>
 <li><p>@property 后面必须有一个空格，比如 @property (nonatomic, copy)，括号中分割属性的逗号后面必须有一个空格。</p>
 </li>
-<li><p>在 protocol 中声明的 property 必须在类实现中有对应的 synthesize。</p>
-</li>
 </ul>
 <h3 id="内存泄露">内存泄露</h3><ul>
 <li><p>Block类型的属性，必须用 @weakify。</p>
@@ -290,7 +426,75 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/aotuManLady-编码规范/" data-id="cihe4wzx40002ens6y9inw94m" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/aotuManLady-编码规范/" data-id="ciheeiybb0002nhs6avx8cpfv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-AotumanLady-代码分支管理规范" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/25/AotumanLady-代码分支管理规范/" class="article-date">
+  <time datetime="2015-11-25T01:30:29.000Z" itemprop="datePublished">2015-11-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/25/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="介绍">介绍</h3><pre><code>这是我们团队的 Git 分支管理规范。每个人对工具的使用往往各有偏好，各种方法各有利弊，无所谓对错。但涉及团队协作的方面需要有一些一致的规范，所以请大家务必遵守。
+</code></pre><p>除了一致性之外，这个规范的目的是以下几点：</p>
+<ul>
+<li><p>确保可以轻易确定特定时间发布或运行的版本。在新发布的程序存在重大缺陷时，可以尽快 rollback 到上一个稳定版本。</p>
+</li>
+<li><p>在需要修复紧急 bug 并尽快发布时，可以只发布必要的 bugfix 而不    同时发布还不应发布的其他改动。</p>
+</li>
+</ul>
+<h3 id="branch_和_tag">branch 和 tag</h3><pre><code>每个官方的 repo 有且仅有以下的 <span class="keyword">branch </span>和 tag。
+</code></pre><ul>
+<li>Branch: master 和 release。其中 master 对应目前的开发分支，所有的 pull request 都应该发到这个分支。release 是当前发布的分支，在这个分支只能增加从 master cherrypick 过来的 commit。详见本文后面的说明。</li>
+<li>Tag: 对应每个发布版本的 tag。SDK 和应用程序的 tag 遵照 .. 的命名，如 2.5.1；服务端程序的 tag 以发布的日期命名，如 2014.11.13，如果有 bugfix，则在后面增加小写字母，如 2014.11.13 后是 2014.11.13a，然后是 2014.11.13b。<br>目前还有部分 repo 包含多个独立部署的项目（如 uluru-platform）。在这样的 repo 打 tag 时需要附上项目名做前缀，如 bigquery-2.5.1。但我们需要逐步把这些项目拆分到独立的 repo。</li>
+</ul>
+<h3 id="发布新版流程">发布新版流程</h3><ol>
+<li>确保所有要发布的 pull request 都已经 merge 到 master；</li>
+<li>使用 master branch 的代码进行测试，如果发现 bug，把对应的 bugfix merge 到 master；</li>
+<li>删除旧的 release branch，并从当前的 master 创建新的 release branch；</li>
+<li>在 Jenkins 上从 release branch 发起新的 build 并发布；</li>
+<li>发布完成后在当前的 release branch 打上对应版本的 tag。</li>
+</ol>
+<h3 id="Bugfix_流程">Bugfix 流程</h3><pre><code>这里的 <span class="keyword">bugfix </span>指的是修复已经发布的程序（release <span class="keyword">branch）中的缺陷。</span>
+</code></pre><ol>
+<li>master 里的 bug 请直接 merge bugfix 到 master。<br>如果此缺陷在 master 中还存在，请先 merge bugfix 到 master，否则跳到下一步；</li>
+<li>在 release branch 从 master cherrypick 修复该缺陷的一个或多个 commit；</li>
+<li>在 Jenkins 上发布当前 release branch；</li>
+<li>发布完成后在当前的 release branch 打上递增的 tag。比如，如果上一个 tag 是 2.5.1，这个 tag 应该是 2.5.2；如果上一个是 2014.11.13，这个就是 2014.11.13a。</li>
+</ol>
+<h3 id="其他">其他</h3><ul>
+<li>并不是每个 bug 都有专门发布 bugfix 版的必要，对于不紧急的 bug，可以在 master 里 fix 后随下一个版本发布。</li>
+<li>在一个官方 repo 下只应该有以上说的 branch 和 tag，在开发过程中使用到的 feature branch 等请都放在个人的 fork，一律通过向 master 发 pull request 的方式给官方 repo 提交代码。</li>
+</ul>
+<p>参考于 <a href="https://open.leancloud.cn/git-branch-guide.html" target="_blank" rel="external">代码分支管理指南</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/AotumanLady-代码分支管理规范/" data-id="ciheeiyap0000nhs6kyjmben2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -349,7 +553,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="cihe4wzx60004ens60e35wm22" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="ciheeiybk0005nhs6at2hp1f8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1023,7 +1227,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/Google-Objective-C-Style-Guide-中文版/" data-id="cihe4wzx50003ens6p1sz31wj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/Google-Objective-C-Style-Guide-中文版/" data-id="ciheeiybc0003nhs6sgndyeq7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1068,7 +1272,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihe4wzx20001ens6dj4qyc1n" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="ciheeiyb50001nhs6xyfkdpbu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1093,7 +1297,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -1105,11 +1309,15 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       <ul>
         
           <li>
-            <a href="/2015/11/25/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
+            <a href="/2015/11/25/Cocoa-编码规范中文版/">Cocoa 编码规范中文版</a>
           </li>
         
           <li>
-            <a href="/2015/11/24/aotuManLady-编码规范/">AotumanLady 编程规范</a>
+            <a href="/2015/11/25/aotuManLady-编码规范/">AotumanLady 编程规范</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/25/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
           </li>
         
           <li>
@@ -1118,10 +1326,6 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
         
           <li>
             <a href="/2015/11/24/Google-Objective-C-Style-Guide-中文版/">Google Objective C Style Guide 中文版</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/24/hello-world/">Hello World</a>
           </li>
         
       </ul>
