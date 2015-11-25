@@ -67,8 +67,8 @@
   
     <article id="post-AotumanLady-代码分支管理规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/24/AotumanLady-代码分支管理规范/" class="article-date">
-  <time datetime="2015-11-24T09:55:35.000Z" itemprop="datePublished">2015-11-24</time>
+    <a href="/2015/11/25/AotumanLady-代码分支管理规范/" class="article-date">
+  <time datetime="2015-11-25T01:30:29.000Z" itemprop="datePublished">2015-11-25</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/24/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
+      <a class="article-title" href="/2015/11/25/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
     </h1>
   
 
@@ -95,29 +95,26 @@
 <li><p>在需要修复紧急 bug 并尽快发布时，可以只发布必要的 bugfix 而不    同时发布还不应发布的其他改动。</p>
 </li>
 </ul>
-<p>###branch 和 tag </p>
-<pre><code>每个官方的 repo 有且仅有以下的 <span class="keyword">branch </span>和 tag。
+<h3 id="branch_和_tag">branch 和 tag</h3><pre><code>每个官方的 repo 有且仅有以下的 <span class="keyword">branch </span>和 tag。
 </code></pre><ul>
 <li>Branch: master 和 release。其中 master 对应目前的开发分支，所有的 pull request 都应该发到这个分支。release 是当前发布的分支，在这个分支只能增加从 master cherrypick 过来的 commit。详见本文后面的说明。</li>
 <li>Tag: 对应每个发布版本的 tag。SDK 和应用程序的 tag 遵照 .. 的命名，如 2.5.1；服务端程序的 tag 以发布的日期命名，如 2014.11.13，如果有 bugfix，则在后面增加小写字母，如 2014.11.13 后是 2014.11.13a，然后是 2014.11.13b。<br>目前还有部分 repo 包含多个独立部署的项目（如 uluru-platform）。在这样的 repo 打 tag 时需要附上项目名做前缀，如 bigquery-2.5.1。但我们需要逐步把这些项目拆分到独立的 repo。</li>
 </ul>
-<p>###发布新版流程</p>
-<ol>
+<h3 id="发布新版流程">发布新版流程</h3><ol>
 <li>确保所有要发布的 pull request 都已经 merge 到 master；</li>
 <li>使用 master branch 的代码进行测试，如果发现 bug，把对应的 bugfix merge 到 master；</li>
 <li>删除旧的 release branch，并从当前的 master 创建新的 release branch；</li>
 <li>在 Jenkins 上从 release branch 发起新的 build 并发布；</li>
 <li>发布完成后在当前的 release branch 打上对应版本的 tag。</li>
 </ol>
-<p>###Bugfix 流程<br>    这里的 bugfix 指的是修复已经发布的程序（release branch）中的缺陷。</p>
-<ol>
+<h3 id="Bugfix_流程">Bugfix 流程</h3><pre><code>这里的 <span class="keyword">bugfix </span>指的是修复已经发布的程序（release <span class="keyword">branch）中的缺陷。</span>
+</code></pre><ol>
 <li>master 里的 bug 请直接 merge bugfix 到 master。<br>如果此缺陷在 master 中还存在，请先 merge bugfix 到 master，否则跳到下一步；</li>
 <li>在 release branch 从 master cherrypick 修复该缺陷的一个或多个 commit；</li>
 <li>在 Jenkins 上发布当前 release branch；</li>
 <li>发布完成后在当前的 release branch 打上递增的 tag。比如，如果上一个 tag 是 2.5.1，这个 tag 应该是 2.5.2；如果上一个是 2014.11.13，这个就是 2014.11.13a。</li>
 </ol>
-<p>###其他</p>
-<ul>
+<h3 id="其他">其他</h3><ul>
 <li>并不是每个 bug 都有专门发布 bugfix 版的必要，对于不紧急的 bug，可以在 master 里 fix 后随下一个版本发布。</li>
 <li>在一个官方 repo 下只应该有以上说的 branch 和 tag，在开发过程中使用到的 feature branch 等请都放在个人的 fork，一律通过向 master 发 pull request 的方式给官方 repo 提交代码。</li>
 </ul>
@@ -126,7 +123,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-代码分支管理规范/" data-id="cihd7fzxj00001xs61jogmtfe" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihe4wzwq0000ens6vcrc2w8s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -293,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/aotuManLady-编码规范/" data-id="cihd7fzxw00021xs62aog2g53" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/aotuManLady-编码规范/" data-id="cihe4wzx40002ens6y9inw94m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -352,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="cihd7fzxz00041xs6lsltf63x" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="cihe4wzx60004ens60e35wm22" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1026,7 +1023,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/Google-Objective-C-Style-Guide-中文版/" data-id="cihd7fzxy00031xs67jewpkgs" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/Google-Objective-C-Style-Guide-中文版/" data-id="cihe4wzx50003ens6p1sz31wj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1071,7 +1068,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihd7fzxq00011xs6i4uaaw98" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihe4wzx20001ens6dj4qyc1n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1108,7 +1105,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       <ul>
         
           <li>
-            <a href="/2015/11/24/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
+            <a href="/2015/11/25/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
           </li>
         
           <li>
