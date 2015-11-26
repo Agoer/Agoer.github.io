@@ -68,7 +68,7 @@
     <article id="post-AotumanLady-iOS编程规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/26/AotumanLady-iOS编程规范/" class="article-date">
-  <time datetime="2015-11-26T02:21:22.000Z" itemprop="datePublished">2015-11-26</time>
+  <time datetime="2015-11-26T02:50:01.000Z" itemprop="datePublished">2015-11-26</time>
 </a>
     
   </div>
@@ -289,11 +289,251 @@
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span>;  </span><br><span class="line"><span class="built_in">CGFloat</span> x = <span class="built_in">CGRectGetMinX</span>(frame);  </span><br><span class="line"><span class="built_in">CGFloat</span> y = <span class="built_in">CGRectGetMinY</span>(frame);  </span><br><span class="line"><span class="built_in">CGFloat</span> width = <span class="built_in">CGRectGetWidth</span>(frame);  </span><br><span class="line"><span class="built_in">CGFloat</span> height = <span class="built_in">CGRectGetHeight</span>(frame);  </span><br><span class="line"><span class="built_in">CGRect</span> frame = <span class="built_in">CGRectMake</span>(<span class="number">0.0</span>, <span class="number">0.0</span>, width, height);</span><br></pre></td></tr></table></figure>
 <p>BAD</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CGRect</span> frame = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span>;  </span><br><span class="line"><span class="built_in">CGFloat</span> x = frame<span class="variable">.origin</span><span class="variable">.x</span>;  </span><br><span class="line"><span class="built_in">CGFloat</span> y = frame<span class="variable">.origin</span><span class="variable">.y</span>;  </span><br><span class="line"><span class="built_in">CGFloat</span> width = frame<span class="variable">.size</span><span class="variable">.width</span>;  </span><br><span class="line"><span class="built_in">CGFloat</span> height = frame<span class="variable">.size</span><span class="variable">.height</span>;  </span><br><span class="line"><span class="built_in">CGRect</span> frame = (<span class="built_in">CGRect</span>)&#123; <span class="variable">.origin</span> = <span class="built_in">CGPointZero</span>, <span class="variable">.size</span> = frame<span class="variable">.size</span> &#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="二、补充准则">二、补充准则</h2><h3 id="1-行宽">1.行宽</h3><ul>
+<li><p>尽量让你的代码保持在 80 列之内。</p>
+<p>  <code>Xcode &gt; Preferences &gt; Text Editing &gt; Show page guide</code></p>
+</li>
+</ul>
+<h3 id="2-方法声明和定义">2.方法声明和定义</h3><ul>
+<li>如果一行有非常多的参数，更好的方式是将每个参数单独拆成一行。如果使用多行，将每个参数前的冒号对齐。</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">-</span> (void)<span class="tag">doSomethingWith</span>:(GTMFoo *)<span class="tag">theFoo</span></span><br><span class="line">                      <span class="tag">rect</span>:(NSRect)<span class="tag">theRect</span></span><br><span class="line">                  <span class="tag">interval</span>:(float)<span class="tag">theInterval</span> &#123;</span><br><span class="line">     ...</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>当第一个关键字比其它的短时，保证下一行至少有 4 个空格的缩进。这样可以使关键字垂直对齐，而不是使用冒号对齐：</p>
+<ul>
+<li>(void)short:(GTMFoo *)theFoo<br>  longKeyword:(NSRect)theRect<br>  evenLongerKeyword:(float)theInterval {<br>…<br>}</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-方法调用">3.方法调用</h3><p>方法调用应尽量保持与方法声明的格式一致。当格式的风格有多种选择时，新的代码要与已有代码保持一致。</p>
+<ul>
+<li>调用时所有参数应该在同一行：</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[myObject <span class="string">doFooWith:</span>arg1 <span class="string">name:</span>arg2 <span class="string">error:</span>arg3];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>或者每行一个参数，以冒号对齐：</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[myObject doFooWith:arg1</span><br><span class="line">               <span class="property">name</span>:arg2</span><br><span class="line">              <span class="keyword">error</span>:arg3];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不要使用下面的缩进风格：</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[myObject <span class="string">doFooWith:</span>arg1 <span class="string">name:</span>arg2  <span class="comment">// some lines with &gt;1 arg</span></span><br><span class="line"><span class="label">              error:</span>arg3];</span><br><span class="line"></span><br><span class="line">[myObject <span class="string">doFooWith:</span>arg1</span><br><span class="line"><span class="label">               name:</span>arg2 <span class="string">error:</span>arg3];</span><br><span class="line"></span><br><span class="line">[myObject <span class="string">doFooWith:</span>arg1</span><br><span class="line"><span class="label">          name:</span>arg2  <span class="comment">// aligning keywords instead of colons</span></span><br><span class="line"><span class="label">          error:</span>arg3];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法定义与方法声明一样，当关键字的长度不足以以冒号对齐时，下一行都要以四个空格进行缩进。</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[myObj short:arg1</span><br><span class="line">    longKeyword:arg2</span><br><span class="line">    evenLongerKeyword:arg3]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-_@public_和_@private">4. @public 和 @private</h3><blockquote>
+<p>Tip: @public 和 @private 访问修饰符应该以一个空格缩进。</p>
+</blockquote>
+<p>与 C++ 中的 public, private 以及 protected 非常相似。</p>
+<pre><code><span class="variable">@interface</span> <span class="attribute">MyClass </span>: NSObject {
+ <span class="variable">@public</span>
+  ...
+ <span class="variable">@private</span>
+  ...
+}
+<span class="variable">@end</span>
+</code></pre><h3 id="5-_异常">5. 异常</h3><blockquote>
+<p>Tip: 每个 @ 标签应该有独立的一行，在 @ 与 {} 之间需要有一个空格， @catch 与被捕捉到的异常对象的声明之间也要有一个空格。</p>
+</blockquote>
+<p>如果你决定使用 Objective-C 的异常，那么就按下面的格式。不过你最好先看看 避免抛异常 了解下为什么不要使用异常。</p>
+<pre><code><span class="at_rule">@<span class="keyword">try</span> </span>{
+  <span class="tag">foo</span>();
+}
+<span class="at_rule">@<span class="keyword">catch</span> (NSException *ex) </span>{
+  <span class="tag">bar</span>(<span class="tag">ex</span>);
+}
+<span class="at_rule">@<span class="keyword">finally</span> </span>{
+  <span class="tag">baz</span>();
+}
+</code></pre><h3 id="6-_协议名">6. 协议名</h3><blockquote>
+<p>Tip: 类型标识符和尖括号内的协议名之间，不能有任何空格。</p>
+</blockquote>
+<p>这条规则适用于类声明、实例变量以及方法声明。例如：</p>
+<pre><code><span class="variable">@interface</span> <span class="attribute">MyProtocoledClass </span>: NSObject&lt;NSWindowDelegate&gt; {
+ <span class="variable">@private</span>
+  id&lt;MyFancyDelegate&gt; delegate_;
+}
+- (void)<span class="attribute">setDelegate</span>:(id&lt;MyFancyDelegate&gt;)aDelegate;
+<span class="variable">@end</span>
+</code></pre><h3 id="7-块（闭包）">7.块（闭包）</h3><blockquote>
+<p>Tip: 块（block）适合用在 target/selector 模式下创建回调方法时，因为它使代码更易读。块中的代码应该缩进 4 个空格。</p>
+</blockquote>
+<p>取决于块的长度，下列都是合理的风格准则：</p>
+<ul>
+<li>如果一行可以写完块，则没必要换行。</li>
+<li>如果不得不换行，关括号应与块声明的第一个字符对齐。</li>
+<li>块内的代码须按 4 空格缩进。</li>
+<li>如果块太长，比如超过 20 行，建议把它定义成一个局部变量，然后再使用该变量。</li>
+<li>如果块不带参数，^{ 之间无须空格。如果带有参数，^( 之间无须空格，但 ) { 之间须有一个空格。</li>
+<li>块内允许按两个空格缩进，但前提是和项目的其它代码保持一致的缩进风格。</li>
+</ul>
+<p>例子如下：</p>
+<pre><code><span class="comment">// The entire block fits on one line.</span>
+[operation setCompletionBlock:^{ [<span class="keyword">self</span> onOperationDone]; }];
 
+<span class="comment">// The block can be put on a new line, indented four spaces, with the</span>
+<span class="comment">// closing brace aligned with the first character of the line on which</span>
+<span class="comment">// block was declared.</span>
+[operation setCompletionBlock:^{
+    [<span class="keyword">self</span><span class="variable">.delegate</span> newDataAvailable];
+}];
+
+<span class="comment">// Using a block with a C API follows the same alignment and spacing</span>
+<span class="comment">// rules as with Objective-C.</span>
+<span class="built_in">dispatch_async</span>(fileIOQueue_, ^{
+    <span class="built_in">NSString</span>* path = [<span class="keyword">self</span> sessionFilePath];
+    <span class="keyword">if</span> (path) {
+      <span class="comment">// ...</span>
+    }
+});
+
+<span class="comment">// An example where the parameter wraps and the block declaration fits</span>
+<span class="comment">// on the same line. Note the spacing of |^(SessionWindow *window) {|</span>
+<span class="comment">// compared to |^{| above.</span>
+[[SessionService sharedService]
+    loadWindowWithCompletionBlock:^(SessionWindow *window) {
+        <span class="keyword">if</span> (window) {
+          [<span class="keyword">self</span> windowDidLoad:window];
+        } <span class="keyword">else</span> {
+          [<span class="keyword">self</span> errorLoadingWindow];
+        }
+        }];
+
+<span class="comment">// An example where the parameter wraps and the block declaration does</span>
+<span class="comment">// not fit on the same line as the name.</span>
+[[SessionService sharedService]
+    loadWindowWithCompletionBlock:
+        ^(SessionWindow *window) {
+            <span class="keyword">if</span> (window) {
+              [<span class="keyword">self</span> windowDidLoad:window];
+            } <span class="keyword">else</span> {
+              [<span class="keyword">self</span> errorLoadingWindow];
+            }
+        }];
+
+<span class="comment">// Large blocks can be declared out-of-line.</span>
+<span class="keyword">void</span> (^largeBlock)(<span class="keyword">void</span>) = ^{
+    <span class="comment">// ...</span>
+};
+[operationQueue_ addOperationWithBlock:largeBlock];
+</code></pre><h3 id="8-文件名">8.文件名</h3><blockquote>
+<p>Tip: 文件名须反映出其实现了什么类 – 包括大小写。遵循你所参与项目的约定。</p>
+</blockquote>
+<p>文件的扩展名应该如下：</p>
+<pre><code><span class="class">.h</span>    C/C++/Objective-C 的头文件
+<span class="class">.m</span>    Ojbective-C 实现文件
+<span class="class">.mm</span>    Ojbective-C++ 的实现文件
+<span class="class">.cc</span>    纯 C++ 的实现文件
+<span class="class">.c</span>    纯 C 的实现文件
+</code></pre><p>类别的文件名应该包含被扩展的类名，如：GTMNSString+Utils.h 或<code>GTMNSTextView+Autocomplete.h</code>。</p>
+<h3 id="9-Objective-C++">9.Objective-C++</h3><blockquote>
+<p>Tip: 源代码文件内，Ojbective-C++ 代码遵循你正在实现的函数/方法的风格。</p>
+</blockquote>
+<p>为了最小化 Cocoa/Objective-C 与 C++ 之间命名风格的冲突，根据待实现的函数/方法选择编码风格。实现 @implementation 语句块时，使用 Objective-C 的命名规则；如果实现一个 C++ 的类，就使用 C++ 命名规则。</p>
+<pre><code><span class="comment">// file: cross_platform_header.h</span>
+
+class CrossPlatformAPI {
+ public:
+  ...
+  <span class="keyword">int</span> DoSomethingPlatformSpecific();  <span class="comment">// impl on each platform</span>
+ private:
+  <span class="keyword">int</span> an_instance_var_;
+};
+
+<span class="comment">// file: mac_implementation.mm</span>
+<span class="preprocessor">#include <span class="title">"cross_platform_header.h"</span></span>
+
+<span class="comment">// A typical Objective-C class, using Objective-C naming.</span>
+<span class="class"><span class="keyword">@interface</span> <span class="title">MyDelegate</span> : <span class="title">NSObject</span> </span>{
+ <span class="keyword">@private</span>
+  <span class="keyword">int</span> instanceVar_;
+  CrossPlatformAPI* backEndObject_;
+}
+- (<span class="keyword">void</span>)respondToSomething:(<span class="keyword">id</span>)something;
+<span class="keyword">@end</span>
+<span class="class"><span class="keyword">@implementation</span> <span class="title">MyDelegate</span></span>
+- (<span class="keyword">void</span>)respondToSomething:(<span class="keyword">id</span>)something {
+  <span class="comment">// bridge from Cocoa through our C++ backend</span>
+  instanceVar_ = backEndObject-&gt;DoSomethingPlatformSpecific();
+  <span class="built_in">NSString</span>* tempString = [<span class="built_in">NSString</span> stringWithInt:instanceVar_];
+  <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, tempString);
+}
+<span class="keyword">@end</span>
+
+<span class="comment">// The platform-specific implementation of the C++ class, using</span>
+<span class="comment">// C++ naming.</span>
+<span class="keyword">int</span> CrossPlatformAPI::DoSomethingPlatformSpecific() {
+  <span class="built_in">NSString</span>* temp_string = [<span class="built_in">NSString</span> stringWithInt:an_instance_var_];
+  <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, temp_string);
+  <span class="keyword">return</span> [temp_string intValue];
+}
+</code></pre><h3 id="10-类名">10.类名</h3><blockquote>
+<p>Tip: 类名（以及类别、协议名）应首字母大写，并以驼峰格式分割单词。</p>
+</blockquote>
+<p>应用层 的代码，应该尽量避免不必要的前缀。为每个类都添加相同的前缀无助于可读性。当编写的代码期望在不同应用程序间复用时，应使用前缀（如：GTMSendMessage）</p>
+<h3 id="11-类别名">11.类别名</h3><blockquote>
+<p>Tip: 类别名应该有两三个字母的前缀以表示类别是项目的一部分或者该类别是通用的。类别名应该包含它所扩展的类的名字。</p>
+</blockquote>
+<p>比如我们要基于 NSString 创建一个用于解析的类别，我们将把类别放在一个名为 GTMNSString+Parsing.h 的文件中。类别本身命名为 GTMStringParsingAdditions （是的，我们知道类别名和文件名不一样，但是这个文件中可能存在多个不同的与解析有关类别）。类别中的方法应该以 gtm_myCategoryMethodOnAString: 为前缀以避免命名冲突，因为 Objective-C 只有一个名字空间。如果代码不会分享出去，也不会运行在不同的地址空间中，方法名字就不那么重要了。</p>
+<p>类名与包含类别名的括号之间，应该以一个空格分隔。</p>
+<h3 id="12-初始化">12.初始化</h3><blockquote>
+<p>Tip: 不要在 init 方法中，将成员变量初始化为 0 或者 nil；毫无必要。</p>
+</blockquote>
+<p>刚分配的对象，默认值都是 0，除了 isa 指针（译者注：NSObject 的 isa 指针，用于标识对象的类型）。所以不要在初始化器里面写一堆将成员初始化为 0 或者 nil 的代码。</p>
+<h3 id="13-避免_+new">13.避免 +new</h3><blockquote>
+<p>Tip: 不要调用 NSObject 类方法 new，也不要在子类中重载它。使用 alloc 和 init 方法创建并初始化对象。</p>
+</blockquote>
+<p>现代的 Ojbective-C 代码通过调用 alloc 和 init 方法来创建并 retain 一个对象。由于类方法 new 很少使用，这使得有关内存分配的代码审查更困难。</p>
+<h3 id="14-保持公共_API_简单">14.保持公共 API 简单</h3><blockquote>
+<p>Tip: 保持类简单；避免 “厨房水槽（kitchen-sink）” 式的 API。如果一个函数压根没必要公开，就不要这么做。用私有类别保证公共头文件整洁</p>
+</blockquote>
+<p>与 C++ 不同，Objective-C 没有方法来区分公共的方法和私有的方法 – 所有的方法都是公共的（译者注：这取决于 Objective-C 运行时的方法调用的消息机制）。因此，除非客户端的代码期望使用某个方法，不要把这个方法放进公共 API 中。尽可能的避免了你你不希望被调用的方法却被调用到。这包括重载父类的方法。对于内部实现所需要的方法，在实现的文件中定义一个类别，而不是把它们放进公有的头文件中。</p>
+<pre><code>// <span class="type">GTMFoo</span>.m
+<span class="comment">#import "GTMFoo.h"</span>
+
+@<span class="keyword">interface</span> <span class="type">GTMFoo</span> (<span class="type">PrivateDelegateHandling</span>)
+- (<span class="type">NSString</span> *)doSomethingWithDelegate;  // <span class="type">Declare</span> private <span class="keyword">method</span>
+@<span class="keyword">end</span>
+
+@implementation <span class="type">GTMFoo</span>(<span class="type">PrivateDelegateHandling</span>)
+...
+- (<span class="type">NSString</span> *)doSomethingWithDelegate {
+  // <span class="type">Implement</span> this <span class="keyword">method</span>
+}
+...
+@<span class="keyword">end</span>
+</code></pre><p>Objective-C 2.0 以前，如果你在私有的 @interface 中声明了某个方法，但在 @implementation 中忘记定义这个方法，编译器不会抱怨（这是因为你没有在其它的类别中实现这个私有的方法）。解决文案是将方法放进指定类别的 @implemenation 中。</p>
+<p>如果你在使用 Objective-C 2.0，相反你应该使用 类扩展 来声明你的私有类别，例如：</p>
+<p>‘@interface GMFoo () { … }’</p>
+<p>这么做确保如果声明的方法没有在 @implementation 中实现，会触发一个编译器告警。</p>
+<p>再次说明，“私有的” 方法其实不是私有的。你有时可能不小心重载了父类的私有方法，因而制造出很难查找的 Bug。通常，私有的方法应该有一个相当特殊的名字以防止子类无意地重载它们。</p>
+<p>Ojbective-C 的类别可以用来将一个大的 @implementation 拆分成更容易理解的小块，同时，类别可以为最适合的类添加新的、特定应用程序的功能。例如，当添加一个 “middle truncation” 方法时，创建一个 NSString 的新类别并把方法放在里面，要比创建任意的一个新类把方法放进里面好得多。</p>
+<h3 id="15-_#import_and_#include">15. #import and #include</h3><blockquote>
+<p>Tip: #import Ojbective-C/Objective-C++ 头文件，#include C/C++ 头文件。</p>
+</blockquote>
+<p>基于你所包括的头文件的编程语言，选择使用 #import 或是 #include：</p>
+<p>当包含一个使用 Objective-C、Objective-C++ 的头文件时，使用 #import 。<br>当包含一个使用标准 C、C++ 头文件时，使用 #include。头文件应该使用 #define 保护。<br>一些 Ojbective-C 的头文件缺少 #define 保护，需要使用 #import 的方式包含。由于 Objective-C 的头文件只会被 Objective-C 的源文件及头文件包含，广泛地使用 #import 是可以的。</p>
+<p>文件中没有 Objective-C 代码的标准 C、C++ 头文件，很可能会被普通的 C、C++ 包含。由于标准 C、C++ 里面没有 #import 的用法，这些文件将被 #include。在 Objective-C 源文件中使用 #include 包含这些头文件，意味着这些头文件永远会在相同的语义下包含。</p>
+<p>这条规则帮助跨平台的项目避免低级错误。某个 Mac 开发者写了一个新的 C 或 C++ 头文件，如果忘记使用 #define 保护，在 Mac 下使用 #import 这个头文件不回引起问题，但是在其它平台下使用 #include 将可能编译失败。在所有的平台上统一使用 #include，意味着构造更可能全都成功或者失败，防止这些文件只能在某些平台下能够工作。</p>
+<pre><code><span class="preprocessor">#import &lt;Cocoa/Cocoa.h&gt;</span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;CoreFoundation/CoreFoundation.h&gt;</span></span>
+<span class="preprocessor">#import <span class="string">"GTMFoo.h"</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">"base/basictypes.h"</span></span>
+</code></pre><h3 id="16-使用根框架">16.使用根框架</h3><blockquote>
+<p>Tip: #import 根框架而不是单独的零散文件</p>
+</blockquote>
+<p>当你试图从框架（如 Cocoa 或者 Foundation）中包含若干零散的系统头文件时，实际上包含顶层根框架的话，编译器要做的工作更少。根框架通常已经经过预编译，加载更快。另外记得使用 #import 而不是 #include 来包含 Objective-C 的框架。</p>
+<pre><code><span class="id">#import</span> &lt;Foundation/Foundation.h&gt;     <span class="comment">// good</span>
+
+<span class="id">#import</span> &lt;Foundation/NSArray.h&gt;        <span class="comment">// avoid</span>
+<span class="id">#import</span> &lt;Foundation/NSString.h&gt;
+...
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihfm6awy0000kxs6l9zqgzhu" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihfn79bi0000mjs640tnwaex" class="article-share-link">Share</a>
       
       
     </footer>
@@ -967,7 +1207,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihfm6axc0003kxs6cbtsgh7j" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihfn79bx0003mjs6amdee6a5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1173,7 +1413,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/Cocoa-编码规范中文版/" data-id="cihfm6axd0004kxs6qx8i3y5s" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/Cocoa-编码规范中文版/" data-id="cihfn79by0004mjs6wceu7m66" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1338,7 +1578,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/aotuManLady-编码规范/" data-id="cihfm6axb0002kxs6hv9r3xpg" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/aotuManLady-编码规范/" data-id="cihfn79bw0002mjs6ruil3gvc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1406,7 +1646,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihfm6axf0006kxs6hnyzpr8f" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihfn79c00006mjs6sm3zyt7t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1465,7 +1705,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="cihfm6axe0005kxs6qm5ty5wp" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="cihfn79bz0005mjs6gdlzn2eu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1510,7 +1750,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihfm6ax90001kxs6aqvzhy5x" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihfn79bu0001mjs6ci22c3cz" class="article-share-link">Share</a>
       
       
     </footer>
