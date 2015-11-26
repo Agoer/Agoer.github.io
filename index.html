@@ -65,10 +65,153 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS-面试题②" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/26/iOS-面试题②/" class="article-date">
+  <time datetime="2015-11-26T07:00:36.000Z" itemprop="datePublished">2015-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/26/iOS-面试题②/">iOS 面试题②</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个问题已经有很多优秀的答案了，但最近一周面试了很多iOS开发，也准备了一些题目，忍不住发上来…首先需要声明的是，此次的面试者大多在有1~3年的iOS开发经验，并非需要找一个真正的大牛，所以我准备的题目，自己觉得大多数还是比较基础，比较能够看出这个层次的人的水准的。如果你也是个有3年左右开发经验的从业者，不妨一试。</p>
+<p>面试开始的时候，我会让面试者选择一个他最熟悉的项目，给我们介绍一下它的技术架构，以及面试者在其中参与的模块和具体工作。因为我本人很讨厌面试上来做自我介绍，所以我一般开门见山，直接开始讲项目了。事实上，很多开发者并不明白我提到的“架构”的具体意思，有些人说了一大堆产品的功能，还有人说的非常笼统（比如，遵循MVC架构之类），一般这种时候我会打断他们，直接让他们给我讲一下这个APP的层次结构，或者是核心模块等。之后我会问两个问题：</p>
+<ol>
+<li>讲述一次在这个APP中，用户触发了一个事件，引起了一个服务请求，然后获取服务端返回，并且更新前端界面的过程。请说的详细一点，比如数据经过了哪些类的处理，每一次传递时的格式是怎么样的？</li>
+<li>你参与的APP，是如何处理多个服务的同步发起的？随后让面试者说一下APP的界面架构，这个比较随意。问完了项目，就开始基础知识题啦~</li>
+</ol>
+<p>##Model层：</p>
+<ol>
+<li>数据持久化存储方案有哪些？沙盒的目录结构是怎样的？各自一般用于什么场合？</li>
+<li>SQL语句问题：inner join、left join、right join的区别是什么？</li>
+<li>sqlite的优化网络通信用过哪些方式（100%的人说了AFNetworking…）如何处理多个网络请求并发的情况<br>在网络请求中如何提高性能在网络请求中如何保证安全性 语言与基础知识：</li>
+<li>内存中的栈和堆的区别是什么？那些数据在栈上，哪些在堆上？</li>
+<li>·#define和const定义的变量，有什么区别什么情况下会出现内存的循环引用block中的weak self，是任何时候都需要加的么？</li>
+<li>GCD的queue，main queue中执行的代码，一定是在main thread么？</li>
+<li>NSOperationQueue有哪些使用方式</li>
+<li>NSThread中的Runloop的作用，如何使用？</li>
+<li>.h文件中的变量，外部可以直接访问么？（注意是变量，不是property）</li>
+<li>讲述一下runtime的概念，message send如果寻找不到相应的对象，会如何进行后续处理 ？</li>
+<li>TCP和UDP的区别是什么？</li>
+<li>MD5和Base64的区别是什么，各自场景是什么？</li>
+<li>二叉搜索树的概念，时间复杂度多少？架构：（我们招的不是架构师，这方面问的不多，而且从之前对APP的架构介绍里可以边听边问）哪些类不适合使用单例模式？即使他们在周期中只会出现一次。</li>
+<li>Notification的使用场景是什么？同步还是异步？</li>
+<li>简单介绍一下KVC和KVO，他们都可以应用在哪些场景？ APP相关：</li>
+<li>如何添加一个自定义字体到工程中</li>
+<li>如何制作一个静态库/动态库，他们的区别是什么？</li>
+<li>Configuration中，debug和release的区别是什么？</li>
+<li>简单介绍下发送系统消息的机制（APNS） </li>
+</ol>
+<p>##UI：</p>
+<ol>
+<li>系统如何寻找到需要响应用户操作的那个Responder</li>
+<li>多屏幕尺寸的适配</li>
+<li>UIButton的父类是什么？UILabel呢？</li>
+<li>push view controller 和 present view controller的区别</li>
+<li>描述下tableview cell的重用机制</li>
+<li>UIView的frame和bounds的区别是什么 </li>
+</ol>
+<p>###最后是几道场景题，也是我最喜欢问的：</p>
+<ol>
+<li>发送10个网络请求，然后再接收到所有回应之后执行后续操作，如何实现？</li>
+<li>实现一个第三方控件，可以在任何时候出现在APP界面最上层</li>
+<li>实现一个最简单的点击拖拽功能。上面那个拖拽之外，如果在手放开时，需要根据速度往前滑动呢？</li>
+<li>如何减小一个应用程序的尺寸？</li>
+<li>如何提高一个性用程序的性能？</li>
+<li>不同版本的APP，数据库结构变化了，如何处理? </li>
+</ol>
+<p>平心而论，这些题目并没有特别难，没有讲到黑科技，也没有讲到ACM算法题，都是iOS的基础概念以及很容易遇到的场景。可能也是因为我们招的目标，也只是一个可以完成业务开发的3年左右经验的人而已，所以大部分面试者水平并不如意，能答出以上大半题目，同时思路清晰态度积极向上的人，不到四分之一吧…另外的感想就是，这个行业可能真的有点浮躁，很多面试者，连简单的几个场景题都答不出来，基础知识更是一般，只会用几个第三方库，就开口要25~30w的年薪，还有一种爱理不理的感觉。也有些人，在原来的公司，自称是技术负责人，但连APP的基本架构，包括哪些主要模块都讲不清楚，各种兜圈子，甚至有人讲了半天的产品功能和亮点，我不得不一次次打断才能继续面试。其实我从11年开始自学iOS，做的事情越多，越觉得自己有越多的东西要学，离大牛的标准也是越来越远。而无论从深度还是广度来看，iOS开发都是一个值得挖掘的技术领域。由于苹果产品的火热，市场上的iOS开发一直供不应求，但真正有能力，高素质的可能真的不那么多。</p>
+<p><a href="http://www.zhihu.com/question/19604641/answer/" target="_blank" rel="external">链接</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/iOS-面试题②/" data-id="cihfx8pn400019cs6osn3jlf4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS-面试题①" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/26/iOS-面试题①/" class="article-date">
+  <time datetime="2015-11-26T06:57:06.000Z" itemprop="datePublished">2015-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/26/iOS-面试题①/">iOS 面试题①</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>什么是arc？（arc是为了解决什么问题诞生的？）</li>
+<li>请解释以下keywords的区别： assign vs weak,   <strong>block vs </strong>weak</li>
+<li>__block在arc和非arc下含义一样吗？</li>
+<li>使用atomic一定是线程安全的吗？</li>
+<li>描述一个你遇到过的retain cycle例子。(别撒谎，你肯定遇到过)</li>
+<li>+(void)load;   +(void)initialize；有什么用处？</li>
+<li>为什么其他语言里叫函数调用， objective c里则是给对象发消息（或者谈下对runtime的理解）</li>
+<li>什么是method swizzling?</li>
+<li>UIView和CALayer是啥关系？</li>
+<li>如何高性能的给UIImageView加个圆角？（不准说layer.cornerRadius!）</li>
+<li>使用drawRect有什么影响？（这个可深可浅，你至少得用过。。）</li>
+<li>ASIHttpRequest或者SDWebImage里面给UIImageView加载图片的逻辑是什么样的？（把UIImageView放到UITableViewCell里面问更赞</li>
+<li>麻烦你设计个简单的图片内存缓存器（移除策略是一定要说的）</li>
+<li>讲讲你用Instrument优化动画性能的经历吧（别问我什么是Instrument）</li>
+<li>loadView是干嘛用的？</li>
+<li>viewWillLayoutSubView你总是知道的。。</li>
+<li>GCD里面有哪几种Queue？你自己建立过串行queue吗？背后的线程模型是什么样的？</li>
+<li>用过coredata或者sqlite吗？读写是分线程的吗？遇到过死锁没？咋解决的？</li>
+<li>http的post和get啥区别？（区别挺多的，麻烦多说点）</li>
+<li>我知道你大学毕业过后就没接触过算法数据结构了，但是请你一定告诉我什么是Binary search tree?  search的时间复杂度是多少？我很想知道！</li>
+</ol>
+<p><a href="http://www.zhihu.com/question/19604641/answer/" target="_blank" rel="external">链接</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/iOS-面试题①/" data-id="cihfx8pn600029cs6un2w49ev" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-AotumanLady-iOS-App-开发准备工作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/26/AotumanLady-iOS-App-开发准备工作/" class="article-date">
-  <time datetime="2015-11-26T03:47:44.000Z" itemprop="datePublished">2015-11-26</time>
+  <time datetime="2015-11-26T03:48:21.000Z" itemprop="datePublished">2015-11-26</time>
 </a>
     
   </div>
@@ -96,13 +239,13 @@
 <h3 id="依赖库支持">依赖库支持</h3><ol>
 <li>版本管理: iVersion</li>
 <li>反馈: bugtags</li>
-<li>推送:</li>
+<li></li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihfp99e20000tts6h9havmkr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihfx8pmt00009cs66h4qb2x4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -577,7 +720,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihfp838b0006trs6zbjvwa30" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihfx8pnh00099cs6in9hrhiu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1251,7 +1394,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihfp83850002trs6wh6wrs8l" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihfx8pna00059cs63bk2al0y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1457,7 +1600,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/Cocoa-编码规范中文版/" data-id="cihfp83860003trs6c6x0esxu" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/Cocoa-编码规范中文版/" data-id="cihfx8pnc00069cs6one5cy4h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1622,7 +1765,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/aotuManLady-编码规范/" data-id="cihfp83840001trs66vshbu94" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/aotuManLady-编码规范/" data-id="cihfx8pn900049cs6w6eosisu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1690,7 +1833,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihfp83890005trs6et6ss5fn" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihfx8png00089cs6z2zotq16" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1749,7 +1892,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="cihfp83880004trs66yledrxf" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/AotumanLady-写作规范/" data-id="cihfx8pne00079cs6o6jpz8o8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1794,7 +1937,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihfp837y0000trs6id1tggqf" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihfx8pn700039cs6b43l6fqw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1819,7 +1962,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">8</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -1831,6 +1974,14 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       <ul>
         
           <li>
+            <a href="/2015/11/26/iOS-面试题②/">iOS 面试题②</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/26/iOS-面试题①/">iOS 面试题①</a>
+          </li>
+        
+          <li>
             <a href="/2015/11/26/AotumanLady-iOS-App-开发准备工作/">AotumanLady iOS App 开发准备工作</a>
           </li>
         
@@ -1840,14 +1991,6 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
         
           <li>
             <a href="/2015/11/26/Google-Objective-C-Style-Guide-中文版/">Google Objective C Style Guide 中文版</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/25/Cocoa-编码规范中文版/">Cocoa 编码规范中文版</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/25/aotuManLady-编码规范/">AotumanLady 编程规范</a>
           </li>
         
       </ul>

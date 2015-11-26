@@ -3,21 +3,36 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | 李二狗的技术博客</title>
+  <title>iOS 面试题① | 李二狗的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="什么是arc？（arc是为了解决什么问题诞生的？）
+请解释以下keywords的区别： assign vs weak,   block vs weak
+__block在arc和非arc下含义一样吗？
+使用atomic一定是线程安全的吗？
+描述一个你遇到过的retain cycle例子。(别撒谎，你肯定遇到过)
++(void)load;   +(void)initialize；有什么用处？
+为什么其">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/index.html">
+<meta property="og:title" content="iOS 面试题①">
+<meta property="og:url" content="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/iOS-面试题①/index.html">
 <meta property="og:site_name" content="李二狗的技术博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-11-24T04:46:22.000Z">
+<meta property="og:description" content="什么是arc？（arc是为了解决什么问题诞生的？）
+请解释以下keywords的区别： assign vs weak,   block vs weak
+__block在arc和非arc下含义一样吗？
+使用atomic一定是线程安全的吗？
+描述一个你遇到过的retain cycle例子。(别撒谎，你肯定遇到过)
++(void)load;   +(void)initialize；有什么用处？
+为什么其">
+<meta property="og:updated_time" content="2015-11-26T07:03:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="iOS 面试题①">
+<meta name="twitter:description" content="什么是arc？（arc是为了解决什么问题诞生的？）
+请解释以下keywords的区别： assign vs weak,   block vs weak
+__block在arc和非arc下含义一样吗？
+使用atomic一定是线程安全的吗？
+描述一个你遇到过的retain cycle例子。(别撒谎，你肯定遇到过)
++(void)load;   +(void)initialize；有什么用处？
+为什么其">
   
     <link rel="alternative" href="/atom.xml" title="李二狗的技术博客" type="application/atom+xml">
   
@@ -67,10 +82,10 @@ Quick">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-iOS-面试题①" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/24/hello-world/" class="article-date">
-  <time datetime="2015-11-24T04:46:22.000Z" itemprop="datePublished">2015-11-24</time>
+    <a href="/2015/11/26/iOS-面试题①/" class="article-date">
+  <time datetime="2015-11-26T06:57:06.000Z" itemprop="datePublished">2015-11-26</time>
 </a>
     
   </div>
@@ -81,7 +96,7 @@ Quick">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      iOS 面试题①
     </h1>
   
 
@@ -89,20 +104,34 @@ Quick">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <ol>
+<li>什么是arc？（arc是为了解决什么问题诞生的？）</li>
+<li>请解释以下keywords的区别： assign vs weak,   <strong>block vs </strong>weak</li>
+<li>__block在arc和非arc下含义一样吗？</li>
+<li>使用atomic一定是线程安全的吗？</li>
+<li>描述一个你遇到过的retain cycle例子。(别撒谎，你肯定遇到过)</li>
+<li>+(void)load;   +(void)initialize；有什么用处？</li>
+<li>为什么其他语言里叫函数调用， objective c里则是给对象发消息（或者谈下对runtime的理解）</li>
+<li>什么是method swizzling?</li>
+<li>UIView和CALayer是啥关系？</li>
+<li>如何高性能的给UIImageView加个圆角？（不准说layer.cornerRadius!）</li>
+<li>使用drawRect有什么影响？（这个可深可浅，你至少得用过。。）</li>
+<li>ASIHttpRequest或者SDWebImage里面给UIImageView加载图片的逻辑是什么样的？（把UIImageView放到UITableViewCell里面问更赞</li>
+<li>麻烦你设计个简单的图片内存缓存器（移除策略是一定要说的）</li>
+<li>讲讲你用Instrument优化动画性能的经历吧（别问我什么是Instrument）</li>
+<li>loadView是干嘛用的？</li>
+<li>viewWillLayoutSubView你总是知道的。。</li>
+<li>GCD里面有哪几种Queue？你自己建立过串行queue吗？背后的线程模型是什么样的？</li>
+<li>用过coredata或者sqlite吗？读写是分线程的吗？遇到过死锁没？咋解决的？</li>
+<li>http的post和get啥区别？（区别挺多的，麻烦多说点）</li>
+<li>我知道你大学毕业过后就没接触过算法数据结构了，但是请你一定告诉我什么是Binary search tree?  search的时间复杂度是多少？我很想知道！</li>
+</ol>
+<p><a href="http://www.zhihu.com/question/19604641/answer/" target="_blank" rel="external">链接</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/24/hello-world/" data-id="cihfx8pn700039cs6b43l6fqw" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/iOS-面试题①/" data-id="cihfx8pn600029cs6un2w49ev" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,15 +140,20 @@ Quick">
     
 <nav id="article-nav">
   
-    <a href="/2015/11/24/AotumanLady-写作规范/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/11/26/iOS-面试题②/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          AotumanLady 写作规范
+          iOS 面试题②
         
       </div>
     </a>
   
+  
+    <a href="/2015/11/26/AotumanLady-iOS-App-开发准备工作/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">AotumanLady iOS App 开发准备工作</div>
+    </a>
   
 </nav>
 
