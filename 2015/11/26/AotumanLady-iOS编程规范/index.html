@@ -17,7 +17,7 @@
 
 代码写作规范请移步 AotumanLady 写作规范
 代码分支管理规范请移步 AotumanLady 代码分支管理规范">
-<meta property="og:updated_time" content="2015-11-26T02:50:01.000Z">
+<meta property="og:updated_time" content="2015-11-26T02:53:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AotumanLady iOS编程规范">
 <meta name="twitter:description" content="团队建立之初，需要一份 iOS 编码规范，近两天详细阅读了 Cocoa-编码规范中文版 和 Google Objective C Style Guide 中文版 ,在上述文章的基础上写一份符合当前 Objective-C、iOS 和 Xcode 版本的代码规范。欢迎批评指正。
@@ -76,7 +76,7 @@
         <section id="main"><article id="post-AotumanLady-iOS编程规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/26/AotumanLady-iOS编程规范/" class="article-date">
-  <time datetime="2015-11-26T02:50:01.000Z" itemprop="datePublished">2015-11-26</time>
+  <time datetime="2015-11-26T02:53:52.000Z" itemprop="datePublished">2015-11-26</time>
 </a>
     
   </div>
@@ -307,12 +307,9 @@
 </ul>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">-</span> (void)<span class="tag">doSomethingWith</span>:(GTMFoo *)<span class="tag">theFoo</span></span><br><span class="line">                      <span class="tag">rect</span>:(NSRect)<span class="tag">theRect</span></span><br><span class="line">                  <span class="tag">interval</span>:(float)<span class="tag">theInterval</span> &#123;</span><br><span class="line">     ...</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>当第一个关键字比其它的短时，保证下一行至少有 4 个空格的缩进。这样可以使关键字垂直对齐，而不是使用冒号对齐：</p>
-<ul>
-<li>(void)short:(GTMFoo *)theFoo<br>  longKeyword:(NSRect)theRect<br>  evenLongerKeyword:(float)theInterval {<br>…<br>}</li>
+<li>当第一个关键字比其它的短时，保证下一行至少有 4 个空格的缩进。这样可以使关键字垂直对齐，而不是使用冒号对齐：</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">-</span> (void)<span class="tag">short</span>:(GTMFoo *)<span class="tag">theFoo</span></span><br><span class="line">    <span class="tag">longKeyword</span>:(NSRect)<span class="tag">theRect</span></span><br><span class="line">    <span class="tag">evenLongerKeyword</span>:(float)<span class="tag">theInterval</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="3-方法调用">3.方法调用</h3><p>方法调用应尽量保持与方法声明的格式一致。当格式的风格有多种选择时，新的代码要与已有代码保持一致。</p>
 <ul>
 <li>调用时所有参数应该在同一行：</li>
@@ -541,7 +538,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihfn79bi0000mjs640tnwaex" class="article-share-link">Share</a>
+      <a data-url="https://github.com/lc10915819/lc10915819.github.io.git/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihfnl3bw0000nhs61vfdvqjf" class="article-share-link">Share</a>
       
       
     </footer>
