@@ -19,7 +19,7 @@ ReactiveCocoa 原理
 action、delegate、KVO、callback 的组合，从而来实现 功能的 连接、过滤和组合。
 
 一步步去实现 RAC1.使用 RAC 实现 UITextfield 最简单的事件监听1234//监听输入   [self.userTextField.rac_textSignal subscrib">
-<meta property="og:updated_time" content="2015-11-27T10:23:43.000Z">
+<meta property="og:updated_time" content="2015-11-27T10:25:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ReactiveCocoa">
 <meta name="twitter:description" content="ReactiveCocoa  信号(signal)主导一切。
@@ -145,11 +145,12 @@ action、delegate、KVO、callback 的组合，从而来实现 功能的 连接�
 <p>上面的代码使用 <code>combineLatest:reduce:</code> 方法把<code>validUsernameSignal</code> 和 <code>validPasswordSignal</code>  产生的最新的值聚合在一起，并生成一个新的信号。每次这两个源信号的任何一个产生新值时，reduce block都会执行，block的返回值会发给下一个信号。</p>
 <p>对聚合好的信号，然后去控制 UIButton 界面。</p>
 <h3 id="7-使用_RAC_替代_Button_事件">7.使用 RAC 替代 Button 事件</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[self.signinButton rac_signalForControlEvents:UIControlEventTouchUpInside]</span></span><br><span class="line">    </span><br><span class="line">    subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">&#123;</span><br><span class="line">       </span><br><span class="line">        NSLog<span class="list">(@<span class="string">"button clicked"</span>)</span><span class="comment">;</span></span><br><span class="line">    &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>项目地址：<a href="https://github.com/lc10915819/ReactiveCocoaDemo" target="_blank" rel="external">ReactiveCocoaDemo</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihhiueeu0004yas6345sgfju" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihhixej400041as61fs4ftyc" class="article-share-link">Share</a>
       
       
     </footer>

@@ -134,11 +134,12 @@
 <p>上面的代码使用 <code>combineLatest:reduce:</code> 方法把<code>validUsernameSignal</code> 和 <code>validPasswordSignal</code>  产生的最新的值聚合在一起，并生成一个新的信号。每次这两个源信号的任何一个产生新值时，reduce block都会执行，block的返回值会发给下一个信号。</p>
 <p>对聚合好的信号，然后去控制 UIButton 界面。</p>
 <h3 id="7-使用_RAC_替代_Button_事件">7.使用 RAC 替代 Button 事件</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[self.signinButton rac_signalForControlEvents:UIControlEventTouchUpInside]</span></span><br><span class="line">    </span><br><span class="line">    subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">&#123;</span><br><span class="line">       </span><br><span class="line">        NSLog<span class="list">(@<span class="string">"button clicked"</span>)</span><span class="comment">;</span></span><br><span class="line">    &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>项目地址：<a href="https://github.com/lc10915819/ReactiveCocoaDemo" target="_blank" rel="external">ReactiveCocoaDemo</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihhiueeu0004yas6345sgfju" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihhixej400041as61fs4ftyc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -613,7 +614,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihhiuef80009yas6zdrvxpuy" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihhixejh00091as6mparfzaf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -694,7 +695,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihhiueef0000yas66jdtp0n5" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihhixein00001as66n12l6kd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -753,7 +754,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihhiueeq0001yas6nmr6ohdu" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihhixeit00011as6spm3nbyj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -800,7 +801,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihhiuef9000ayas6fsijahs8" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihhixeji000a1as6klforpuw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1474,7 +1475,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihhiueex0005yas6kfrh38y0" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihhixej600051as64m8nqukc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1680,7 +1681,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/Cocoa-编码规范中文版/" data-id="cihhiueez0006yas6x0bhqr9v" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/Cocoa-编码规范中文版/" data-id="cihhixej800061as6vmeaj42o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1845,7 +1846,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/aotuManLady-编码规范/" data-id="cihhiueet0003yas63198ztra" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/aotuManLady-编码规范/" data-id="cihhixej200031as6psbdod02" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1913,7 +1914,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihhiuef10008yas6w3fulul0" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihhixejb00081as6vhy6n1lo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1972,7 +1973,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/24/AotumanLady-写作规范/" data-id="cihhiuef00007yas65fouh65z" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/24/AotumanLady-写作规范/" data-id="cihhixej900071as6mk3as737" class="article-share-link">Share</a>
       
       
     </footer>
