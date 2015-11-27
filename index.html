@@ -91,7 +91,7 @@
 </code></pre><h2 id="ReactiveCocoa_原理">ReactiveCocoa 原理</h2><blockquote>
 <p>action、delegate、KVO、callback 的组合，从而来实现 功能的 连接、过滤和组合。</p>
 </blockquote>
-<h2 id="一步步去实现_RAC">一步步去实现 RAC</h2><h3 id="1-使用_RAC_实现_UITextfield_最简单的实践监听">1.使用 RAC 实现 UITextfield 最简单的实践监听</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//监听输入</span></span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span> subscribeNext:^(<span class="keyword">id</span> word)&#123;</span><br><span class="line">       <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,word);</span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
+<h2 id="一步步去实现_RAC">一步步去实现 RAC</h2><h3 id="1-使用_RAC_实现_UITextfield_最简单的事件监听">1.使用 RAC 实现 UITextfield 最简单的事件监听</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//监听输入</span></span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span> subscribeNext:^(<span class="keyword">id</span> word)&#123;</span><br><span class="line">       <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,word);</span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
 <p>类似于</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)textField:(<span class="built_in">UITextField</span> *)textField shouldChangeCharactersInRange:(<span class="built_in">NSRange</span>)range replacementString:(<span class="built_in">NSString</span> *)string;  </span><br><span class="line"> <span class="comment">// return NO to not change text</span></span><br></pre></td></tr></table></figure>
 <p>每一次改变都会触发 block 事件，并打印出文本框的内容。</p>
@@ -121,11 +121,24 @@
 <p>很相似，除了 filter 多了一个 <code>else</code> ,其余完全一样。<br>到底在什么时候选择什么样的方法呢？</p>
 <p><strong>map：改变输入源类型的时候 调用。</strong></p>
 <p><strong>filter:限制输入源的长度、颜色等时候调用。</strong></p>
+<h3 id="5-用_signal_去控制一切">5.用 signal 去控制一切</h3><p>代码你应该最喜欢吧？</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *validUsernameSignal =</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span></span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">      <span class="keyword">return</span> @([<span class="keyword">self</span> isValidUsername:text]);</span><br><span class="line">  &#125;];</span><br><span class="line">  <span class="comment">//得到验证用户名正确性的信号</span></span><br><span class="line"></span><br><span class="line">RACSignal *validPasswordSignal =</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.pswTextfield</span><span class="variable">.rac_textSignal</span></span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">     <span class="keyword">return</span> @([<span class="keyword">self</span> isValidPassword:text]);</span><br><span class="line"> &#125;];  </span><br><span class="line"> <span class="comment">//得到验证密码正确性的信号</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">RAC(<span class="keyword">self</span><span class="variable">.pswTextfield</span>,backgroundColor) =</span><br><span class="line">[validPasswordSignal</span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">     <span class="keyword">return</span> [passwordValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"> &#125;];</span><br><span class="line"> <span class="comment">//针对返回的信号去改变 控件的显示方式</span></span><br><span class="line"></span><br><span class="line">RAC(<span class="keyword">self</span><span class="variable">.userTextField</span>,backgroundColor) =</span><br><span class="line">[validUsernameSignal</span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *usernameValid)&#123;</span><br><span class="line">     <span class="keyword">return</span> [usernameValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"> &#125;];</span><br><span class="line"> <span class="comment">// me too~</span></span><br></pre></td></tr></table></figure>
+<p>一种不可取的控件改变实现方式</p>
+<p>BAD ! BAD ! BAD !</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[validPasswordSignal</span><br><span class="line">  map:<span class="comment">^id</span><span class="list">(<span class="keyword">NSNumber</span> *passwordValid)</span><span class="collection">&#123;</span><br><span class="line">    return<span class="collection">[passwordValid boolValue]</span> ? <span class="collection">[UIColor clearColor]</span>:<span class="collection">[UIColor yellowColor]</span><span class="comment">;</span></span><br><span class="line">  &#125;</span>]</span></span><br><span class="line">  subscribeNext:^<span class="list">(<span class="keyword">UIColor</span> *color)</span><span class="collection">&#123;</span><br><span class="line">    self.passwordTextField.backgroundColor = color;</span><br><span class="line">  &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>能用 RAC 的宏， why not？</p>
+<p>RAC：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hexcolor">#def</span>ine <span class="function"><span class="title">RAC</span><span class="params">(TARGET, ...)</span></span> \</span><br><span class="line">    <span class="function"><span class="title">metamacro_if_eq</span><span class="params">(<span class="number">1</span>, metamacro_argcount(__VA_ARGS__)</span></span>) \</span><br><span class="line">        (<span class="function"><span class="title">RAC_</span><span class="params">(TARGET, __VA_ARGS__, nil)</span></span>) \</span><br><span class="line">        (<span class="function"><span class="title">RAC_</span><span class="params">(TARGET, __VA_ARGS__)</span></span>)</span><br></pre></td></tr></table></figure>
+<h3 id="6-用_UITextfield_的返回信号_去处理其他事件（_UIButton_）">6.用 UITextfield 的返回信号 去处理其他事件（ UIButton ）</h3><p>code：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *validUsernameSignal =</span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span></span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">         <span class="keyword">return</span> @([<span class="keyword">self</span> isValidUsername:text]);</span><br><span class="line">     &#125;];</span><br><span class="line">   </span><br><span class="line">   RACSignal *validPasswordSignal =</span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.pswTextfield</span><span class="variable">.rac_textSignal</span></span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">        <span class="keyword">return</span> @([<span class="keyword">self</span> isValidPassword:text]);</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   RAC(<span class="keyword">self</span><span class="variable">.pswTextfield</span>,backgroundColor) =</span><br><span class="line">   [validPasswordSignal</span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">        <span class="keyword">return</span> [passwordValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   RAC(<span class="keyword">self</span><span class="variable">.userTextField</span>,backgroundColor) =</span><br><span class="line">   [validUsernameSignal</span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *usernameValid)&#123;</span><br><span class="line">        <span class="keyword">return</span> [usernameValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">RACSignal *signUpActiveSingle = [RACSignal combineLatest:@[validUsernameSignal,validPasswordSignal] reduce:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span>*usernameValid, <span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> @([usernameValid boolValue]&amp;&amp;[passwordValid boolValue]);</span><br><span class="line">   </span><br><span class="line">&#125;];</span><br><span class="line">   </span><br><span class="line">   [signUpActiveSingle subscribeNext:^(<span class="built_in">NSNumber</span> *signupActive) &#123;</span><br><span class="line">      </span><br><span class="line">       <span class="keyword">self</span><span class="variable">.signinButton</span><span class="variable">.enabled</span> = [signupActive boolValue];</span><br><span class="line">       </span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
+<p>上面的代码使用 <code>combineLatest:reduce:</code> 方法把<code>validUsernameSignal</code> 和 <code>validPasswordSignal</code>  产生的最新的值聚合在一起，并生成一个新的信号。每次这两个源信号的任何一个产生新值时，reduce block都会执行，block的返回值会发给下一个信号。</p>
+<p>对聚合好的信号，然后去控制 UIButton 界面。</p>
+<h3 id="7-使用_RAC_替代_Button_事件">7.使用 RAC 替代 Button 事件</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[self.signinButton rac_signalForControlEvents:UIControlEventTouchUpInside]</span></span><br><span class="line">    </span><br><span class="line">    subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">&#123;</span><br><span class="line">       </span><br><span class="line">        NSLog<span class="list">(@<span class="string">"button clicked"</span>)</span><span class="comment">;</span></span><br><span class="line">    &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihhhcmbt0004ugs6vrhl53yd" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihhiueeu0004yas6345sgfju" class="article-share-link">Share</a>
       
       
     </footer>
@@ -600,7 +613,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihhhcmc60009ugs6f0nzuq3l" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihhiuef80009yas6zdrvxpuy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -681,7 +694,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihhhcmbe0000ugs6wzm73wgp" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihhiueef0000yas66jdtp0n5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -740,7 +753,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihhhcmbo0001ugs64ix2fnym" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihhiueeq0001yas6nmr6ohdu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -787,7 +800,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihhhcmc7000augs66c9zwccc" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihhiuef9000ayas6fsijahs8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1461,7 +1474,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihhhcmbu0005ugs6ddfagmxt" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihhiueex0005yas6kfrh38y0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1667,7 +1680,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/Cocoa-编码规范中文版/" data-id="cihhhcmbw0006ugs6jf6buoe1" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/Cocoa-编码规范中文版/" data-id="cihhiueez0006yas6x0bhqr9v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1832,7 +1845,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/aotuManLady-编码规范/" data-id="cihhhcmbs0003ugs6gzxkeksq" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/aotuManLady-编码规范/" data-id="cihhiueet0003yas63198ztra" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1900,7 +1913,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihhhcmc40008ugs6i49snxsv" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihhiuef10008yas6w3fulul0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1959,7 +1972,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/24/AotumanLady-写作规范/" data-id="cihhhcmby0007ugs69w0cve7s" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/24/AotumanLady-写作规范/" data-id="cihhiuef00007yas65fouh65z" class="article-share-link">Share</a>
       
       
     </footer>
