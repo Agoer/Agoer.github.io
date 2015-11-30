@@ -20,13 +20,13 @@
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/92987100.jpg">
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/54816366.jpg">
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/40676889.jpg">
-<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/25588960.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/79036640.jpg">
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/28361769.jpg">
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/81085209.jpg">
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83542990.jpg">
-<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/22519419.jpg">
-<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/85204463.jpg">
-<meta property="og:updated_time" content="2015-11-30T10:53:06.000Z">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/87529378.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/2910837.jpg">
+<meta property="og:updated_time" content="2015-11-30T11:07:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bulid Configuration">
 <meta name="twitter:description" content="Build ConfigurationXcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。
@@ -118,7 +118,7 @@
 <h3 id="4-在程序配置项里面对应你所设置的_configuration_定义不同的API_接口。">4.在程序配置项里面对应你所设置的 configuration 定义不同的API 接口。</h3><p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/40676889.jpg" alt=""></p>
 <p><strong>切换不同的 编译模式，会根据宏定义打印相应的API。</strong></p>
 <h2 id="配置不同的_APPIcon">配置不同的 APPIcon</h2><h3 id="1-使用_Asset_Catalog，配置不同环境下的appIcon">1.使用 Asset Catalog，配置不同环境下的appIcon</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="class">.test_debug</span>   		<span class="comment">//开发测试环境   </span></span><br><span class="line"><span class="number">2</span><span class="class">.debug</span>			  	<span class="comment">//开发环境</span></span><br><span class="line"><span class="number">3</span><span class="class">.beta</span>				<span class="comment">//预发布线上环境(企业版) 	</span></span><br><span class="line"><span class="number">3</span><span class="class">.release</span>			<span class="comment">//线上环境</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/25588960.jpg" alt=""></p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/79036640.jpg" alt=""></p>
 <p><strong>不同环境下运行得到的 icon 就会有所差异</strong></p>
 <h2 id="配置不同的_APP_Name">配置不同的 APP Name</h2><h3 id="1-Target_-_Build_Settings里点+号，添加一个User-Defined_Setting">1.Target - Build Settings里点+号，添加一个User-Defined Setting</h3><h3 id="2-比如我们请一个叫APP_DISPLAY_NAME的key值，下面BETA叫BETA，DEVELOP叫DEVELOP，_Release还是用系统原配置。">2.比如我们请一个叫APP_DISPLAY_NAME的key值，下面BETA叫BETA，DEVELOP叫DEVELOP， Release还是用系统原配置。</h3><h3 id="3-进到Target_-_Info里，修改Bundle_name为$(APP_DISPLAY_NAME)">3.进到Target - Info里，修改Bundle name为$(APP_DISPLAY_NAME)</h3><p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/28361769.jpg" alt=""></p>
 <p>效果如下：</p>
@@ -133,18 +133,18 @@
 <ul>
 <li>beta                //预发布线上环境(企业版)</li>
 </ul>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/22519419.jpg" alt=""></p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/87529378.jpg" alt=""></p>
 <ul>
 <li>release            //线上环境</li>
 </ul>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/85204463.jpg" alt=""></p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/2910837.jpg" alt=""></p>
 <p>参考文档：<a href="http://www.jianshu.com/p/51a2bbe877aa" target="_blank" rel="external">简书</a></p>
 <p>Demo: <a href="https://github.com/lc10915819/AddBuildConfiguration" target="_blank" rel="external">这里</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihlu7vu20008i2s6v3ym012g" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihluqr5t0008m8s6v4o3jxf4" class="article-share-link">Share</a>
       
       
     </footer>
