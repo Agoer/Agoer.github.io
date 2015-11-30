@@ -89,8 +89,8 @@
       
         <h2 id="Build_Configuration">Build Configuration</h2><p>Xcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。</p>
 <p><img src="http://i12.tietuku.com/5416d9b6ae0ff918.jpg" alt="你好"></p>
-<p>为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ develop_debug ）、测试服务器( debug )、线上服务器( release ).如何能够不去修改代码的情况下去快速切换调试模式呢 ？<br>幸好有 bulid configuration！</p>
-<h2 id="配置_bulid_configuration">配置 bulid configuration</h2><h3 id="1-添加_configuration">1.添加 configuration</h3><p>假定我们需要三个不同的调试环境。</p>
+<p>为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ test_debug ）、测试服务器( debug )、预发布线上服务器（Beta）、线上服务器( release ).如何能够不去修改代码的情况下去快速切换调试模式呢 ？<br>幸好有 bulid configuration！</p>
+<h2 id="配置_bulid_configuration">配置 bulid configuration</h2><h3 id="1-添加_configuration">1.添加 configuration</h3><p>假定我们需要四个不同的调试环境。</p>
 <p>按照优先级 从低到高的顺序：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="class">.test_debug</span>   		<span class="comment">//开发测试环境   </span></span><br><span class="line"><span class="number">2</span><span class="class">.debug</span>			  	<span class="comment">//开发环境</span></span><br><span class="line"><span class="number">3</span><span class="class">.beta</span>				<span class="comment">//预发布线上环境(企业版) 	</span></span><br><span class="line"><span class="number">3</span><span class="class">.release</span>			<span class="comment">//线上环境</span></span><br></pre></td></tr></table></figure>
 <p>其中 test_debug 和 debug 是 可以做断点调试；<br>beta 和 release 是不可以做断点调试的。</p>
@@ -128,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihlu5zgx0008hms6sj9c72au" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihlu7vu20008i2s6v3ym012g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -204,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihlu5zgq0006hms6v6qsjn45" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihlu7vtz0006i2s6ksfn4sah" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihlu5zgm0004hms6vkjplovf" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihlu7vtv0004i2s6hzoejkxp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -763,7 +763,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihlu5zh1000bhms6cdk9r5uz" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihlu7vu6000bi2s6hmpy6m00" class="article-share-link">Share</a>
       
       
     </footer>
@@ -844,7 +844,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihlu5zg70000hms68v4kpldn" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihlu7vta0000i2s6279lsckb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -903,7 +903,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihlu5zgh0001hms69r1ns1qc" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihlu7vtg0001i2s6xcrz9ak4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -950,7 +950,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihlu5zh3000chms611gp9za9" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihlu7vu7000ci2s65legtxoe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1624,7 +1624,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihlu5zgp0005hms6qu3peman" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihlu7vtx0005i2s672h0cb4f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1830,7 +1830,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/Cocoa-编码规范中文版/" data-id="cihlu5zgr0007hms6k5pe2wnc" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/Cocoa-编码规范中文版/" data-id="cihlu7vu10007i2s6yw2favsy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1995,7 +1995,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/aotuManLady-编码规范/" data-id="cihlu5zgk0003hms69l2ci0nc" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/aotuManLady-编码规范/" data-id="cihlu7vtt0003i2s69g9qswnk" class="article-share-link">Share</a>
       
       
     </footer>

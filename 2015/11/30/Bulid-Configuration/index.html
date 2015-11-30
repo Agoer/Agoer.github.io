@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Build ConfigurationXcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。
 
-为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ develop_debug ）、测试服务器( debug )、线上服务器( release ).如何能">
+为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ test_debug ）、测试服务器( debug )、预发布线上服务器（Beta）、线上服务器( r">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bulid Configuration">
 <meta property="og:url" content="http://www.lichaner.com/2015/11/30/Bulid-Configuration/index.html">
 <meta property="og:site_name" content="李二狗的技术博客">
 <meta property="og:description" content="Build ConfigurationXcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。
 
-为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ develop_debug ）、测试服务器( debug )、线上服务器( release ).如何能">
+为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ test_debug ）、测试服务器( debug )、预发布线上服务器（Beta）、线上服务器( r">
 <meta property="og:image" content="http://i12.tietuku.com/5416d9b6ae0ff918.jpg">
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83583695.jpg">
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/92987100.jpg">
@@ -26,12 +26,12 @@
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83542990.jpg">
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/22519419.jpg">
 <meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/85204463.jpg">
-<meta property="og:updated_time" content="2015-11-30T10:51:43.000Z">
+<meta property="og:updated_time" content="2015-11-30T10:53:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bulid Configuration">
 <meta name="twitter:description" content="Build ConfigurationXcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。
 
-为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ develop_debug ）、测试服务器( debug )、线上服务器( release ).如何能">
+为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ test_debug ）、测试服务器( debug )、预发布线上服务器（Beta）、线上服务器( r">
   
     <link rel="alternative" href="/atom.xml" title="李二狗的技术博客" type="application/atom+xml">
   
@@ -105,8 +105,8 @@
       
         <h2 id="Build_Configuration">Build Configuration</h2><p>Xcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。</p>
 <p><img src="http://i12.tietuku.com/5416d9b6ae0ff918.jpg" alt="你好"></p>
-<p>为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ develop_debug ）、测试服务器( debug )、线上服务器( release ).如何能够不去修改代码的情况下去快速切换调试模式呢 ？<br>幸好有 bulid configuration！</p>
-<h2 id="配置_bulid_configuration">配置 bulid configuration</h2><h3 id="1-添加_configuration">1.添加 configuration</h3><p>假定我们需要三个不同的调试环境。</p>
+<p>为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ test_debug ）、测试服务器( debug )、预发布线上服务器（Beta）、线上服务器( release ).如何能够不去修改代码的情况下去快速切换调试模式呢 ？<br>幸好有 bulid configuration！</p>
+<h2 id="配置_bulid_configuration">配置 bulid configuration</h2><h3 id="1-添加_configuration">1.添加 configuration</h3><p>假定我们需要四个不同的调试环境。</p>
 <p>按照优先级 从低到高的顺序：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="class">.test_debug</span>   		<span class="comment">//开发测试环境   </span></span><br><span class="line"><span class="number">2</span><span class="class">.debug</span>			  	<span class="comment">//开发环境</span></span><br><span class="line"><span class="number">3</span><span class="class">.beta</span>				<span class="comment">//预发布线上环境(企业版) 	</span></span><br><span class="line"><span class="number">3</span><span class="class">.release</span>			<span class="comment">//线上环境</span></span><br></pre></td></tr></table></figure>
 <p>其中 test_debug 和 debug 是 可以做断点调试；<br>beta 和 release 是不可以做断点调试的。</p>
@@ -144,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihlu5zgx0008hms6sj9c72au" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihlu7vu20008i2s6v3ym012g" class="article-share-link">Share</a>
       
       
     </footer>
