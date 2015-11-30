@@ -65,14 +65,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Bulid-Configuration" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-AotumanLady-iOS-App-开发准备工作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/30/Bulid-Configuration/" class="article-date">
-  <time datetime="2015-11-30T08:00:38.000Z" itemprop="datePublished">2015-11-30</time>
+    <a href="/2015/11/30/AotumanLady-iOS-App-开发准备工作/" class="article-date">
+  <time datetime="2015-11-30T13:01:33.000Z" itemprop="datePublished">2015-11-30</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Xcode-配置categories/">Xcode# 配置categories</a>
+    <a class="article-category-link" href="/categories/技术方案-配置categories/">技术方案# 配置categories</a>
   </div>
 
   </div>
@@ -83,7 +83,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/Bulid-Configuration/">Bulid Configuration</a>
+      <a class="article-title" href="/2015/11/30/AotumanLady-iOS-App-开发准备工作/">AotumanLady iOS App 开发准备工作</a>
     </h1>
   
 
@@ -91,209 +91,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Build_Configuration">Build Configuration</h2><p>Xcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。</p>
-<p><img src="http://i12.tietuku.com/5416d9b6ae0ff918.jpg" alt="你好"></p>
-<p>为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ test_debug ）、测试服务器( debug )、预发布线上服务器（Beta）、线上服务器( release ).如何能够不去修改代码的情况下去快速切换调试模式呢 ？<br>幸好有 bulid configuration！</p>
-<h2 id="配置_bulid_configuration">配置 bulid configuration</h2><h3 id="1-添加_configuration">1.添加 configuration</h3><p>假定我们需要四个不同的调试环境。</p>
-<p>按照优先级 从低到高的顺序：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="class">.test_debug</span>   		<span class="comment">//开发测试环境   </span></span><br><span class="line"><span class="number">2</span><span class="class">.debug</span>			  	<span class="comment">//开发环境</span></span><br><span class="line"><span class="number">3</span><span class="class">.beta</span>				<span class="comment">//预发布线上环境(企业版) 	</span></span><br><span class="line"><span class="number">3</span><span class="class">.release</span>			<span class="comment">//线上环境</span></span><br></pre></td></tr></table></figure>
-<p>其中 test_debug 和 debug 是 可以做断点调试；<br>beta 和 release 是不可以做断点调试的。</p>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83583695.jpg" alt=""></p>
-<h3 id="2-查看_configuration">2.查看 configuration</h3><p>添加完第1步的Configuration之后，在Edit Scheme里就会看到新添加的配置项</p>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/92987100.jpg" alt=""></p>
-<h3 id="3-更改Preprocessor_Macros">3.更改Preprocessor Macros</h3><p>第1步里我们直接复制了Debug / Release 的配置项，那这里的值就会有问题，需要自己设置。</p>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/54816366.jpg" alt=""></p>
-<h3 id="4-在程序配置项里面对应你所设置的_configuration_定义不同的API_接口。">4.在程序配置项里面对应你所设置的 configuration 定义不同的API 接口。</h3><p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/40676889.jpg" alt=""></p>
-<p><strong>切换不同的 编译模式，会根据宏定义打印相应的API。</strong></p>
-<h2 id="配置不同的_APPIcon">配置不同的 APPIcon</h2><h3 id="1-使用_Asset_Catalog，配置不同环境下的appIcon">1.使用 Asset Catalog，配置不同环境下的appIcon</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="class">.test_debug</span>   		<span class="comment">//开发测试环境   </span></span><br><span class="line"><span class="number">2</span><span class="class">.debug</span>			  	<span class="comment">//开发环境</span></span><br><span class="line"><span class="number">3</span><span class="class">.beta</span>				<span class="comment">//预发布线上环境(企业版) 	</span></span><br><span class="line"><span class="number">3</span><span class="class">.release</span>			<span class="comment">//线上环境</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/79036640.jpg" alt=""></p>
-<p><strong>不同环境下运行得到的 icon 就会有所差异</strong></p>
-<h2 id="配置不同的_APP_Name">配置不同的 APP Name</h2><h3 id="1-Target_-_Build_Settings里点+号，添加一个User-Defined_Setting">1.Target - Build Settings里点+号，添加一个User-Defined Setting</h3><h3 id="2-比如我们请一个叫APP_DISPLAY_NAME的key值，下面BETA叫BETA，DEVELOP叫DEVELOP，_Release还是用系统原配置。">2.比如我们请一个叫APP_DISPLAY_NAME的key值，下面BETA叫BETA，DEVELOP叫DEVELOP， Release还是用系统原配置。</h3><h3 id="3-进到Target_-_Info里，修改Bundle_name为$(APP_DISPLAY_NAME)">3.进到Target - Info里，修改Bundle name为$(APP_DISPLAY_NAME)</h3><p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/28361769.jpg" alt=""></p>
-<p>效果如下：</p>
-<ul>
-<li>test_debug           //开发测试环境   </li>
-</ul>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/81085209.jpg" alt=""></p>
-<ul>
-<li>debug                  //开发环境</li>
-</ul>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83542990.jpg" alt=""></p>
-<ul>
-<li>beta                //预发布线上环境(企业版)</li>
-</ul>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/87529378.jpg" alt=""></p>
-<ul>
-<li>release            //线上环境</li>
-</ul>
-<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/2910837.jpg" alt=""></p>
-<p>参考文档：<a href="http://www.jianshu.com/p/51a2bbe877aa" target="_blank" rel="external">简书</a></p>
-<p>Demo: <a href="https://github.com/lc10915819/AddBuildConfiguration" target="_blank" rel="external">这里</a></p>
-<p>很好的 markdown 图片上传工具 <a href="http://yotuku.cn/?utm_source=doubangroup#!/" target="_blank" rel="external">url</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihlypwgd00083es6m6og725t" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-CocoaPods-Podfile-语法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/30/CocoaPods-Podfile-语法/" class="article-date">
-  <time datetime="2015-11-30T02:21:09.000Z" itemprop="datePublished">2015-11-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/CocoaPods-Podfile-语法/">CocoaPods Podfile 语法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Pod_Commands">Pod Commands</h2><p><code>pod search &lt;open source&gt;</code></p>
-<p>ag:<br><code>pod search AFNetworking</code></p>
-<p>在cocoapods这个目录中搜索。也可以在 <code>http://cocoapods.org</code>中搜索第三方库。</p>
-<h2 id="Podfile">Podfile</h2><h3 id="1-pod_‘objection’’version’;">1.pod ‘objection’’version’;</h3><ul>
-<li>pod ‘MCDateExtensions’,不指定版本，在pod update时会获取最新的版本；</li>
-<li>pod ‘MCDateExtensions’’~&gt;1.0.0’，获取的版本信息是[1.0.0, 1.1.0). ~&gt;是参照ruby的语法的，~&gt;x.y.z, 的意思是版本号 x,y 固定，但可以大于等于 z。</li>
-</ul>
-<p><strong>通常版本号的命名有其惯例：x major 版本号升级表示有 API 发生不向后的兼容性变动，y minor 版本号升级表示有功能新增，z tiny 版本号升级表示 bugs 修正。</strong> 因此 “~&gt; x.y.z” 可以让我們保有升级弹性，又不致于升級太多让程序发生不兼容错误;</p>
-<h3 id="2-本地导入">2.本地导入</h3><p>从本地pod files</p>
-<p><code>pod &#39;AFNetworking&#39;, :path =&gt; &#39;~/Documents/AFNetworking&#39;</code></p>
-<p>此目录下一定要有.podspec文档</p>
-<h3 id="3-从git_server端pod_files">3.从git server端pod files</h3><ul>
-<li>从分支导入</li>
-</ul>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>, :git =&gt; <span class="string">'https://github.com/gowalla/AFNetworking.git'</span>, :branch =&gt; ‘develop’</span><br></pre></td></tr></table></figure>
-<ul>
-<li>从commit 导入</li>
-</ul>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>, :git =&gt; <span class="string">'https://github.com/gowalla/AFNetworking.git'</span>, :commit =&gt; <span class="string">'082f8319af'</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-子模块导入">4.子模块导入</h3><p>pod ‘ShareKit/Facebook’ 支持子模块的导入。</p>
-<h3 id="5-注释">5.注释</h3><p>单行注释： #</p>
-<p>多行注释:</p>
-<p>=begin    </p>
-<p>codes to comment </p>
-<p>=end</p>
-<h3 id="6-版本介绍">6.版本介绍</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>      <span class="comment">//不显式指定依赖库版本，表示每次都获取最新版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'2.0'</span>     <span class="comment">//只使用2.0版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt; 2.0'</span>     <span class="comment">//使用高于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt;= 2.0'</span>     <span class="comment">//使用大于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt; 2.0'</span>     <span class="comment">//使用小于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt;= 2.0'</span>     <span class="comment">//使用小于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 0.1.2'</span>     <span class="comment">//使用大于等于0.1.2但小于0.2的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0.1'</span>     <span class="comment">//使用大于等于0.1但小于1.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0'</span>     <span class="comment">//高于0的版本，写这个限制和什么都不写是一个效果，都表示使用最新版本</span></span><br></pre></td></tr></table></figure>
-<h3 id="7-Podfile-lock文件">7.Podfile.lock文件</h3><p>Podfile.lock文件对团队协作很重要，我们需要将它添加到版本管理中。</p>
-<h3 id="8-Podfile_文件位置">8.Podfile 文件位置</h3><p>事实上Podfile文件可以放在任意一个目录下，需要做的是在Podfile中指定工程的路径，和原来相比，Podfile文件就在最开始的位置增加了一行，具体内容如下</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xcodeproj <span class="string">"/Users/wangzz/Desktop/CocoaPodsTest/CocoaPodsTest.xcodeproj"</span>  </span><br><span class="line">  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span></span><br></pre></td></tr></table></figure>
-<h3 id="9-Podfile和target">9.Podfile和target</h3><ol>
-<li>多个target中使用相同的Pods依赖库</li>
+        <h3 id="技术解决方案">技术解决方案</h3><ol>
+<li>存储方案：七牛、云片</li>
+<li>滤镜: 嗨图、camera360、Adobe</li>
+<li>协同工具:Teambition 、slack</li>
+<li>推送:极光 PUSH</li>
 </ol>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">link_with <span class="string">'CocoaPodsTest'</span>, <span class="string">'Second'</span>  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>不同的target使用完全不同的Pods依赖库</li>
+<h3 id="依赖库支持">依赖库支持</h3><ol>
+<li>版本管理: iVersion</li>
+<li>反馈: bugtags</li>
+<li></li>
 </ol>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">target <span class="symbol">:<span class="string">'CocoaPodsTest'</span></span> <span class="keyword">do</span>  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span>  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">  </span><br><span class="line">target <span class="symbol">:<span class="string">'Second'</span></span> <span class="keyword">do</span>  </span><br><span class="line">pod <span class="string">'OpenUDID'</span>, <span class="string">'~&gt; 1.0.0'</span>  </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>更多内容 点击 <a href="http://www.cnblogs.com/ouyangfang/p/4173544.html" target="_blank" rel="external">这里</a></p>
-<p><a href="http://guides.cocoapods.org/using/index.html" target="_blank" rel="external">Cocoapods 官网引导</a></p>
-<p><a href="http://blog.csdn.net/wzzvictory/article/details/19178709" target="_blank" rel="external">王中周 CSDN 博客</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihlypwg500063es6ooasxsuj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ReactiveCocoa" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/27/ReactiveCocoa/" class="article-date">
-  <time datetime="2015-11-27T07:21:55.000Z" itemprop="datePublished">2015-11-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/27/ReactiveCocoa/">ReactiveCocoa</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>ReactiveCocoa  信号<span class="comment">(signal)</span>主导一切。
-</code></pre><h2 id="ReactiveCocoa_原理">ReactiveCocoa 原理</h2><blockquote>
-<p>action、delegate、KVO、callback 的组合，从而来实现 功能的 连接、过滤和组合。</p>
-</blockquote>
-<h2 id="一步步去实现_RAC">一步步去实现 RAC</h2><h3 id="1-使用_RAC_实现_UITextfield_最简单的事件监听">1.使用 RAC 实现 UITextfield 最简单的事件监听</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//监听输入</span></span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span> subscribeNext:^(<span class="keyword">id</span> word)&#123;</span><br><span class="line">       <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,word);</span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
-<p>类似于</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)textField:(<span class="built_in">UITextField</span> *)textField shouldChangeCharactersInRange:(<span class="built_in">NSRange</span>)range replacementString:(<span class="built_in">NSString</span> *)string;  </span><br><span class="line"> <span class="comment">// return NO to not change text</span></span><br></pre></td></tr></table></figure>
-<p>每一次改变都会触发 block 事件，并打印出文本框的内容。</p>
-<p>return</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.359</span> RWReactivePlayground[<span class="number">9193</span>:a0b] i</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.436</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.541</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is </span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.695</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is t</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.831</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is th</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.878</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is thi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.901</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.009</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> </span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.142</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> m</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.236</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> ma</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.335</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> mag</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.439</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> magi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.535</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> magic</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.774</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> magic?</span><br></pre></td></tr></table></figure>
-<h3 id="2-使用_RAC_对输入内容进行过滤">2.使用 RAC 对输入内容进行过滤</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *usernameSourceSignal =  <span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span>;</span><br><span class="line"></span><br><span class="line">  RACSignal *filteredUsername = [usernameSourceSignal filter:^<span class="built_in">BOOL</span>(<span class="keyword">id</span> value) &#123;</span><br><span class="line">      <span class="built_in">NSString</span> *text = value;</span><br><span class="line">      <span class="keyword">return</span> text<span class="variable">.length</span> &gt; <span class="number">3</span>;</span><br><span class="line">  &#125;];</span><br><span class="line">  </span><br><span class="line">  [filteredUsername subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">      </span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,x);</span><br><span class="line">  </span><br><span class="line">  &#125;];</span><br></pre></td></tr></table></figure>
-<p>简写</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[self.userTextField.rac_textSignal filter:<span class="comment">^BOOL</span><span class="list">(<span class="keyword">id</span> value)</span> <span class="collection">&#123;</span><br><span class="line"> </span><br><span class="line">    NSString *text = value;</span><br><span class="line">    return text.length &gt; <span class="number">3</span><span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">&#125;</span>]</span></span><br><span class="line"></span><br><span class="line">subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">&#123;</span><br><span class="line">    </span><br><span class="line">       NSLog<span class="list">(@<span class="string">"%@"</span>,x)</span><span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">&#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>1&gt; 在输入的过程中，每一次的 block 调用 都会触发 Filter 的 过滤，然后返回给 returnRAC 一个值；<br>2&gt; returnRAC 通过 自身的 描述方法 </p>
-<p><code>subscribeNext(void (^)(id x))nextBlock</code> </p>
-<p>去对得到的结果进行处理。</p>
-<p>从后续的 demo 就会发现，其实是<strong>信息流</strong>的传递和处理。</p>
-<p>只有当输入的长度 &gt; 3 才会打印输出。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.335</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is t</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.478</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is th</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.526</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is thi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.548</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.676</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> </span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.798</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> m</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.926</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> ma</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.987</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> mag</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">52.141</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> magi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">52.229</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> magic</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">52.486</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> magic?</span><br></pre></td></tr></table></figure>
-<h3 id="3-_上面_Return_的类型_要和_下面_Receive_的类型保持一致">3. 上面 Return 的类型 要和 下面 Receive 的类型保持一致</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[self.userTextField.rac_textSignal</span><br><span class="line">   map:<span class="comment">^id</span><span class="list">(<span class="keyword">NSString</span> *text)</span><span class="collection">&#123;</span><br><span class="line">       return @<span class="list">(<span class="keyword">text.length</span>)</span><span class="comment">;</span></span><br><span class="line">   &#125;</span>]</span></span><br><span class="line">  filter:<span class="comment">^BOOL</span><span class="list">(<span class="keyword">NSNumber</span> *length)</span><span class="collection">&#123;</span><br><span class="line">      return<span class="collection">[length integerValue]</span> &gt; <span class="number">3</span><span class="comment">;</span></span><br><span class="line">  &#125;</span>]</span></span><br><span class="line"> subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span><span class="collection">&#123;</span><br><span class="line">     NSLog<span class="list">(@<span class="string">"%@"</span>, x)</span><span class="comment">;</span></span><br><span class="line"> &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>RETURN </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">54.566</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">4</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">54.725</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">5</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">54.853</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">6</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.061</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">7</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.197</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">8</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.300</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">9</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.462</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">10</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.558</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">11</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.646</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">12</span></span><br></pre></td></tr></table></figure>
-<p>Why? 为什么不再打印 输入文本了？</p>
-<p>因为信息流在 </p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map:^<span class="property">id</span>(NSString *<span class="type">text</span>)&#123;</span><br><span class="line"><span class="command">          return</span> @(<span class="type">text</span>.<span class="property">length</span>);</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
-<p>已经改变了后续信号源的类型。</p>
-<h3 id="4-_map_OR_filter_？">4. map OR filter ？</h3><p>先看看 map 和 filter 的实现差异性。</p>
-<p>filter:</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)filter:(BOOL (^)(id <span class="keyword">value</span>))block &#123;</span><br><span class="line">	NSCParameterAssert(block <span class="comment">!= nil);</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">Class</span> <span class="keyword">class</span> = self.<span class="keyword">class</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> [[self flattenMap:^ id (id <span class="keyword">value</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (block(<span class="keyword">value</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> [<span class="keyword">class</span> <span class="keyword">return</span>:<span class="keyword">value</span>];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">class</span>.empty;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;] setNameWithFormat:@<span class="string">"[%@] -filter:"</span>, self.<span class="keyword">name</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>map:</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (instancetype)map:(<span class="keyword">id</span> (^)(<span class="keyword">id</span> value))block &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(block != <span class="literal">nil</span>);</span><br><span class="line"></span><br><span class="line">	Class class = <span class="keyword">self</span><span class="variable">.class</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> [[<span class="keyword">self</span> flattenMap:^(<span class="keyword">id</span> value) &#123;</span><br><span class="line">		<span class="keyword">return</span> [class <span class="keyword">return</span>:block(value)];</span><br><span class="line">	&#125;] setNameWithFormat:<span class="string">@"[%@] -map:"</span>, <span class="keyword">self</span><span class="variable">.name</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>很相似，除了 filter 多了一个 <code>else</code> ,其余完全一样。<br>到底在什么时候选择什么样的方法呢？</p>
-<p><strong>map：改变输入源类型的时候 调用。</strong></p>
-<p><strong>filter:限制输入源的长度、颜色等时候调用。</strong></p>
-<h3 id="5-用_signal_去控制一切">5.用 signal 去控制一切</h3><p>代码你应该最喜欢吧？</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *validUsernameSignal =</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span></span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">      <span class="keyword">return</span> @([<span class="keyword">self</span> isValidUsername:text]);</span><br><span class="line">  &#125;];</span><br><span class="line">  <span class="comment">//得到验证用户名正确性的信号</span></span><br><span class="line"></span><br><span class="line">RACSignal *validPasswordSignal =</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.pswTextfield</span><span class="variable">.rac_textSignal</span></span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">     <span class="keyword">return</span> @([<span class="keyword">self</span> isValidPassword:text]);</span><br><span class="line"> &#125;];  </span><br><span class="line"> <span class="comment">//得到验证密码正确性的信号</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">RAC(<span class="keyword">self</span><span class="variable">.pswTextfield</span>,backgroundColor) =</span><br><span class="line">[validPasswordSignal</span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">     <span class="keyword">return</span> [passwordValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"> &#125;];</span><br><span class="line"> <span class="comment">//针对返回的信号去改变 控件的显示方式</span></span><br><span class="line"></span><br><span class="line">RAC(<span class="keyword">self</span><span class="variable">.userTextField</span>,backgroundColor) =</span><br><span class="line">[validUsernameSignal</span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *usernameValid)&#123;</span><br><span class="line">     <span class="keyword">return</span> [usernameValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"> &#125;];</span><br><span class="line"> <span class="comment">// me too~</span></span><br></pre></td></tr></table></figure>
-<p>一种不可取的控件改变实现方式</p>
-<p>BAD ! BAD ! BAD !</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[validPasswordSignal</span><br><span class="line">  map:<span class="comment">^id</span><span class="list">(<span class="keyword">NSNumber</span> *passwordValid)</span><span class="collection">&#123;</span><br><span class="line">    return<span class="collection">[passwordValid boolValue]</span> ? <span class="collection">[UIColor clearColor]</span>:<span class="collection">[UIColor yellowColor]</span><span class="comment">;</span></span><br><span class="line">  &#125;</span>]</span></span><br><span class="line">  subscribeNext:^<span class="list">(<span class="keyword">UIColor</span> *color)</span><span class="collection">&#123;</span><br><span class="line">    self.passwordTextField.backgroundColor = color;</span><br><span class="line">  &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>能用 RAC 的宏， why not？</p>
-<p>RAC：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hexcolor">#def</span>ine <span class="function"><span class="title">RAC</span><span class="params">(TARGET, ...)</span></span> \</span><br><span class="line">    <span class="function"><span class="title">metamacro_if_eq</span><span class="params">(<span class="number">1</span>, metamacro_argcount(__VA_ARGS__)</span></span>) \</span><br><span class="line">        (<span class="function"><span class="title">RAC_</span><span class="params">(TARGET, __VA_ARGS__, nil)</span></span>) \</span><br><span class="line">        (<span class="function"><span class="title">RAC_</span><span class="params">(TARGET, __VA_ARGS__)</span></span>)</span><br></pre></td></tr></table></figure>
-<h3 id="6-用_UITextfield_的返回信号_去处理其他事件（_UIButton_）">6.用 UITextfield 的返回信号 去处理其他事件（ UIButton ）</h3><p>code：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *validUsernameSignal =</span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span></span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">         <span class="keyword">return</span> @([<span class="keyword">self</span> isValidUsername:text]);</span><br><span class="line">     &#125;];</span><br><span class="line">   </span><br><span class="line">   RACSignal *validPasswordSignal =</span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.pswTextfield</span><span class="variable">.rac_textSignal</span></span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">        <span class="keyword">return</span> @([<span class="keyword">self</span> isValidPassword:text]);</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   RAC(<span class="keyword">self</span><span class="variable">.pswTextfield</span>,backgroundColor) =</span><br><span class="line">   [validPasswordSignal</span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">        <span class="keyword">return</span> [passwordValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   RAC(<span class="keyword">self</span><span class="variable">.userTextField</span>,backgroundColor) =</span><br><span class="line">   [validUsernameSignal</span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *usernameValid)&#123;</span><br><span class="line">        <span class="keyword">return</span> [usernameValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">RACSignal *signUpActiveSingle = [RACSignal combineLatest:@[validUsernameSignal,validPasswordSignal] reduce:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span>*usernameValid, <span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> @([usernameValid boolValue]&amp;&amp;[passwordValid boolValue]);</span><br><span class="line">   </span><br><span class="line">&#125;];</span><br><span class="line">   </span><br><span class="line">   [signUpActiveSingle subscribeNext:^(<span class="built_in">NSNumber</span> *signupActive) &#123;</span><br><span class="line">      </span><br><span class="line">       <span class="keyword">self</span><span class="variable">.signinButton</span><span class="variable">.enabled</span> = [signupActive boolValue];</span><br><span class="line">       </span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
-<p>上面的代码使用 <code>combineLatest:reduce:</code> 方法把<code>validUsernameSignal</code> 和 <code>validPasswordSignal</code>  产生的最新的值聚合在一起，并生成一个新的信号。每次这两个源信号的任何一个产生新值时，reduce block都会执行，block的返回值会发给下一个信号。</p>
-<p>对聚合好的信号，然后去控制 UIButton 界面。</p>
-<h3 id="7-使用_RAC_替代_Button_事件">7.使用 RAC 替代 Button 事件</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[self.signinButton rac_signalForControlEvents:UIControlEventTouchUpInside]</span></span><br><span class="line">    </span><br><span class="line">    subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">&#123;</span><br><span class="line">       </span><br><span class="line">        NSLog<span class="list">(@<span class="string">"button clicked"</span>)</span><span class="comment">;</span></span><br><span class="line">    &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>项目地址：<a href="https://github.com/lc10915819/ReactiveCocoaDemo" target="_blank" rel="external">ReactiveCocoaDemo</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihlypwg000043es6i7rw9l4u" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-iOS-App-开发准备工作/" data-id="cihlyu08c000s46s65xvnk976" class="article-share-link">Share</a>
       
       
     </footer>
@@ -305,10 +118,14 @@
   
     <article id="post-AotumanLady-iOS编程规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/26/AotumanLady-iOS编程规范/" class="article-date">
-  <time datetime="2015-11-26T07:56:13.000Z" itemprop="datePublished">2015-11-26</time>
+    <a href="/2015/11/30/AotumanLady-iOS编程规范/" class="article-date">
+  <time datetime="2015-11-30T13:01:12.000Z" itemprop="datePublished">2015-11-30</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/规范-配置categories/">规范# 配置categories</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -317,7 +134,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/26/AotumanLady-iOS编程规范/">AotumanLady iOS编程规范</a>
+      <a class="article-title" href="/2015/11/30/AotumanLady-iOS编程规范/">AotumanLady iOS编程规范</a>
     </h1>
   
 
@@ -768,7 +585,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihlypwgm000d3es6un6ii2cw" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-iOS编程规范/" data-id="cihlyu08a000q46s6r87uvq5f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -778,12 +595,16 @@ class CrossPlatformAPI {
 
 
   
-    <article id="post-iOS-面试题②" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Cocoa-编码规范中文版" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/26/iOS-面试题②/" class="article-date">
-  <time datetime="2015-11-26T07:00:36.000Z" itemprop="datePublished">2015-11-26</time>
+    <a href="/2015/11/30/Cocoa-编码规范中文版/" class="article-date">
+  <time datetime="2015-11-30T13:01:02.000Z" itemprop="datePublished">2015-11-30</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/规范-配置categories/">规范# 配置categories</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -792,7 +613,7 @@ class CrossPlatformAPI {
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/26/iOS-面试题②/">iOS 面试题②</a>
+      <a class="article-title" href="/2015/11/30/Cocoa-编码规范中文版/">Cocoa 编码规范中文版</a>
     </h1>
   
 
@@ -800,56 +621,181 @@ class CrossPlatformAPI {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这个问题已经有很多优秀的答案了，但最近一周面试了很多iOS开发，也准备了一些题目，忍不住发上来…首先需要声明的是，此次的面试者大多在有1~3年的iOS开发经验，并非需要找一个真正的大牛，所以我准备的题目，自己觉得大多数还是比较基础，比较能够看出这个层次的人的水准的。如果你也是个有3年左右开发经验的从业者，不妨一试。</p>
-<p>面试开始的时候，我会让面试者选择一个他最熟悉的项目，给我们介绍一下它的技术架构，以及面试者在其中参与的模块和具体工作。因为我本人很讨厌面试上来做自我介绍，所以我一般开门见山，直接开始讲项目了。事实上，很多开发者并不明白我提到的“架构”的具体意思，有些人说了一大堆产品的功能，还有人说的非常笼统（比如，遵循MVC架构之类），一般这种时候我会打断他们，直接让他们给我讲一下这个APP的层次结构，或者是核心模块等。之后我会问两个问题：</p>
+        <blockquote>
+<p>Code Naming Basics 代码命名基础<br>在面向对象软件库的设计过程中，开发人员经常忽视对类，方法，函数，常量以及其他编程接口元素的命名。本节讨论大多数Cocoa接口的一些命名约定。</p>
+<h3 id="General_Principles_一般性原则">General Principles 一般性原则</h3><h4 id="Clarity_清晰性">Clarity 清晰性</h4><ul>
+<li>最好是既清晰又简短，但不要为简短而丧失清晰性。</li>
+</ul>
+</blockquote>
+<p><code>insertObject:atIndex:</code> good</p>
+<p><code>insert:at:</code> bad（不清晰；要插入什么？“at”表示什么？）</p>
+<p><code>removeObjectAtIndex:</code> good</p>
+<p><code>removeObject:</code> ok<br>(这样也不错，因为方法是移除作为参数的对象)</p>
+<p><code>remove</code> bad (不清晰；要移除什么？)</p>
+<hr>
+<ul>
+<li>名称通常不缩写，即使名称很长，也要拼写完全</li>
+</ul>
+<p><code>destinationSelection</code> good</p>
+<p><code>destSel</code> bad</p>
+<p><code>setBackgroundColor:</code> good</p>
+<p><code>setBkgdColor:</code> 不清晰</p>
+<hr>
+<blockquote>
+<p>你可能会认为某个缩写广为人知，但有可能并非如此，尤其是当你的代码被来自不同文化和语言背景的开发人员所使用时。</p>
+</blockquote>
+<ul>
+<li>然而，你可以使用少数非常常见，历史悠久的缩写。请参考：”可接受的缩略名“一节</li>
+<li>避免使用有歧义的 API 名称，如那些能被理解成多种意思的方法名称</li>
+</ul>
+<p><code>sendPort</code> bad 是发送端口还是返回一个发送端口？</p>
+<p><code>displayName</code> bad 是显示一个名称还是返回用户界面中控件的标题？</p>
+<h3 id="Consistency_一致性">Consistency 一致性</h3><ul>
+<li><p>尽可能使用与 Cocoa 编程接口命名保持一致的名称。如果你不太确定某个命名的一致性，请浏览一下头文件或参考文档中的范例</p>
+</li>
+<li><p>在使用多态方法的类中，命名的一致性非常重要。在不同类中实现相同功能的方法应该具有相同的名称</p>
+</li>
+</ul>
+<p><code>- (int) tag</code> bad 在 NSView, NSCell, NSControl 中有定义</p>
+<p><code>- (void) setStringValue:(NSString *)</code> bad 在许多 Cocoa classes 中有定义</p>
+<p>请参考“方法参数”一节。</p>
+<h3 id="No_Self_Reference_不要自我指涉">No Self Reference 不要自我指涉</h3><ul>
+<li>不要名称自我指涉</li>
+</ul>
+<p><code>NSString</code> okey</p>
+<p><code>NSStringObject</code> bad 自我指涉</p>
+<ul>
+<li>掩码（可使用位操作进行组合）和用作通知名称的常量不受该约定限制</li>
+</ul>
+<p><code>NSUnderlineByWordMask</code> okey</p>
+<p><code>NSTableViewColumnDidMoveNotification</code> okey</p>
+<h3 id="Prefixes_前缀">Prefixes 前缀</h3><blockquote>
+<p>前缀是名称的重要组成部分。它们可以区分软件的功能范畴。通常，软件会被打包成一个框架或多个紧密相关的框架（如 Foundation 和 Application Kit 框架）。前缀可以防止第三方开发者与苹果公司之间的命名冲突（同样也可防止苹果内部不同框架之间的命名冲突）</p>
+</blockquote>
+<ul>
+<li>前缀有规定的格式。它由两到三个大写字符组成，不能使用下划线与子前缀<br>前缀</li>
+</ul>
+<p><code>Foundation NS</code></p>
+<p><code>Application Kit NS</code></p>
+<p><code>Address Book AB</code></p>
+<p><code>Interface Builder IB</code> </p>
+<ul>
+<li>命名 class，protocol，structure，函数，常量时使用前缀；命名成员方法时不使用前缀，因为方法已经在它所在类的命名空间种；同理，命名结构体字段时也不使用前缀</li>
+</ul>
+<h3 id="Typographic_Conventions_书写约定">Typographic Conventions 书写约定</h3><p>在为 API 元素命名时，请遵循如下一些简单的书写约定</p>
+<ul>
+<li>对于包含多个单词的名称，不要使用标点符号作为名称的一部分或作为分隔符（下划线，破折号等）；</li>
+<li><p>此外，大写每个单词的首字符并将这些单词连续拼写在一起。请注意以下限制：</p>
 <ol>
-<li>讲述一次在这个APP中，用户触发了一个事件，引起了一个服务请求，然后获取服务端返回，并且更新前端界面的过程。请说的详细一点，比如数据经过了哪些类的处理，每一次传递时的格式是怎么样的？</li>
-<li>你参与的APP，是如何处理多个服务的同步发起的？随后让面试者说一下APP的界面架构，这个比较随意。问完了项目，就开始基础知识题啦~</li>
+<li>方法名小写第一个单词的首字符，大写后续所有单词的首字符。方法名不使用前缀。如： fileExistsAtPath:isDirectory: 如果方法名以一个广为人知的大写首字母缩略词开头，该规则不适用，如：NSImage 中的 TIFFRepresentation</li>
+<li><p>函数名和常量名使用与其关联类相同的前缀，并且要大写前缀后面所有单词的首字符。如：NSRunAlertPanel，NSCellDisabled<br>3.避免使用下划线来表示名称的私有属性。苹果公司保留该方式的使用。如果第三方这样使用可能会导致命名冲突，他们可能会在无意中用自己的方法覆盖掉已有的私有方法，这会导致严重的后果。</p>
+<p> 请参考“私有方法”一节以了解私有 API 的命名约定的建议</p>
+</li>
 </ol>
-<h2 id="Model层：">Model层：</h2><ol>
-<li>数据持久化存储方案有哪些？沙盒的目录结构是怎样的？各自一般用于什么场合？</li>
-<li>SQL语句问题：inner join、left join、right join的区别是什么？</li>
-<li>sqlite的优化网络通信用过哪些方式（100%的人说了AFNetworking…）如何处理多个网络请求并发的情况<br>在网络请求中如何提高性能在网络请求中如何保证安全性 语言与基础知识：</li>
-<li>内存中的栈和堆的区别是什么？那些数据在栈上，哪些在堆上？</li>
-<li>·#define和const定义的变量，有什么区别什么情况下会出现内存的循环引用block中的weak self，是任何时候都需要加的么？</li>
-<li>GCD的queue，main queue中执行的代码，一定是在main thread么？</li>
-<li>NSOperationQueue有哪些使用方式</li>
-<li>NSThread中的Runloop的作用，如何使用？</li>
-<li>.h文件中的变量，外部可以直接访问么？（注意是变量，不是property）</li>
-<li>讲述一下runtime的概念，message send如果寻找不到相应的对象，会如何进行后续处理 ？</li>
-<li>TCP和UDP的区别是什么？</li>
-<li>MD5和Base64的区别是什么，各自场景是什么？</li>
-<li>二叉搜索树的概念，时间复杂度多少？架构：（我们招的不是架构师，这方面问的不多，而且从之前对APP的架构介绍里可以边听边问）哪些类不适合使用单例模式？即使他们在周期中只会出现一次。</li>
-<li>Notification的使用场景是什么？同步还是异步？</li>
-<li>简单介绍一下KVC和KVO，他们都可以应用在哪些场景？ APP相关：</li>
-<li>如何添加一个自定义字体到工程中</li>
-<li>如何制作一个静态库/动态库，他们的区别是什么？</li>
-<li>Configuration中，debug和release的区别是什么？</li>
-<li>简单介绍下发送系统消息的机制（APNS） </li>
+</li>
+</ul>
+<h3 id="Class_and_Protocol_Names_类与协议命名">Class and Protocol Names 类与协议命名</h3><pre><code>类名应包含一个明确描述该类（或类的对象）是什么或做什么的名词。类名要有合适的前缀（请参考“前缀”一节）。Foundation 及 Application Kit 有很多这样例子，如：<span class="built_in">NSString</span>, <span class="built_in">NSData</span>, <span class="built_in">NSScanner</span>, <span class="built_in">NSApplication</span>, <span class="built_in">NSButton</span> 以及 <span class="built_in">NSEvent</span>。
+</code></pre><p>协议应该根据对方法的行为分组方式来命名。</p>
+<ul>
+<li>大多数协议仅组合一组相关的方法，而不关联任何类，这种协议的命名应该使用动名词(ing)，以不与类名混淆。<br>代码<br>点评<br>NSLocking<br>good<br>NSLock<br>糟糕，它看起来像类名<br>● 有些协议组合一些彼此无关的方法（这样做是避免创建多个独立的小协议）。这样的协议倾向于与某个类关联在一起，该类是协议的主要体现者。在这种情形，我们约定协议的名称与该类同名。NSObject 协议就是这样一个例子。这个协议组合一组彼此无关的方法，有用于查询对象在其类层次中位置的方法，有使之能调用特殊方法的方法以及用于增减引用计数的方法。由于 NSObject 是这些方法的主要体现者，所以我们用类的名称命名这个协议。</li>
+</ul>
+<h3 id="Header_Files_头文件">Header Files 头文件</h3><p>头文件的命名方式很重要，我们可以根据其命名知晓头文件的内容。</p>
+<ul>
+<li>声明孤立的类或协议：将孤立的类或协议声明放置在单独的头文件中，该头文件名称与类或协议同名<br>头文件<br>声明<br>NSApplication.h<br>NSApplication 类</li>
+<li>声明相关联的类或协议：将相关联的声明（类，类别及协议) 放置在一个头文件中，该头文件名称与主要的类/类别/协议的名字相同。<br>头文件<br>声明<br>NSString.h<br>NSString 和 NSMutableString 类<br>NSLock.h<br>NSLocking 协议和 NSLock, NSConditionLock, NSRecursiveLock 类</li>
+<li>包含框架头文件：每个框架应该包含一个与框架同名的头文件，该头文件包含该框架所有公开的头文件。<br>头文件<br>框架<br>Foundation.h<br>Foundation.framework</li>
+<li>为已有框架中的某个类扩展 API：如果要在一个框架中声明属于另一个框架某个类的范畴类的方法，该头文件的命名形式为：原类名+“Additions”。如 Application Kit 中的 NSBundleAdditions.h </li>
+<li>相关联的函数与数据类型：将相联的函数，常量，结构体以及其他数据类型放置到一个头文件中，并以合适的名字命名。如 Application Kit 中的 NSGraphics.h<br>Naming Methods 方法命名</li>
+</ul>
+<h3 id="General_Rules_一般性规则">General Rules 一般性规则</h3><p>为方法命名时，请考虑如下一些一般性规则：</p>
+<ul>
+<li><p>小写第一个单词的首字符，大写随后单词的首字符，不使用前缀。请参考“书写约定”一节。有两种例外情况：</p>
+<ol>
+<li>方法名以广为人知的大写字母缩略词（如TIFF or PDF）开头；</li>
+<li>私有方法可以使用统一的前缀来分组和辨识，请参考“私有方法”一节</li>
 </ol>
-<h2 id="UI：">UI：</h2><ol>
-<li>系统如何寻找到需要响应用户操作的那个Responder</li>
-<li>多屏幕尺寸的适配</li>
-<li>UIButton的父类是什么？UILabel呢？</li>
-<li>push view controller 和 present view controller的区别</li>
-<li>描述下tableview cell的重用机制</li>
-<li>UIView的frame和bounds的区别是什么 </li>
-</ol>
-<h3 id="最后是几道场景题，也是我最喜欢问的：">最后是几道场景题，也是我最喜欢问的：</h3><ol>
-<li>发送10个网络请求，然后再接收到所有回应之后执行后续操作，如何实现？</li>
-<li>实现一个第三方控件，可以在任何时候出现在APP界面最上层</li>
-<li>实现一个最简单的点击拖拽功能。上面那个拖拽之外，如果在手放开时，需要根据速度往前滑动呢？</li>
-<li>如何减小一个应用程序的尺寸？</li>
-<li>如何提高一个性用程序的性能？</li>
-<li>不同版本的APP，数据库结构变化了，如何处理? </li>
-</ol>
-<p>平心而论，这些题目并没有特别难，没有讲到黑科技，也没有讲到ACM算法题，都是iOS的基础概念以及很容易遇到的场景。可能也是因为我们招的目标，也只是一个可以完成业务开发的3年左右经验的人而已，所以大部分面试者水平并不如意，能答出以上大半题目，同时思路清晰态度积极向上的人，不到四分之一吧…另外的感想就是，这个行业可能真的有点浮躁，很多面试者，连简单的几个场景题都答不出来，基础知识更是一般，只会用几个第三方库，就开口要25~30w的年薪，还有一种爱理不理的感觉。也有些人，在原来的公司，自称是技术负责人，但连APP的基本架构，包括哪些主要模块都讲不清楚，各种兜圈子，甚至有人讲了半天的产品功能和亮点，我不得不一次次打断才能继续面试。其实我从11年开始自学iOS，做的事情越多，越觉得自己有越多的东西要学，离大牛的标准也是越来越远。而无论从深度还是广度来看，iOS开发都是一个值得挖掘的技术领域。由于苹果产品的火热，市场上的iOS开发一直供不应求，但真正有能力，高素质的可能真的不那么多。</p>
-<p><a href="http://www.zhihu.com/question/19604641/answer/" target="_blank" rel="external">链接</a></p>
+<p>表示对象行为的方法，名称以动词开头：</p>
+</li>
+</ul>
+<p><code>- (void) invokeWithTarget:(id)target:</code><br><code>- (void) selectTabViewItem:(NSTableViewItem *)tableViewItem</code></p>
+<p>名称中不要出现 do 或 does，因为这些助动词没什么实际意义。也不要在动词前使用副词或形容词修饰</p>
+<ul>
+<li>如果方法返回方法接收者的某个属性，直接用属性名称命名。不要使用 get，除非是间接返回一个或多个值。请参考“访问方法”一节。</li>
+</ul>
+<p><code>- (NSSize) cellSize;</code> good</p>
+<p><code>- (NSSize) calcCellSize;</code> bad</p>
+<p><code>- (NSSize) getCellSize;</code> bad</p>
+<ul>
+<li>参数要用描述该参数的关键字命名</li>
+</ul>
+<p><code>- (void) sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;</code> good</p>
+<p><code>- (void) sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;</code> bad</p>
+<ul>
+<li>参数前面的单词要能描述该参数。</li>
+</ul>
+<p><code>- (id) viewWithTag:(int)aTag;</code> god</p>
+<p><code>- (id) taggedView:(int)aTag;</code>bad</p>
+<ul>
+<li>细化基类中的已有方法：创建一个新方法，其名称是在被细化方法名称后面追加参数关键词</li>
+</ul>
+<p><code>- (id) initWithFrame:(NSRect)frameRect;</code></p>
+<p>NSView</p>
+<figure class="highlight"><figcaption><span>(id) initWithFrame:(NSRect)frameRect mode:(ind)aMode cellClass:(Class)factoryId numberOfRows:(int)rowsHigh numberOfColumns:(int)colsWide;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;NSMatrix - NSView &#30340;&#23376;&#31867;&#10;&#10;* &#19981;&#35201;&#20351;&#29992; and &#26469;&#36830;&#25509;&#29992;&#23646;&#24615;&#20316;&#21442;&#25968;&#20851;&#38190;&#23383;&#10;&#10;``- (int) runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;`` god&#10;&#10;``- (int) runModalForDirectory:(NSString *)path addFile:(NSString *)name addTypes:(NSArray *)fileTypes;&#10; `` bad&#10;&#10;&#34429;&#28982;&#19978;&#38754;&#30340;&#20363;&#23376;&#20013;&#20351;&#29992; add &#30475;&#36215;&#26469;&#20063;&#19981;&#38169;&#65292;&#20294;&#24403;&#20320;&#26041;&#27861;&#26377;&#22826;&#22810;&#21442;&#25968;&#20851;&#38190;&#23383;&#26102;&#23601;&#26377;&#38382;&#39064;&#12290;&#10;&#10;* &#22914;&#26524;&#26041;&#27861;&#25551;&#36848;&#20004;&#31181;&#29420;&#31435;&#30340;&#34892;&#20026;&#65292;&#20351;&#29992; and &#26469;&#20018;&#25509;&#23427;&#20204;&#10; &#10; ``- (BOOL) openFile:(NSString *)fullPath withApplication:(NSString *)appName andDeactivate:(BOOL)flag;``&#10; &#10; NSWorkspace &#10;&#10;## Accessor Methods &#35775;&#38382;&#26041;&#27861;&#10;&#10;&#35775;&#38382;&#26041;&#27861;&#26159;&#23545;&#35937;&#23646;&#24615;&#30340;&#35835;&#21462;&#19982;&#35774;&#32622;&#26041;&#27861;&#12290;&#20854;&#21629;&#21517;&#26377;&#29305;&#23450;&#30340;&#26684;&#24335;&#20381;&#36182;&#20110;&#23646;&#24615;&#30340;&#25551;&#36848;&#20869;&#23481;&#12290;&#10;* &#22914;&#26524;&#23646;&#24615;&#26159;&#29992;&#21517;&#35789;&#25551;&#36848;&#30340;&#65292;&#21017;&#21629;&#21517;&#26684;&#24335;&#20026;&#65306;&#10;```- (void) setNoun:(type)aNoun;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><figcaption><span>(type) noun;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#20363;&#22914;&#65306;&#10;&#10;```- (void) setgColor:(NSColor *)aColor;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><figcaption><span>(NSColor *) color;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;* &#22914;&#26524;&#23646;&#24615;&#26159;&#29992;&#24418;&#23481;&#35789;&#25551;&#36848;&#30340;&#65292;&#21017;&#21629;&#21517;&#26684;&#24335;&#20026;&#65306;&#10;* &#10;``- (void) setAdjective:(BOOL)flag;``&#10;&#10;``- (BOOL) isAdjective;``&#10;&#10;&#20363;&#22914;&#65306;&#10;&#10;``- (void) setEditable:(BOOL)flag;``&#10;&#10;``- (BOOL) isEditable;``&#10;&#10;* &#22914;&#26524;&#23646;&#24615;&#26159;&#29992;&#21160;&#35789;&#25551;&#36848;&#30340;&#65292;&#21017;&#21629;&#21517;&#26684;&#24335;&#20026;&#65306;&#65288;&#21160;&#35789;&#35201;&#29992;&#29616;&#22312;&#26102;&#26102;&#24577;&#65289;&#10;&#10;``- (void) setVerbObject:(BOOL)flag;``&#10;&#10;``- (BOOL) verbObject;``&#10;&#10;&#20363;&#22914;&#65306;&#10;&#10;``- (void) setShowAlpha:(BOOL)flag;``&#10;&#10;``- (BOOL) showsAlpha;``&#10;&#10;* &#19981;&#35201;&#20351;&#29992;&#21160;&#35789;&#30340;&#36807;&#21435;&#20998;&#35789;&#24418;&#24335;&#20316;&#24418;&#23481;&#35789;&#20351;&#29992;&#10;&#10;``- (void) setAcceptsGlyphInfo:(BOOL)flag;`` god&#10;&#10;``- (BOOL) acceptsGlyphInfo;`` god&#10; &#10;``- (void) setGlyphInfoAccepted:(BOOL)flag;``bad&#10;&#10;``- (BOOL) glyphInfoAccepted;`` bad&#10; &#38169;&#10;* &#21487;&#20197;&#20351;&#29992;&#24773;&#24577;&#21160;&#35789;&#65288;can, should, will &#31561;&#65289;&#26469;&#25552;&#39640;&#28165;&#26224;&#24615;&#65292;&#20294;&#19981;&#35201;&#20351;&#10;&#29992; do &#25110; does&#10;&#10;``- (void) setCanHide:(BOOL)flag;``god&#10;&#10;``- (BOOL) canHide;`` god&#10;&#10;``- (void) setShouldCloseDocument:(BOOL)flag;`` god&#10;&#10;``- (void) shouldCloseDocument;`` god&#10; &#10;``- (void) setDoseAcceptGlyphInfo:(BOOL)flag;`` bad&#10;&#10;``- (BOOL) doseAcceptGlyphInfo;`` bad&#10; &#10;*  &#21482;&#26377;&#22312;&#26041;&#27861;&#38656;&#35201;&#38388;&#25509;&#36820;&#22238;&#22810;&#20010;&#20540;&#30340;&#24773;&#20917;&#19979;&#65292;&#25165;&#20351;&#29992; get&#10;&#10;``- (void) getLineDash:(float *)pattern count:(int *)count phase:(float *)phase;``&#10;&#10; NSBezierPath&#10;&#10;&#20687;&#19978;&#38754;&#36825;&#26679;&#30340;&#26041;&#27861;&#65292;&#22312;&#20854;&#23454;&#29616;&#37324;&#24212;&#20801;&#35768;&#25509;&#21463; NULL &#20316;&#20026;&#20854; in/out &#21442;&#25968;&#65292;&#20197;&#34920;&#31034;&#35843;&#29992;&#32773;&#23545;&#19968;&#20010;&#25110;&#22810;&#20010;&#36820;&#22238;&#20540;&#19981;&#24863;&#20852;&#36259;&#12290;&#10;&#10;### Delegate Methods &#22996;&#25176;&#26041;&#27861;&#10;&#10;&#9;&#22996;&#25176;&#26041;&#27861;&#26159;&#37027;&#20123;&#22312;&#29305;&#23450;&#20107;&#20214;&#21457;&#29983;&#26102;&#21487;&#34987;&#23545;&#35937;&#35843;&#29992;&#65292;&#24182;&#22768;&#26126;&#22312;&#23545;&#35937;&#30340;&#22996;&#25176;&#31867;&#20013;&#30340;&#26041;&#27861;&#12290;&#23427;&#20204;&#26377;&#29420;&#29305;&#30340;&#21629;&#21517;&#32422;&#23450;&#65292;&#36825;&#20123;&#21629;&#21517;&#32422;&#23450;&#21516;&#26679;&#20063;&#36866;&#29992;&#20110;&#23545;&#35937;&#30340;&#25968;&#25454;&#28304;&#26041;&#27861;&#12290;&#10; * &#21517;&#31216;&#20197;&#26631;&#31034;&#21457;&#36865;&#28040;&#24687;&#30340;&#23545;&#35937;&#30340;&#31867;&#21517;&#24320;&#22836;&#65292;&#30465;&#30053;&#31867;&#21517;&#30340;&#21069;&#32512;&#24182;&#23567;&#20889;&#31867;&#31532;&#19968;&#20010;&#23383;&#31526;&#10; &#10;``- (BOOL) tableView:(NSTableView *)tableView shouldSelectRow:(int)row;``&#10;&#10;``- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;``&#10;&#10;* &#20882;&#21495;&#32039;&#36319;&#22312;&#31867;&#21517;&#20043;&#21518;&#65288;&#38543;&#21518;&#30340;&#37027;&#20010;&#21442;&#25968;&#34920;&#31034;&#22996;&#27966;&#30340;&#23545;&#35937;&#65289;&#12290;&#35813;&#35268;&#21017;&#19981;&#36866;&#29992;&#20110;&#21482;&#26377;&#19968;&#20010; sender &#21442;&#25968;&#30340;&#26041;&#27861;&#10;&#10;``- (BOOL) applicationOpenUntitledFile:(NSApplication *)sender;``&#10;&#10;* &#19978;&#38754;&#30340;&#37027;&#26465;&#35268;&#21017;&#20063;&#19981;&#36866;&#29992;&#20110;&#21709;&#24212;&#36890;&#30693;&#30340;&#26041;&#27861;&#12290;&#22312;&#36825;&#31181;&#24773;&#20917;&#19979;&#65292;&#26041;&#27861;&#30340;&#21807;&#19968;&#21442;&#25968;&#34920;&#31034;&#36890;&#30693;&#23545;&#35937;&#10;&#10;``- (void) windowDidChangeScreen:(NSNotification *)notification;``&#10;&#10;* &#29992;&#20110;&#36890;&#30693;&#22996;&#25176;&#23545;&#35937;&#25805;&#20316;&#21363;&#23558;&#21457;&#29983;&#25110;&#24050;&#32463;&#21457;&#29983;&#30340;&#26041;&#27861;&#21517;&#20013;&#35201;&#20351;&#29992; did &#25110; will&#10;&#10;``- (void) browserDidScroll:(NSBrowser *)sender;``&#10;&#10;``- (NSUndoManager *) windowWillReturnUndoManager:(NSWindow *)window;``&#10;&#10;* &#29992;&#20110;&#35810;&#38382;&#22996;&#25176;&#23545;&#35937;&#21487;&#21542;&#25191;&#34892;&#26576;&#25805;&#20316;&#30340;&#26041;&#27861;&#21517;&#20013;&#21487;&#20351;&#29992; did &#25110; will&#65292;&#20294;&#26368;&#22909;&#20351;&#29992; should &#10;&#10;``- (BOOL) windowShouldClose:(id)sender;``&#10;&#10;### Collection Methods &#38598;&#21512;&#26041;&#27861;&#10;&#10;&#9;&#31649;&#29702;&#23545;&#35937;&#65288;&#38598;&#21512;&#20013;&#30340;&#23545;&#35937;&#34987;&#31216;&#20043;&#20026;&#20803;&#32032;&#65289;&#30340;&#38598;&#21512;&#31867;&#65292;&#32422;&#23450;&#35201;&#20855;&#22791;&#22914;&#19979;&#24418;&#24335;&#30340;&#26041;&#27861;&#65306;&#10;&#10;``- (void) addElement:(elementType)adObj;``&#10;&#10;``- (void) removeElement:(elementType)anObj;``&#10;&#10;``- (NSArray *)elements;``&#10;&#10;&#20363;&#22914;&#65306;&#10;&#10;``- (void) addLayoutManager:(NSLayoutManager *)adObj;``&#10;&#10;``- (void) removeLayoutManager:(NSLayoutManager *)anObj;``&#10;&#10;``- (NSArray *)layoutManagers;``&#10;&#10;&#38598;&#21512;&#26041;&#27861;&#21629;&#21517;&#26377;&#22914;&#19979;&#19968;&#20123;&#38480;&#21046;&#21644;&#32422;&#23450;&#65306;&#10;&#10;* &#22914;&#26524;&#38598;&#21512;&#20013;&#30340;&#20803;&#32032;&#26080;&#24207;&#65292;&#36820;&#22238; NSSet&#65292;&#32780;&#19981;&#26159; NSArray&#10; &#10;* &#22914;&#26524;&#23558;&#20803;&#32032;&#25554;&#20837;&#25351;&#23450;&#20301;&#32622;&#30340;&#21151;&#33021;&#24456;&#37325;&#35201;&#65292;&#21017;&#38656;&#20855;&#22791;&#22914;&#19979;&#26041;&#27861;&#65306;&#10;&#10;&#183;&#183;- (void) insertElement:(elementType)anObj atIndex:(int)index;``&#10;&#10;``- (void) removeElementAtIndex:(int)index;``&#10;&#10;&#38598;&#21512;&#26041;&#27861;&#30340;&#23454;&#29616;&#35201;&#32771;&#34385;&#22914;&#19979;&#32454;&#33410;&#65306;&#10;*  &#20197;&#19978;&#38598;&#21512;&#31867;&#26041;&#27861;&#36890;&#24120;&#36127;&#36131;&#31649;&#29702;&#20803;&#32032;&#30340;&#25152;&#26377;&#32773;&#20851;&#31995;&#65292;&#22312; add &#25110; insert &#30340;&#23454;&#29616;&#20195;&#30721;&#37324;&#20250; retain &#20803;&#32032;&#65292;&#22312; remove &#30340;&#23454;&#29616;&#20195;&#30721;&#20013;&#20250; release &#20803;&#32032;&#10;*  &#24403;&#34987;&#25554;&#20837;&#30340;&#23545;&#35937;&#38656;&#35201;&#25345;&#26377;&#25351;&#21521;&#38598;&#21512;&#23545;&#35937;&#30340;&#25351;&#38024;&#26102;&#65292;&#36890;&#24120;&#20351;&#29992; set... &#26469;&#21629;&#21517;&#20854;&#35774;&#32622;&#35813;&#25351;&#38024;&#30340;&#26041;&#27861;&#65292;&#19988;&#19981;&#35201; retain &#38598;&#21512;&#23545;&#35937;&#12290;&#27604;&#22914;&#19978;&#38754;&#30340;&#10;`` insertLayerManager:atIndex:`` &#36825;&#31181;&#24773;&#24418;&#65292;NSLayoutManager &#31867;&#20351;&#29992;&#22914;&#19979;&#26041;&#27861;&#65306;&#10;&#10;``- (void) setTextStorage:(NSTextStorage *)textStorage;``&#10;&#10;``- (NSTextStorage *)textStorage;``&#10;&#10;&#36890;&#24120;&#20320;&#19981;&#20250;&#30452;&#25509;&#35843;&#29992; setTextStorage:&#65292;&#32780;&#26159;&#35206;&#20889;&#23427;&#12290;&#10;&#10;&#21478;&#19968;&#20010;&#20851;&#20110;&#38598;&#21512;&#32422;&#23450;&#30340;&#20363;&#23376;&#26469;&#33258; NSWindow &#31867;&#65306;&#10;&#10;``- (void) addChildWindow:(NSWindow *)childWin ordered:(NSWindowOrderingMode)place;``&#10;&#10;``- (void) removeChildWindow:(NSWindow *)childWin;``&#10;&#10;``- (NSArray *)childWindows;``&#10;&#10;``- (NSWindow *) parentWindow;``&#10;&#10;``- (void) setParentWindow:(NSWindow *)window;``&#10;&#10;### Method Arguments &#26041;&#27861;&#21442;&#25968;&#10;&#10;&#21629;&#21517;&#26041;&#27861;&#21442;&#25968;&#26102;&#35201;&#32771;&#34385;&#22914;&#19979;&#35268;&#21017;&#65306;&#10;* &#22914;&#21516;&#26041;&#27861;&#21517;&#65292;&#21442;&#25968;&#21517;&#23567;&#20889;&#31532;&#19968;&#20010;&#21333;&#35789;&#30340;&#39318;&#23383;&#31526;&#65292;&#22823;&#20889;&#21518;&#32487;&#21333;&#35789;&#30340;&#39318;&#23383;&#31526;&#12290;&#22914;&#65306;``removeObject:(id)anObject``.() &#19981;&#35201;&#22312;&#21442;&#25968;&#21517;&#20013;&#20351;&#29992; pointer &#25110; ptr&#65292;&#35753;&#21442;&#25968;&#30340;&#31867;&#22411;&#26469;&#35828;&#26126;&#23427;&#26159;&#25351;&#38024;&#10;&#10;* &#36991;&#20813;&#20351;&#29992; one&#65292; two&#65292;...&#65292;&#20316;&#20026;&#21442;&#25968;&#21517;&#10;&#10;* &#36991;&#20813;&#20026;&#33410;&#30465;&#20960;&#20010;&#23383;&#31526;&#32780;&#32553;&#20889; &#10;&#10;&#25353;&#29031; Cocoa &#24815;&#20363;&#65292;&#20197;&#19979;&#20851;&#38190;&#23383;&#19982;&#21442;&#25968;&#32852;&#21512;&#20351;&#29992;&#65306;&#10;&#10;``...action:(SEL)aSelector``&#10;&#10;``..alignment:(int)mode``&#10;&#10;``...atIndex:(int)index``&#10;&#10;``...content:(NSRect)aRect``&#10;&#10;``...doubleValue:(double)aDouble``&#10;&#10;``...floatValue:(float)aFloat``&#10;&#10;``...font:(NSFont *)fontObj``&#10;&#10;``...frame:(NSRect)frameRect``&#10;&#10;``...intValue:(int)anInt``&#10;&#10;``...keyEquivalent:(NSString *0charCode``&#10;&#10;``...length:(int)numBytes``&#10;&#10;``...point:(NSPoint)aPoint``&#10;&#10;``...stringValue:(NSString *)aString``&#10;&#10;``...tag:(int)anInt``&#10;&#10;``...target:(id)anObject``&#10;&#10;``...title:(NSString *)aString``&#10;&#10;### Private Methods &#31169;&#26377;&#26041;&#27861;&#10;&#10;&#9;&#22823;&#22810;&#25968;&#24773;&#20917;&#19979;&#65292;&#31169;&#26377;&#26041;&#27861;&#21629;&#21517;&#30456;&#21516;&#19982;&#20844;&#20849;&#26041;&#27861;&#21629;&#21517;&#32422;&#23450;&#30456;&#21516;&#65292;&#20294;&#36890;&#24120;&#25105;&#20204;&#32422;&#23450;&#32473;&#31169;&#26377;&#26041;&#27861;&#28155;&#21152;&#21069;&#32512;&#65292;&#20197;&#20415;&#19982;&#20844;&#20849;&#26041;&#27861;&#21306;&#20998;&#24320;&#26469;&#12290;&#21363;&#20351;&#36825;&#26679;&#65292;&#31169;&#26377;&#26041;&#27861;&#30340;&#21517;&#31216;&#24456;&#23481;&#26131;&#23548;&#33268;&#29305;&#21035;&#30340;&#38382;&#39064;&#12290;&#24403;&#20320;&#35774;&#35745;&#19968;&#20010;&#32487;&#25215;&#33258; Cocoa framework &#26576;&#20010;&#31867;&#30340;&#23376;&#31867;&#26102;&#65292;&#20320;&#26080;&#27861;&#30693;&#36947;&#20320;&#30340;&#31169;&#26377;&#26041;&#27861;&#26159;&#21542;&#19981;&#23567;&#24515;&#35206;&#30422;&#20102;&#26694;&#26550;&#20013;&#22522;&#31867;&#30340;&#21516;&#21517;&#26041;&#27861;&#12290;&#10;&#9;&#10;Cocoa framework &#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#36890;&#24120;&#20197;&#19979;&#21010;&#32447;&#20316;&#20026;&#21069;&#32512;&#65288;&#22914;&#65306;_fooData&#65289;&#65292;&#20197;&#26631;&#31034;&#20854;&#31169;&#26377;&#23646;&#24615;&#12290;&#22522;&#20110;&#36825;&#26679;&#30340;&#20107;&#23454;&#65292;&#36981;&#24490;&#20197;&#19979;&#20004;&#26465;&#24314;&#35758;&#65306;&#10;&#10;*  &#19981;&#35201;&#20351;&#29992;&#19979;&#21010;&#32447;&#20316;&#20026;&#20320;&#33258;&#24049;&#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#30340;&#21069;&#32512;&#65292;Apple &#20445;&#30041;&#36825;&#31181;&#29992;&#27861;&#12290;&#10;*  &#33509;&#35201;&#32487;&#25215; Cocoa framework &#20013;&#19968;&#20010;&#36229;&#22823;&#30340;&#31867;&#65288;&#22914;&#65306;NSView&#65289;&#65292;&#24182;&#19988;&#24819;&#35201;&#20351;&#20320;&#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#19982;&#22522;&#31867;&#20013;&#30340;&#21306;&#21035;&#24320;&#26469;&#65292;&#20320;&#21487;&#20197;&#20026;&#20320;&#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#28155;&#21152;&#20320;&#33258;&#24049;&#30340;&#21069;&#32512;&#12290;&#36825;&#20010;&#21069;&#32512;&#24212;&#35813;&#20855;&#26377;&#21807;&#19968;&#24615;&#65292;&#22914;&#22522;&#20110;&#20320;&#20844;&#21496;&#30340;&#21517;&#31216;&#65292;&#25110;&#24037;&#31243;&#30340;&#21517;&#31216;&#65292;&#24182;&#20197;&#8220;XX_&#8221;&#24418;&#24335;&#32473;&#20986;&#12290;&#27604;&#22914;&#20320;&#30340;&#24037;&#31243;&#21517;&#20026;&#34;Byte Flogger&#34;&#65292;&#37027;&#20040;&#23601;&#21487;&#20197;&#26159;&#8220;BF_addObject:&#8221;&#10;&#10;&#23613;&#31649;&#20026;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#28155;&#21152;&#21069;&#32512;&#30340;&#24314;&#35758;&#19982;&#21069;&#38754;&#31867;&#20013;&#26041;&#27861;&#21629;&#21517;&#30340;&#32422;&#23450;&#20914;&#31361;&#65292;&#36825;&#37324;&#30340;&#24847;&#22270;&#26377;&#25152;&#19981;&#21516;&#65306;&#20026;&#20102;&#38450;&#27490;&#19981;&#23567;&#24515;&#22320;&#35206;&#30422;&#22522;&#31867;&#20013;&#30340;&#31169;&#26377;&#26041;&#27861;&#12290;&#10;&#10;### Naming Functions &#20989;&#25968;&#21629;&#21517;&#10;&#10;&#9;Objective-C &#20801;&#35768;&#36890;&#36807;&#20989;&#25968;&#65288;C&#24418;&#24335;&#30340;&#20989;&#25968;&#65289;&#25551;&#36848;&#34892;&#20026;&#65292;&#23601;&#22914;&#25104;&#21592;&#26041;&#27861;&#19968;&#26679;&#12290; &#20320;&#24212;&#24403;&#20248;&#20808;&#20351;&#29992;&#20989;&#25968;&#65292;&#32780;&#19981;&#26159;&#31867;&#26041;&#27861;&#65292;&#22914;&#26524;&#38544;&#21547;&#30340;&#31867;&#20026;&#21333;&#20363;&#25110;&#22312;&#22788;&#29702;&#20989;&#25968;&#23376;&#31995;&#32479;&#26102;&#12290;&#10;&#10;&#20989;&#25968;&#21629;&#21517;&#24212;&#35813;&#36981;&#24490;&#22914;&#19979;&#20960;&#26465;&#35268;&#21017;&#65306;&#10;&#9;&#10;*  &#20989;&#25968;&#21629;&#21517;&#19982;&#26041;&#27861;&#21629;&#21517;&#30456;&#20284;&#65292;&#20294;&#26377;&#20960;&#28857;&#19981;&#21516;&#65306;&#10;&#23427;&#20204;&#26377;&#21069;&#32512;&#65292;&#20854;&#21069;&#32512;&#19982;&#20320;&#20351;&#29992;&#30340;&#31867;&#21644;&#24120;&#37327;&#30340;&#21069;&#32512;&#30456;&#21516;&#10;&#22823;&#20889;&#21069;&#32512;&#21518;&#32039;&#36319;&#30340;&#31532;&#19968;&#20010;&#21333;&#35789;&#39318;&#23383;&#31526;&#10;* &#22823;&#22810;&#25968;&#20989;&#25968;&#21517;&#31216;&#20197;&#21160;&#35789;&#24320;&#22836;&#65292;&#36825;&#20010;&#21160;&#35789;&#25551;&#36848;&#35813;&#20989;&#25968;&#30340;&#34892;&#20026;&#10;NSHighlightRect&#10;NSDeallocateObject&#10;&#10;&#26597;&#35810;&#23646;&#24615;&#30340;&#20989;&#25968;&#26377;&#20010;&#26356;&#22810;&#30340;&#35268;&#21017;&#35201;&#36981;&#24490;&#65306;&#10;* &#26597;&#35810;&#31532;&#19968;&#20010;&#21442;&#25968;&#30340;&#23646;&#24615;&#30340;&#20989;&#25968;&#65292;&#30465;&#30053;&#21160;&#35789;&#10;&#10;```unsigned int NSEventMaskFromType(NSEventType type)&#10;float NSHeight(NSRect rect)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回值为引用的方法，使用 Get</li>
+</ul>
+<figure class="highlight"><figcaption><span>char *NSGetSizeAndAlignment(const char *typePtr, unsigned int *sizep, unsigned int *alignp)```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;* &#36820;&#22238; boolean &#20540;&#30340;&#20989;&#25968;&#65292;&#21517;&#31216;&#20351;&#29992;&#21028;&#26029;&#21160;&#35789; is/does &#24320;&#22836; &#10;&#10;```BOOL NSDecimalIsNotANumber(const NSDecimal *decimal)</span><br></pre></td></tr></table></figure>
+<h3 id="Naming_Instance_Variables_and_Data_Types_实例变量与数据类型命名">Naming Instance Variables and Data Types 实例变量与数据类型命名</h3><pre><code>这一节描述实例变量，常量，异常以及通知的命名约定。
+</code></pre><h3 id="Instance_Variables_实例变量">Instance Variables 实例变量</h3><p>在为类添加实例变量是要注意：</p>
+<ul>
+<li>避免创建 public 实例变量</li>
+<li>使用 @private，@protected 显式限定实例变量的访问权限</li>
+<li>确保实例变量名简明扼要地描述了它所代表的属性</li>
+</ul>
+<p>如果实例变量别设计为可被访问的，确保编写了访问方法</p>
+<h3 id="Constants_常量">Constants 常量</h3><p>常量命名规则根据常量创建的方式不同而大不同。</p>
+<h3 id="枚举常量">枚举常量</h3><ul>
+<li>使用枚举来定义一组相关的整数常量</li>
+<li><p>枚举常量与其 typedef 命名遵守函数命名规则。如：来自 NSMatrix.h 中的例子：（本例中的 typedef tag（_NSMatrixMode）不是必须的）</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	typedef <span class="class"><span class="keyword">enum</span> <span class="title">_NSMatrixMode</span> &#123;</span></span><br><span class="line">	<span class="constant">NSRadioModeMatrix</span>       = <span class="number">0</span>,</span><br><span class="line">    <span class="constant">NSHighlightModeMatrix</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="constant">NSListModeMatrix</span>           = <span class="number">2</span>,</span><br><span class="line">    <span class="constant">NSTrackModeMatrix</span>        = <span class="number">3</span></span><br><span class="line">&#125; <span class="constant">NSMatrixMode</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>位掩码常量可以使用不具名枚举。如：</p>
+</li>
+<li>enum {<br>  NSBorderlessWindowMask         = 0,<br>  NSTitledWindowMask                 = 1 &lt;&lt; 0,<br>  NSClosableWindowMask            = 1 &lt;&lt; 1,<br>  NSMiniaturizableWindowMask  = 1 &lt;&lt; 2,<br>  NSResizableWindowMask          = 1 &lt;&lt; 3<br>};</li>
+</ul>
+<h3 id="const_常量">const 常量</h3><ul>
+<li>使用 const 来修饰浮点常量或彼此没有关联的整数常量 </li>
+<li>枚举常量命名规则与函数命名规则相同。const 常量命名范例：<br>const float NSLightGray;</li>
+</ul>
+<h3 id="其他常量">其他常量</h3><ul>
+<li>通常不使用 #define 来创建常量。如上面所述，整数常量请使用枚举，浮点数常量请使用 const</li>
+<li>使用大写字母来定义预处理编译宏。如：#ifdef DEBUG</li>
+<li>编译器定义的宏名首尾都有双下划线。如：<strong>MACH</strong></li>
+<li>为 notification 名及 dictionary key 定义字符串常量，从而能够利用编译器的拼写检查，减少书写错误。Cocoa  框架提供了很多这样的范例：<br>APPKIT_EXTERN NSString *NSPrintCopies;<br>实际的字符串值在实现文件中赋予。（注意：APPKIT_EXTERN 宏等价于Objective-C 中 extern）</li>
+</ul>
+<h3 id="Exceptions_and_Notifications_异常与通知">Exceptions and Notifications 异常与通知</h3><p>异常与通知的命名遵循相似的规则，但是它们有各自推荐的使用模式。</p>
+<h3 id="异常">异常</h3><p>虽然你可以处于任何目的而使用异常（由 NSException 类及相关类实现），Cocoa 通常不使用异常来处理常规的，可预料的错误。在这些情形下，使用诸如 nil, NULL, NO或错误代码之类的返回值。异常的典型应用类似数组越界之类的编程错误。<br>异常由具有如下形式的全局 NSString 对象标识：<br>[Prefix] + UniquePartOfName + Exception<br>UniquePartOfName 部分是有连续的首字符大写的单词组成。例如：<br>NSColorListIOException<br>NSColorListNotEditableException<br>NSDraggingException<br>NSFontUnavailableException<br>NSIllegalSelectorException</p>
+<h3 id="通知">通知</h3><p>如果一个类有委托，那它的大部分通知可能由其委托的委托方法来处理。这些通知的名称应该能够反应其响应的委托方法。比如，当应用程序提交 NSApplicationDidBecomeActiveNotification 通知时，全局 NSApplication 对象的委托会注册从而能够接收 applicaitonDidBecomeActive: 消息。<br>通知由具有如下形式的全局 NSString 对象标识：<br>[相关联类的名称] + [Did 或 Will] + [UniquePartOfName] + Notification<br>例如：<br>NSApplicationDidBecomeActiveNotification<br>NSWindowDidMiniaturizeNotification<br>NSTextViewDidChangeSelectionNotification<br>NSColorPanelColorDidChangeNotification</p>
+<blockquote>
+<p>可接受的缩略语<br>在设计编程接口时，通常名称不要缩写。然而，下面列出的缩写要么是固定下来的要么是过去被广泛使用的，所以你可以继续使用。关于缩写有一些额外的注意事项：</p>
+<ul>
+<li>标准 C 库中长期使用的缩写形式是可以接受的。如：”alloc”，”getc”</li>
+<li>你可以在参数名中更自由地使用缩写。如：imageRep，col（column），obj，otherWin<br>alloc<br>Allocate<br>msg<br>Message<br>alt<br>Alternate<br>nib<br>Interface Builder archive<br>app<br>Application<br>pboard<br>Pasteboard<br>calc<br>Calculate<br>rect<br>Rectangle<br>dealloc<br>Deallocate<br>Rep<br>Representation<br>func<br>Function<br>temp<br>Temporary<br>horiz<br>Horizontal<br>vert<br>Vertical<br>info<br>Information<br>init<br>Initialize<br>max<br>Maximum</li>
+</ul>
+</blockquote>
+<p>常见的缩写：<br>ASCII，PDF，XML，HTML，URL，RTF，HTTP，TIFF<br>JPG，GIF，LZW，ROM，RGB，CMYK，MIDI，FTP</p>
+<h1 id="框架开发者小贴士与技巧">框架开发者小贴士与技巧</h1><h2 id="Initialize_初始化">Initialize 初始化</h2><h3 id="类初始化">类初始化</h3><p>在 initialize 类方法中，能够编写实现一些延迟执行且只被一次的代码，initialize 类方法是由运行时系统在该类响应任何其他消息之前调用的。典型的应用是在其中设置类的版本信息。运行时系统向每个类发送 initialize 消息，即使该类没有实现 initialize，也会调用其基类的某个 initialize 方法。因此一个类的 initialize 方法可能会因为存在继承类的缘故被执行多次。因此有必要使用一定的技巧来防止只执行一次的代码被多次执行。如：NSFoo 类的 initialize 方法实现可能如下：</p>
+<ul>
+<li>(id) initialize<br>{<br>  if (self == [NSFoo class])<br>  {<pre><code><span class="comment">// 初始化代码</span>
+</code></pre>  }<br>  return self;<br>}<br>不应当显式调用 initialize 方法。如果你需要激活 initialize 方法，使用 [NSFoo self] 形式的调用。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihlypwfl00003es6rc6hrcmb" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/Cocoa-编码规范中文版/" data-id="cihlyu081000i46s6cluj1hmq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -859,12 +805,16 @@ class CrossPlatformAPI {
 
 
   
-    <article id="post-iOS-面试题①" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-AotumanLady-代码分支管理规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/26/iOS-面试题①/" class="article-date">
-  <time datetime="2015-11-26T06:57:06.000Z" itemprop="datePublished">2015-11-26</time>
+    <a href="/2015/11/30/AotumanLady-代码分支管理规范/" class="article-date">
+  <time datetime="2015-11-30T13:00:57.000Z" itemprop="datePublished">2015-11-30</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/规范-配置categories/">规范# 配置categories</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -873,7 +823,7 @@ class CrossPlatformAPI {
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/26/iOS-面试题①/">iOS 面试题①</a>
+      <a class="article-title" href="/2015/11/30/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
     </h1>
   
 
@@ -881,34 +831,43 @@ class CrossPlatformAPI {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>什么是arc？（arc是为了解决什么问题诞生的？）</li>
-<li>请解释以下keywords的区别： assign vs weak,   <strong>block vs </strong>weak</li>
-<li>__block在arc和非arc下含义一样吗？</li>
-<li>使用atomic一定是线程安全的吗？</li>
-<li>描述一个你遇到过的retain cycle例子。(别撒谎，你肯定遇到过)</li>
-<li>+(void)load;   +(void)initialize；有什么用处？</li>
-<li>为什么其他语言里叫函数调用， objective c里则是给对象发消息（或者谈下对runtime的理解）</li>
-<li>什么是method swizzling?</li>
-<li>UIView和CALayer是啥关系？</li>
-<li>如何高性能的给UIImageView加个圆角？（不准说layer.cornerRadius!）</li>
-<li>使用drawRect有什么影响？（这个可深可浅，你至少得用过。。）</li>
-<li>ASIHttpRequest或者SDWebImage里面给UIImageView加载图片的逻辑是什么样的？（把UIImageView放到UITableViewCell里面问更赞</li>
-<li>麻烦你设计个简单的图片内存缓存器（移除策略是一定要说的）</li>
-<li>讲讲你用Instrument优化动画性能的经历吧（别问我什么是Instrument）</li>
-<li>loadView是干嘛用的？</li>
-<li>viewWillLayoutSubView你总是知道的。。</li>
-<li>GCD里面有哪几种Queue？你自己建立过串行queue吗？背后的线程模型是什么样的？</li>
-<li>用过coredata或者sqlite吗？读写是分线程的吗？遇到过死锁没？咋解决的？</li>
-<li>http的post和get啥区别？（区别挺多的，麻烦多说点）</li>
-<li>我知道你大学毕业过后就没接触过算法数据结构了，但是请你一定告诉我什么是Binary search tree?  search的时间复杂度是多少？我很想知道！</li>
+        <h3 id="介绍">介绍</h3><pre><code>这是我们团队的 Git 分支管理规范。每个人对工具的使用往往各有偏好，各种方法各有利弊，无所谓对错。但涉及团队协作的方面需要有一些一致的规范，所以请大家务必遵守。
+</code></pre><p>除了一致性之外，这个规范的目的是以下几点：</p>
+<ul>
+<li><p>确保可以轻易确定特定时间发布或运行的版本。在新发布的程序存在重大缺陷时，可以尽快 rollback 到上一个稳定版本。</p>
+</li>
+<li><p>在需要修复紧急 bug 并尽快发布时，可以只发布必要的 bugfix 而不    同时发布还不应发布的其他改动。</p>
+</li>
+</ul>
+<h3 id="branch_和_tag">branch 和 tag</h3><pre><code>每个官方的 repo 有且仅有以下的 <span class="keyword">branch </span>和 tag。
+</code></pre><ul>
+<li>Branch: master 和 release。其中 master 对应目前的开发分支，所有的 pull request 都应该发到这个分支。release 是当前发布的分支，在这个分支只能增加从 master cherrypick 过来的 commit。详见本文后面的说明。</li>
+<li>Tag: 对应每个发布版本的 tag。SDK 和应用程序的 tag 遵照 .. 的命名，如 2.5.1；服务端程序的 tag 以发布的日期命名，如 2014.11.13，如果有 bugfix，则在后面增加小写字母，如 2014.11.13 后是 2014.11.13a，然后是 2014.11.13b。<br>目前还有部分 repo 包含多个独立部署的项目（如 uluru-platform）。在这样的 repo 打 tag 时需要附上项目名做前缀，如 bigquery-2.5.1。但我们需要逐步把这些项目拆分到独立的 repo。</li>
+</ul>
+<h3 id="发布新版流程">发布新版流程</h3><ol>
+<li>确保所有要发布的 pull request 都已经 merge 到 master；</li>
+<li>使用 master branch 的代码进行测试，如果发现 bug，把对应的 bugfix merge 到 master；</li>
+<li>删除旧的 release branch，并从当前的 master 创建新的 release branch；</li>
+<li>在 Jenkins 上从 release branch 发起新的 build 并发布；</li>
+<li>发布完成后在当前的 release branch 打上对应版本的 tag。</li>
 </ol>
-<p><a href="http://www.zhihu.com/question/19604641/answer/" target="_blank" rel="external">链接</a></p>
+<h3 id="Bugfix_流程">Bugfix 流程</h3><pre><code>这里的 <span class="keyword">bugfix </span>指的是修复已经发布的程序（release <span class="keyword">branch）中的缺陷。</span>
+</code></pre><ol>
+<li>master 里的 bug 请直接 merge bugfix 到 master。<br>如果此缺陷在 master 中还存在，请先 merge bugfix 到 master，否则跳到下一步；</li>
+<li>在 release branch 从 master cherrypick 修复该缺陷的一个或多个 commit；</li>
+<li>在 Jenkins 上发布当前 release branch；</li>
+<li>发布完成后在当前的 release branch 打上递增的 tag。比如，如果上一个 tag 是 2.5.1，这个 tag 应该是 2.5.2；如果上一个是 2014.11.13，这个就是 2014.11.13a。</li>
+</ol>
+<h3 id="其他">其他</h3><ul>
+<li>并不是每个 bug 都有专门发布 bugfix 版的必要，对于不紧急的 bug，可以在 master 里 fix 后随下一个版本发布。</li>
+<li>在一个官方 repo 下只应该有以上说的 branch 和 tag，在开发过程中使用到的 feature branch 等请都放在个人的 fork，一律通过向 master 发 pull request 的方式给官方 repo 提交代码。</li>
+</ul>
+<p>参考于 <a href="https://open.leancloud.cn/git-branch-guide.html" target="_blank" rel="external">代码分支管理指南</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihlypwfr00013es68dumay0l" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-代码分支管理规范/" data-id="cihlyu088000o46s60zg74iok" class="article-share-link">Share</a>
       
       
     </footer>
@@ -918,12 +877,16 @@ class CrossPlatformAPI {
 
 
   
-    <article id="post-AotumanLady-iOS-App-开发准备工作" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-AotumanLady-写作规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/26/AotumanLady-iOS-App-开发准备工作/" class="article-date">
-  <time datetime="2015-11-26T03:48:21.000Z" itemprop="datePublished">2015-11-26</time>
+    <a href="/2015/11/30/AotumanLady-写作规范/" class="article-date">
+  <time datetime="2015-11-30T13:00:51.000Z" itemprop="datePublished">2015-11-30</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/规范-配置categories/">规范# 配置categories</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -932,7 +895,7 @@ class CrossPlatformAPI {
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/26/AotumanLady-iOS-App-开发准备工作/">AotumanLady iOS App 开发准备工作</a>
+      <a class="article-title" href="/2015/11/30/AotumanLady-写作规范/">AotumanLady 写作规范</a>
     </h1>
   
 
@@ -940,22 +903,34 @@ class CrossPlatformAPI {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="技术解决方案">技术解决方案</h3><ol>
-<li>存储方案：七牛、云片</li>
-<li>滤镜: 嗨图、camera360、Adobe</li>
-<li>协同工具:Teambition 、slack</li>
-<li>推送:极光 PUSH</li>
-</ol>
-<h3 id="依赖库支持">依赖库支持</h3><ol>
-<li>版本管理: iVersion</li>
-<li>反馈: bugtags</li>
-<li></li>
-</ol>
+        <h3 id="文案风格">文案风格</h3><ul>
+<li>请确认没有错别字。</li>
+<li>谐音错别字也不可以使用。比如 「童鞋」、「菇凉」 等。</li>
+<li>扼要表达，不可拖拉。</li>
+</ul>
+<h3 id="中英文、数字混合时空格的使用">中英文、数字混合时空格的使用</h3><ul>
+<li><p>英文和非标点的中文之间需要添加一个空格</p>
+<p>  right:<br><code>我们是 AutoManLady 的一部分。</code></p>
+<p>  error:<br><code>我们是AutoManLady的一部分。</code></p>
+</li>
+<li><p>数字与非标点的中文之间需要有一个空格</p>
+<p>  best:<br><code>我们一共有一百位员工。</code></p>
+<p>  right:<br><code>我们一共有 100 位员工。</code></p>
+<p>  error:<br><code>我们一共有100位员工。</code></p>
+</li>
+<li><p>数字与单位之间需要一个空格</p>
+<p>  best:<br><code>5 GB</code></p>
+<p>  right:<br><code>5GB</code></p>
+</li>
+<li><p>特殊名词的大小写</p>
+<pre><code>Android、iOS、iPhone、Google、Apple
+</code></pre></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihlypwgn000e3es6z0zawocg" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-写作规范/" data-id="cihlyu085000m46s68kfs038v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -967,10 +942,14 @@ class CrossPlatformAPI {
   
     <article id="post-Google-Objective-C-Style-Guide-中文版" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/26/Google-Objective-C-Style-Guide-中文版/" class="article-date">
-  <time datetime="2015-11-26T02:08:56.000Z" itemprop="datePublished">2015-11-26</time>
+    <a href="/2015/11/30/Google-Objective-C-Style-Guide-中文版/" class="article-date">
+  <time datetime="2015-11-30T13:00:43.000Z" itemprop="datePublished">2015-11-30</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/规范-配置categories/">规范# 配置categories</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -979,7 +958,7 @@ class CrossPlatformAPI {
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/26/Google-Objective-C-Style-Guide-中文版/">Google Objective C Style Guide 中文版</a>
+      <a class="article-title" href="/2015/11/30/Google-Objective-C-Style-Guide-中文版/">Google Objective C Style Guide 中文版</a>
     </h1>
   
 
@@ -1629,213 +1608,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihlypwg300053es6go530mou" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Cocoa-编码规范中文版" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/25/Cocoa-编码规范中文版/" class="article-date">
-  <time datetime="2015-11-25T05:57:27.000Z" itemprop="datePublished">2015-11-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/25/Cocoa-编码规范中文版/">Cocoa 编码规范中文版</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>Code Naming Basics 代码命名基础<br>在面向对象软件库的设计过程中，开发人员经常忽视对类，方法，函数，常量以及其他编程接口元素的命名。本节讨论大多数Cocoa接口的一些命名约定。</p>
-<h3 id="General_Principles_一般性原则">General Principles 一般性原则</h3><h4 id="Clarity_清晰性">Clarity 清晰性</h4><ul>
-<li>最好是既清晰又简短，但不要为简短而丧失清晰性。</li>
-</ul>
-</blockquote>
-<p><code>insertObject:atIndex:</code> good</p>
-<p><code>insert:at:</code> bad（不清晰；要插入什么？“at”表示什么？）</p>
-<p><code>removeObjectAtIndex:</code> good</p>
-<p><code>removeObject:</code> ok<br>(这样也不错，因为方法是移除作为参数的对象)</p>
-<p><code>remove</code> bad (不清晰；要移除什么？)</p>
-<hr>
-<ul>
-<li>名称通常不缩写，即使名称很长，也要拼写完全</li>
-</ul>
-<p><code>destinationSelection</code> good</p>
-<p><code>destSel</code> bad</p>
-<p><code>setBackgroundColor:</code> good</p>
-<p><code>setBkgdColor:</code> 不清晰</p>
-<hr>
-<blockquote>
-<p>你可能会认为某个缩写广为人知，但有可能并非如此，尤其是当你的代码被来自不同文化和语言背景的开发人员所使用时。</p>
-</blockquote>
-<ul>
-<li>然而，你可以使用少数非常常见，历史悠久的缩写。请参考：”可接受的缩略名“一节</li>
-<li>避免使用有歧义的 API 名称，如那些能被理解成多种意思的方法名称</li>
-</ul>
-<p><code>sendPort</code> bad 是发送端口还是返回一个发送端口？</p>
-<p><code>displayName</code> bad 是显示一个名称还是返回用户界面中控件的标题？</p>
-<h3 id="Consistency_一致性">Consistency 一致性</h3><ul>
-<li><p>尽可能使用与 Cocoa 编程接口命名保持一致的名称。如果你不太确定某个命名的一致性，请浏览一下头文件或参考文档中的范例</p>
-</li>
-<li><p>在使用多态方法的类中，命名的一致性非常重要。在不同类中实现相同功能的方法应该具有相同的名称</p>
-</li>
-</ul>
-<p><code>- (int) tag</code> bad 在 NSView, NSCell, NSControl 中有定义</p>
-<p><code>- (void) setStringValue:(NSString *)</code> bad 在许多 Cocoa classes 中有定义</p>
-<p>请参考“方法参数”一节。</p>
-<h3 id="No_Self_Reference_不要自我指涉">No Self Reference 不要自我指涉</h3><ul>
-<li>不要名称自我指涉</li>
-</ul>
-<p><code>NSString</code> okey</p>
-<p><code>NSStringObject</code> bad 自我指涉</p>
-<ul>
-<li>掩码（可使用位操作进行组合）和用作通知名称的常量不受该约定限制</li>
-</ul>
-<p><code>NSUnderlineByWordMask</code> okey</p>
-<p><code>NSTableViewColumnDidMoveNotification</code> okey</p>
-<h3 id="Prefixes_前缀">Prefixes 前缀</h3><blockquote>
-<p>前缀是名称的重要组成部分。它们可以区分软件的功能范畴。通常，软件会被打包成一个框架或多个紧密相关的框架（如 Foundation 和 Application Kit 框架）。前缀可以防止第三方开发者与苹果公司之间的命名冲突（同样也可防止苹果内部不同框架之间的命名冲突）</p>
-</blockquote>
-<ul>
-<li>前缀有规定的格式。它由两到三个大写字符组成，不能使用下划线与子前缀<br>前缀</li>
-</ul>
-<p><code>Foundation NS</code></p>
-<p><code>Application Kit NS</code></p>
-<p><code>Address Book AB</code></p>
-<p><code>Interface Builder IB</code> </p>
-<ul>
-<li>命名 class，protocol，structure，函数，常量时使用前缀；命名成员方法时不使用前缀，因为方法已经在它所在类的命名空间种；同理，命名结构体字段时也不使用前缀</li>
-</ul>
-<h3 id="Typographic_Conventions_书写约定">Typographic Conventions 书写约定</h3><p>在为 API 元素命名时，请遵循如下一些简单的书写约定</p>
-<ul>
-<li>对于包含多个单词的名称，不要使用标点符号作为名称的一部分或作为分隔符（下划线，破折号等）；</li>
-<li><p>此外，大写每个单词的首字符并将这些单词连续拼写在一起。请注意以下限制：</p>
-<ol>
-<li>方法名小写第一个单词的首字符，大写后续所有单词的首字符。方法名不使用前缀。如： fileExistsAtPath:isDirectory: 如果方法名以一个广为人知的大写首字母缩略词开头，该规则不适用，如：NSImage 中的 TIFFRepresentation</li>
-<li><p>函数名和常量名使用与其关联类相同的前缀，并且要大写前缀后面所有单词的首字符。如：NSRunAlertPanel，NSCellDisabled<br>3.避免使用下划线来表示名称的私有属性。苹果公司保留该方式的使用。如果第三方这样使用可能会导致命名冲突，他们可能会在无意中用自己的方法覆盖掉已有的私有方法，这会导致严重的后果。</p>
-<p> 请参考“私有方法”一节以了解私有 API 的命名约定的建议</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="Class_and_Protocol_Names_类与协议命名">Class and Protocol Names 类与协议命名</h3><pre><code>类名应包含一个明确描述该类（或类的对象）是什么或做什么的名词。类名要有合适的前缀（请参考“前缀”一节）。Foundation 及 Application Kit 有很多这样例子，如：<span class="built_in">NSString</span>, <span class="built_in">NSData</span>, <span class="built_in">NSScanner</span>, <span class="built_in">NSApplication</span>, <span class="built_in">NSButton</span> 以及 <span class="built_in">NSEvent</span>。
-</code></pre><p>协议应该根据对方法的行为分组方式来命名。</p>
-<ul>
-<li>大多数协议仅组合一组相关的方法，而不关联任何类，这种协议的命名应该使用动名词(ing)，以不与类名混淆。<br>代码<br>点评<br>NSLocking<br>good<br>NSLock<br>糟糕，它看起来像类名<br>● 有些协议组合一些彼此无关的方法（这样做是避免创建多个独立的小协议）。这样的协议倾向于与某个类关联在一起，该类是协议的主要体现者。在这种情形，我们约定协议的名称与该类同名。NSObject 协议就是这样一个例子。这个协议组合一组彼此无关的方法，有用于查询对象在其类层次中位置的方法，有使之能调用特殊方法的方法以及用于增减引用计数的方法。由于 NSObject 是这些方法的主要体现者，所以我们用类的名称命名这个协议。</li>
-</ul>
-<h3 id="Header_Files_头文件">Header Files 头文件</h3><p>头文件的命名方式很重要，我们可以根据其命名知晓头文件的内容。</p>
-<ul>
-<li>声明孤立的类或协议：将孤立的类或协议声明放置在单独的头文件中，该头文件名称与类或协议同名<br>头文件<br>声明<br>NSApplication.h<br>NSApplication 类</li>
-<li>声明相关联的类或协议：将相关联的声明（类，类别及协议) 放置在一个头文件中，该头文件名称与主要的类/类别/协议的名字相同。<br>头文件<br>声明<br>NSString.h<br>NSString 和 NSMutableString 类<br>NSLock.h<br>NSLocking 协议和 NSLock, NSConditionLock, NSRecursiveLock 类</li>
-<li>包含框架头文件：每个框架应该包含一个与框架同名的头文件，该头文件包含该框架所有公开的头文件。<br>头文件<br>框架<br>Foundation.h<br>Foundation.framework</li>
-<li>为已有框架中的某个类扩展 API：如果要在一个框架中声明属于另一个框架某个类的范畴类的方法，该头文件的命名形式为：原类名+“Additions”。如 Application Kit 中的 NSBundleAdditions.h </li>
-<li>相关联的函数与数据类型：将相联的函数，常量，结构体以及其他数据类型放置到一个头文件中，并以合适的名字命名。如 Application Kit 中的 NSGraphics.h<br>Naming Methods 方法命名</li>
-</ul>
-<h3 id="General_Rules_一般性规则">General Rules 一般性规则</h3><p>为方法命名时，请考虑如下一些一般性规则：</p>
-<ul>
-<li><p>小写第一个单词的首字符，大写随后单词的首字符，不使用前缀。请参考“书写约定”一节。有两种例外情况：</p>
-<ol>
-<li>方法名以广为人知的大写字母缩略词（如TIFF or PDF）开头；</li>
-<li>私有方法可以使用统一的前缀来分组和辨识，请参考“私有方法”一节</li>
-</ol>
-<p>表示对象行为的方法，名称以动词开头：</p>
-</li>
-</ul>
-<p><code>- (void) invokeWithTarget:(id)target:</code><br><code>- (void) selectTabViewItem:(NSTableViewItem *)tableViewItem</code></p>
-<p>名称中不要出现 do 或 does，因为这些助动词没什么实际意义。也不要在动词前使用副词或形容词修饰</p>
-<ul>
-<li>如果方法返回方法接收者的某个属性，直接用属性名称命名。不要使用 get，除非是间接返回一个或多个值。请参考“访问方法”一节。</li>
-</ul>
-<p><code>- (NSSize) cellSize;</code> good</p>
-<p><code>- (NSSize) calcCellSize;</code> bad</p>
-<p><code>- (NSSize) getCellSize;</code> bad</p>
-<ul>
-<li>参数要用描述该参数的关键字命名</li>
-</ul>
-<p><code>- (void) sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;</code> good</p>
-<p><code>- (void) sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;</code> bad</p>
-<ul>
-<li>参数前面的单词要能描述该参数。</li>
-</ul>
-<p><code>- (id) viewWithTag:(int)aTag;</code> god</p>
-<p><code>- (id) taggedView:(int)aTag;</code>bad</p>
-<ul>
-<li>细化基类中的已有方法：创建一个新方法，其名称是在被细化方法名称后面追加参数关键词</li>
-</ul>
-<p><code>- (id) initWithFrame:(NSRect)frameRect;</code></p>
-<p>NSView</p>
-<figure class="highlight"><figcaption><span>(id) initWithFrame:(NSRect)frameRect mode:(ind)aMode cellClass:(Class)factoryId numberOfRows:(int)rowsHigh numberOfColumns:(int)colsWide;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;NSMatrix - NSView &#30340;&#23376;&#31867;&#10;&#10;* &#19981;&#35201;&#20351;&#29992; and &#26469;&#36830;&#25509;&#29992;&#23646;&#24615;&#20316;&#21442;&#25968;&#20851;&#38190;&#23383;&#10;&#10;``- (int) runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;`` god&#10;&#10;``- (int) runModalForDirectory:(NSString *)path addFile:(NSString *)name addTypes:(NSArray *)fileTypes;&#10; `` bad&#10;&#10;&#34429;&#28982;&#19978;&#38754;&#30340;&#20363;&#23376;&#20013;&#20351;&#29992; add &#30475;&#36215;&#26469;&#20063;&#19981;&#38169;&#65292;&#20294;&#24403;&#20320;&#26041;&#27861;&#26377;&#22826;&#22810;&#21442;&#25968;&#20851;&#38190;&#23383;&#26102;&#23601;&#26377;&#38382;&#39064;&#12290;&#10;&#10;* &#22914;&#26524;&#26041;&#27861;&#25551;&#36848;&#20004;&#31181;&#29420;&#31435;&#30340;&#34892;&#20026;&#65292;&#20351;&#29992; and &#26469;&#20018;&#25509;&#23427;&#20204;&#10; &#10; ``- (BOOL) openFile:(NSString *)fullPath withApplication:(NSString *)appName andDeactivate:(BOOL)flag;``&#10; &#10; NSWorkspace &#10;&#10;## Accessor Methods &#35775;&#38382;&#26041;&#27861;&#10;&#10;&#35775;&#38382;&#26041;&#27861;&#26159;&#23545;&#35937;&#23646;&#24615;&#30340;&#35835;&#21462;&#19982;&#35774;&#32622;&#26041;&#27861;&#12290;&#20854;&#21629;&#21517;&#26377;&#29305;&#23450;&#30340;&#26684;&#24335;&#20381;&#36182;&#20110;&#23646;&#24615;&#30340;&#25551;&#36848;&#20869;&#23481;&#12290;&#10;* &#22914;&#26524;&#23646;&#24615;&#26159;&#29992;&#21517;&#35789;&#25551;&#36848;&#30340;&#65292;&#21017;&#21629;&#21517;&#26684;&#24335;&#20026;&#65306;&#10;```- (void) setNoun:(type)aNoun;</span><br></pre></td></tr></table></figure>
-<figure class="highlight"><figcaption><span>(type) noun;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#20363;&#22914;&#65306;&#10;&#10;```- (void) setgColor:(NSColor *)aColor;</span><br></pre></td></tr></table></figure>
-<figure class="highlight"><figcaption><span>(NSColor *) color;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;* &#22914;&#26524;&#23646;&#24615;&#26159;&#29992;&#24418;&#23481;&#35789;&#25551;&#36848;&#30340;&#65292;&#21017;&#21629;&#21517;&#26684;&#24335;&#20026;&#65306;&#10;* &#10;``- (void) setAdjective:(BOOL)flag;``&#10;&#10;``- (BOOL) isAdjective;``&#10;&#10;&#20363;&#22914;&#65306;&#10;&#10;``- (void) setEditable:(BOOL)flag;``&#10;&#10;``- (BOOL) isEditable;``&#10;&#10;* &#22914;&#26524;&#23646;&#24615;&#26159;&#29992;&#21160;&#35789;&#25551;&#36848;&#30340;&#65292;&#21017;&#21629;&#21517;&#26684;&#24335;&#20026;&#65306;&#65288;&#21160;&#35789;&#35201;&#29992;&#29616;&#22312;&#26102;&#26102;&#24577;&#65289;&#10;&#10;``- (void) setVerbObject:(BOOL)flag;``&#10;&#10;``- (BOOL) verbObject;``&#10;&#10;&#20363;&#22914;&#65306;&#10;&#10;``- (void) setShowAlpha:(BOOL)flag;``&#10;&#10;``- (BOOL) showsAlpha;``&#10;&#10;* &#19981;&#35201;&#20351;&#29992;&#21160;&#35789;&#30340;&#36807;&#21435;&#20998;&#35789;&#24418;&#24335;&#20316;&#24418;&#23481;&#35789;&#20351;&#29992;&#10;&#10;``- (void) setAcceptsGlyphInfo:(BOOL)flag;`` god&#10;&#10;``- (BOOL) acceptsGlyphInfo;`` god&#10; &#10;``- (void) setGlyphInfoAccepted:(BOOL)flag;``bad&#10;&#10;``- (BOOL) glyphInfoAccepted;`` bad&#10; &#38169;&#10;* &#21487;&#20197;&#20351;&#29992;&#24773;&#24577;&#21160;&#35789;&#65288;can, should, will &#31561;&#65289;&#26469;&#25552;&#39640;&#28165;&#26224;&#24615;&#65292;&#20294;&#19981;&#35201;&#20351;&#10;&#29992; do &#25110; does&#10;&#10;``- (void) setCanHide:(BOOL)flag;``god&#10;&#10;``- (BOOL) canHide;`` god&#10;&#10;``- (void) setShouldCloseDocument:(BOOL)flag;`` god&#10;&#10;``- (void) shouldCloseDocument;`` god&#10; &#10;``- (void) setDoseAcceptGlyphInfo:(BOOL)flag;`` bad&#10;&#10;``- (BOOL) doseAcceptGlyphInfo;`` bad&#10; &#10;*  &#21482;&#26377;&#22312;&#26041;&#27861;&#38656;&#35201;&#38388;&#25509;&#36820;&#22238;&#22810;&#20010;&#20540;&#30340;&#24773;&#20917;&#19979;&#65292;&#25165;&#20351;&#29992; get&#10;&#10;``- (void) getLineDash:(float *)pattern count:(int *)count phase:(float *)phase;``&#10;&#10; NSBezierPath&#10;&#10;&#20687;&#19978;&#38754;&#36825;&#26679;&#30340;&#26041;&#27861;&#65292;&#22312;&#20854;&#23454;&#29616;&#37324;&#24212;&#20801;&#35768;&#25509;&#21463; NULL &#20316;&#20026;&#20854; in/out &#21442;&#25968;&#65292;&#20197;&#34920;&#31034;&#35843;&#29992;&#32773;&#23545;&#19968;&#20010;&#25110;&#22810;&#20010;&#36820;&#22238;&#20540;&#19981;&#24863;&#20852;&#36259;&#12290;&#10;&#10;### Delegate Methods &#22996;&#25176;&#26041;&#27861;&#10;&#10;&#9;&#22996;&#25176;&#26041;&#27861;&#26159;&#37027;&#20123;&#22312;&#29305;&#23450;&#20107;&#20214;&#21457;&#29983;&#26102;&#21487;&#34987;&#23545;&#35937;&#35843;&#29992;&#65292;&#24182;&#22768;&#26126;&#22312;&#23545;&#35937;&#30340;&#22996;&#25176;&#31867;&#20013;&#30340;&#26041;&#27861;&#12290;&#23427;&#20204;&#26377;&#29420;&#29305;&#30340;&#21629;&#21517;&#32422;&#23450;&#65292;&#36825;&#20123;&#21629;&#21517;&#32422;&#23450;&#21516;&#26679;&#20063;&#36866;&#29992;&#20110;&#23545;&#35937;&#30340;&#25968;&#25454;&#28304;&#26041;&#27861;&#12290;&#10; * &#21517;&#31216;&#20197;&#26631;&#31034;&#21457;&#36865;&#28040;&#24687;&#30340;&#23545;&#35937;&#30340;&#31867;&#21517;&#24320;&#22836;&#65292;&#30465;&#30053;&#31867;&#21517;&#30340;&#21069;&#32512;&#24182;&#23567;&#20889;&#31867;&#31532;&#19968;&#20010;&#23383;&#31526;&#10; &#10;``- (BOOL) tableView:(NSTableView *)tableView shouldSelectRow:(int)row;``&#10;&#10;``- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;``&#10;&#10;* &#20882;&#21495;&#32039;&#36319;&#22312;&#31867;&#21517;&#20043;&#21518;&#65288;&#38543;&#21518;&#30340;&#37027;&#20010;&#21442;&#25968;&#34920;&#31034;&#22996;&#27966;&#30340;&#23545;&#35937;&#65289;&#12290;&#35813;&#35268;&#21017;&#19981;&#36866;&#29992;&#20110;&#21482;&#26377;&#19968;&#20010; sender &#21442;&#25968;&#30340;&#26041;&#27861;&#10;&#10;``- (BOOL) applicationOpenUntitledFile:(NSApplication *)sender;``&#10;&#10;* &#19978;&#38754;&#30340;&#37027;&#26465;&#35268;&#21017;&#20063;&#19981;&#36866;&#29992;&#20110;&#21709;&#24212;&#36890;&#30693;&#30340;&#26041;&#27861;&#12290;&#22312;&#36825;&#31181;&#24773;&#20917;&#19979;&#65292;&#26041;&#27861;&#30340;&#21807;&#19968;&#21442;&#25968;&#34920;&#31034;&#36890;&#30693;&#23545;&#35937;&#10;&#10;``- (void) windowDidChangeScreen:(NSNotification *)notification;``&#10;&#10;* &#29992;&#20110;&#36890;&#30693;&#22996;&#25176;&#23545;&#35937;&#25805;&#20316;&#21363;&#23558;&#21457;&#29983;&#25110;&#24050;&#32463;&#21457;&#29983;&#30340;&#26041;&#27861;&#21517;&#20013;&#35201;&#20351;&#29992; did &#25110; will&#10;&#10;``- (void) browserDidScroll:(NSBrowser *)sender;``&#10;&#10;``- (NSUndoManager *) windowWillReturnUndoManager:(NSWindow *)window;``&#10;&#10;* &#29992;&#20110;&#35810;&#38382;&#22996;&#25176;&#23545;&#35937;&#21487;&#21542;&#25191;&#34892;&#26576;&#25805;&#20316;&#30340;&#26041;&#27861;&#21517;&#20013;&#21487;&#20351;&#29992; did &#25110; will&#65292;&#20294;&#26368;&#22909;&#20351;&#29992; should &#10;&#10;``- (BOOL) windowShouldClose:(id)sender;``&#10;&#10;### Collection Methods &#38598;&#21512;&#26041;&#27861;&#10;&#10;&#9;&#31649;&#29702;&#23545;&#35937;&#65288;&#38598;&#21512;&#20013;&#30340;&#23545;&#35937;&#34987;&#31216;&#20043;&#20026;&#20803;&#32032;&#65289;&#30340;&#38598;&#21512;&#31867;&#65292;&#32422;&#23450;&#35201;&#20855;&#22791;&#22914;&#19979;&#24418;&#24335;&#30340;&#26041;&#27861;&#65306;&#10;&#10;``- (void) addElement:(elementType)adObj;``&#10;&#10;``- (void) removeElement:(elementType)anObj;``&#10;&#10;``- (NSArray *)elements;``&#10;&#10;&#20363;&#22914;&#65306;&#10;&#10;``- (void) addLayoutManager:(NSLayoutManager *)adObj;``&#10;&#10;``- (void) removeLayoutManager:(NSLayoutManager *)anObj;``&#10;&#10;``- (NSArray *)layoutManagers;``&#10;&#10;&#38598;&#21512;&#26041;&#27861;&#21629;&#21517;&#26377;&#22914;&#19979;&#19968;&#20123;&#38480;&#21046;&#21644;&#32422;&#23450;&#65306;&#10;&#10;* &#22914;&#26524;&#38598;&#21512;&#20013;&#30340;&#20803;&#32032;&#26080;&#24207;&#65292;&#36820;&#22238; NSSet&#65292;&#32780;&#19981;&#26159; NSArray&#10; &#10;* &#22914;&#26524;&#23558;&#20803;&#32032;&#25554;&#20837;&#25351;&#23450;&#20301;&#32622;&#30340;&#21151;&#33021;&#24456;&#37325;&#35201;&#65292;&#21017;&#38656;&#20855;&#22791;&#22914;&#19979;&#26041;&#27861;&#65306;&#10;&#10;&#183;&#183;- (void) insertElement:(elementType)anObj atIndex:(int)index;``&#10;&#10;``- (void) removeElementAtIndex:(int)index;``&#10;&#10;&#38598;&#21512;&#26041;&#27861;&#30340;&#23454;&#29616;&#35201;&#32771;&#34385;&#22914;&#19979;&#32454;&#33410;&#65306;&#10;*  &#20197;&#19978;&#38598;&#21512;&#31867;&#26041;&#27861;&#36890;&#24120;&#36127;&#36131;&#31649;&#29702;&#20803;&#32032;&#30340;&#25152;&#26377;&#32773;&#20851;&#31995;&#65292;&#22312; add &#25110; insert &#30340;&#23454;&#29616;&#20195;&#30721;&#37324;&#20250; retain &#20803;&#32032;&#65292;&#22312; remove &#30340;&#23454;&#29616;&#20195;&#30721;&#20013;&#20250; release &#20803;&#32032;&#10;*  &#24403;&#34987;&#25554;&#20837;&#30340;&#23545;&#35937;&#38656;&#35201;&#25345;&#26377;&#25351;&#21521;&#38598;&#21512;&#23545;&#35937;&#30340;&#25351;&#38024;&#26102;&#65292;&#36890;&#24120;&#20351;&#29992; set... &#26469;&#21629;&#21517;&#20854;&#35774;&#32622;&#35813;&#25351;&#38024;&#30340;&#26041;&#27861;&#65292;&#19988;&#19981;&#35201; retain &#38598;&#21512;&#23545;&#35937;&#12290;&#27604;&#22914;&#19978;&#38754;&#30340;&#10;`` insertLayerManager:atIndex:`` &#36825;&#31181;&#24773;&#24418;&#65292;NSLayoutManager &#31867;&#20351;&#29992;&#22914;&#19979;&#26041;&#27861;&#65306;&#10;&#10;``- (void) setTextStorage:(NSTextStorage *)textStorage;``&#10;&#10;``- (NSTextStorage *)textStorage;``&#10;&#10;&#36890;&#24120;&#20320;&#19981;&#20250;&#30452;&#25509;&#35843;&#29992; setTextStorage:&#65292;&#32780;&#26159;&#35206;&#20889;&#23427;&#12290;&#10;&#10;&#21478;&#19968;&#20010;&#20851;&#20110;&#38598;&#21512;&#32422;&#23450;&#30340;&#20363;&#23376;&#26469;&#33258; NSWindow &#31867;&#65306;&#10;&#10;``- (void) addChildWindow:(NSWindow *)childWin ordered:(NSWindowOrderingMode)place;``&#10;&#10;``- (void) removeChildWindow:(NSWindow *)childWin;``&#10;&#10;``- (NSArray *)childWindows;``&#10;&#10;``- (NSWindow *) parentWindow;``&#10;&#10;``- (void) setParentWindow:(NSWindow *)window;``&#10;&#10;### Method Arguments &#26041;&#27861;&#21442;&#25968;&#10;&#10;&#21629;&#21517;&#26041;&#27861;&#21442;&#25968;&#26102;&#35201;&#32771;&#34385;&#22914;&#19979;&#35268;&#21017;&#65306;&#10;* &#22914;&#21516;&#26041;&#27861;&#21517;&#65292;&#21442;&#25968;&#21517;&#23567;&#20889;&#31532;&#19968;&#20010;&#21333;&#35789;&#30340;&#39318;&#23383;&#31526;&#65292;&#22823;&#20889;&#21518;&#32487;&#21333;&#35789;&#30340;&#39318;&#23383;&#31526;&#12290;&#22914;&#65306;``removeObject:(id)anObject``.() &#19981;&#35201;&#22312;&#21442;&#25968;&#21517;&#20013;&#20351;&#29992; pointer &#25110; ptr&#65292;&#35753;&#21442;&#25968;&#30340;&#31867;&#22411;&#26469;&#35828;&#26126;&#23427;&#26159;&#25351;&#38024;&#10;&#10;* &#36991;&#20813;&#20351;&#29992; one&#65292; two&#65292;...&#65292;&#20316;&#20026;&#21442;&#25968;&#21517;&#10;&#10;* &#36991;&#20813;&#20026;&#33410;&#30465;&#20960;&#20010;&#23383;&#31526;&#32780;&#32553;&#20889; &#10;&#10;&#25353;&#29031; Cocoa &#24815;&#20363;&#65292;&#20197;&#19979;&#20851;&#38190;&#23383;&#19982;&#21442;&#25968;&#32852;&#21512;&#20351;&#29992;&#65306;&#10;&#10;``...action:(SEL)aSelector``&#10;&#10;``..alignment:(int)mode``&#10;&#10;``...atIndex:(int)index``&#10;&#10;``...content:(NSRect)aRect``&#10;&#10;``...doubleValue:(double)aDouble``&#10;&#10;``...floatValue:(float)aFloat``&#10;&#10;``...font:(NSFont *)fontObj``&#10;&#10;``...frame:(NSRect)frameRect``&#10;&#10;``...intValue:(int)anInt``&#10;&#10;``...keyEquivalent:(NSString *0charCode``&#10;&#10;``...length:(int)numBytes``&#10;&#10;``...point:(NSPoint)aPoint``&#10;&#10;``...stringValue:(NSString *)aString``&#10;&#10;``...tag:(int)anInt``&#10;&#10;``...target:(id)anObject``&#10;&#10;``...title:(NSString *)aString``&#10;&#10;### Private Methods &#31169;&#26377;&#26041;&#27861;&#10;&#10;&#9;&#22823;&#22810;&#25968;&#24773;&#20917;&#19979;&#65292;&#31169;&#26377;&#26041;&#27861;&#21629;&#21517;&#30456;&#21516;&#19982;&#20844;&#20849;&#26041;&#27861;&#21629;&#21517;&#32422;&#23450;&#30456;&#21516;&#65292;&#20294;&#36890;&#24120;&#25105;&#20204;&#32422;&#23450;&#32473;&#31169;&#26377;&#26041;&#27861;&#28155;&#21152;&#21069;&#32512;&#65292;&#20197;&#20415;&#19982;&#20844;&#20849;&#26041;&#27861;&#21306;&#20998;&#24320;&#26469;&#12290;&#21363;&#20351;&#36825;&#26679;&#65292;&#31169;&#26377;&#26041;&#27861;&#30340;&#21517;&#31216;&#24456;&#23481;&#26131;&#23548;&#33268;&#29305;&#21035;&#30340;&#38382;&#39064;&#12290;&#24403;&#20320;&#35774;&#35745;&#19968;&#20010;&#32487;&#25215;&#33258; Cocoa framework &#26576;&#20010;&#31867;&#30340;&#23376;&#31867;&#26102;&#65292;&#20320;&#26080;&#27861;&#30693;&#36947;&#20320;&#30340;&#31169;&#26377;&#26041;&#27861;&#26159;&#21542;&#19981;&#23567;&#24515;&#35206;&#30422;&#20102;&#26694;&#26550;&#20013;&#22522;&#31867;&#30340;&#21516;&#21517;&#26041;&#27861;&#12290;&#10;&#9;&#10;Cocoa framework &#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#36890;&#24120;&#20197;&#19979;&#21010;&#32447;&#20316;&#20026;&#21069;&#32512;&#65288;&#22914;&#65306;_fooData&#65289;&#65292;&#20197;&#26631;&#31034;&#20854;&#31169;&#26377;&#23646;&#24615;&#12290;&#22522;&#20110;&#36825;&#26679;&#30340;&#20107;&#23454;&#65292;&#36981;&#24490;&#20197;&#19979;&#20004;&#26465;&#24314;&#35758;&#65306;&#10;&#10;*  &#19981;&#35201;&#20351;&#29992;&#19979;&#21010;&#32447;&#20316;&#20026;&#20320;&#33258;&#24049;&#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#30340;&#21069;&#32512;&#65292;Apple &#20445;&#30041;&#36825;&#31181;&#29992;&#27861;&#12290;&#10;*  &#33509;&#35201;&#32487;&#25215; Cocoa framework &#20013;&#19968;&#20010;&#36229;&#22823;&#30340;&#31867;&#65288;&#22914;&#65306;NSView&#65289;&#65292;&#24182;&#19988;&#24819;&#35201;&#20351;&#20320;&#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#19982;&#22522;&#31867;&#20013;&#30340;&#21306;&#21035;&#24320;&#26469;&#65292;&#20320;&#21487;&#20197;&#20026;&#20320;&#30340;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#28155;&#21152;&#20320;&#33258;&#24049;&#30340;&#21069;&#32512;&#12290;&#36825;&#20010;&#21069;&#32512;&#24212;&#35813;&#20855;&#26377;&#21807;&#19968;&#24615;&#65292;&#22914;&#22522;&#20110;&#20320;&#20844;&#21496;&#30340;&#21517;&#31216;&#65292;&#25110;&#24037;&#31243;&#30340;&#21517;&#31216;&#65292;&#24182;&#20197;&#8220;XX_&#8221;&#24418;&#24335;&#32473;&#20986;&#12290;&#27604;&#22914;&#20320;&#30340;&#24037;&#31243;&#21517;&#20026;&#34;Byte Flogger&#34;&#65292;&#37027;&#20040;&#23601;&#21487;&#20197;&#26159;&#8220;BF_addObject:&#8221;&#10;&#10;&#23613;&#31649;&#20026;&#31169;&#26377;&#26041;&#27861;&#21517;&#31216;&#28155;&#21152;&#21069;&#32512;&#30340;&#24314;&#35758;&#19982;&#21069;&#38754;&#31867;&#20013;&#26041;&#27861;&#21629;&#21517;&#30340;&#32422;&#23450;&#20914;&#31361;&#65292;&#36825;&#37324;&#30340;&#24847;&#22270;&#26377;&#25152;&#19981;&#21516;&#65306;&#20026;&#20102;&#38450;&#27490;&#19981;&#23567;&#24515;&#22320;&#35206;&#30422;&#22522;&#31867;&#20013;&#30340;&#31169;&#26377;&#26041;&#27861;&#12290;&#10;&#10;### Naming Functions &#20989;&#25968;&#21629;&#21517;&#10;&#10;&#9;Objective-C &#20801;&#35768;&#36890;&#36807;&#20989;&#25968;&#65288;C&#24418;&#24335;&#30340;&#20989;&#25968;&#65289;&#25551;&#36848;&#34892;&#20026;&#65292;&#23601;&#22914;&#25104;&#21592;&#26041;&#27861;&#19968;&#26679;&#12290; &#20320;&#24212;&#24403;&#20248;&#20808;&#20351;&#29992;&#20989;&#25968;&#65292;&#32780;&#19981;&#26159;&#31867;&#26041;&#27861;&#65292;&#22914;&#26524;&#38544;&#21547;&#30340;&#31867;&#20026;&#21333;&#20363;&#25110;&#22312;&#22788;&#29702;&#20989;&#25968;&#23376;&#31995;&#32479;&#26102;&#12290;&#10;&#10;&#20989;&#25968;&#21629;&#21517;&#24212;&#35813;&#36981;&#24490;&#22914;&#19979;&#20960;&#26465;&#35268;&#21017;&#65306;&#10;&#9;&#10;*  &#20989;&#25968;&#21629;&#21517;&#19982;&#26041;&#27861;&#21629;&#21517;&#30456;&#20284;&#65292;&#20294;&#26377;&#20960;&#28857;&#19981;&#21516;&#65306;&#10;&#23427;&#20204;&#26377;&#21069;&#32512;&#65292;&#20854;&#21069;&#32512;&#19982;&#20320;&#20351;&#29992;&#30340;&#31867;&#21644;&#24120;&#37327;&#30340;&#21069;&#32512;&#30456;&#21516;&#10;&#22823;&#20889;&#21069;&#32512;&#21518;&#32039;&#36319;&#30340;&#31532;&#19968;&#20010;&#21333;&#35789;&#39318;&#23383;&#31526;&#10;* &#22823;&#22810;&#25968;&#20989;&#25968;&#21517;&#31216;&#20197;&#21160;&#35789;&#24320;&#22836;&#65292;&#36825;&#20010;&#21160;&#35789;&#25551;&#36848;&#35813;&#20989;&#25968;&#30340;&#34892;&#20026;&#10;NSHighlightRect&#10;NSDeallocateObject&#10;&#10;&#26597;&#35810;&#23646;&#24615;&#30340;&#20989;&#25968;&#26377;&#20010;&#26356;&#22810;&#30340;&#35268;&#21017;&#35201;&#36981;&#24490;&#65306;&#10;* &#26597;&#35810;&#31532;&#19968;&#20010;&#21442;&#25968;&#30340;&#23646;&#24615;&#30340;&#20989;&#25968;&#65292;&#30465;&#30053;&#21160;&#35789;&#10;&#10;```unsigned int NSEventMaskFromType(NSEventType type)&#10;float NSHeight(NSRect rect)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>返回值为引用的方法，使用 Get</li>
-</ul>
-<figure class="highlight"><figcaption><span>char *NSGetSizeAndAlignment(const char *typePtr, unsigned int *sizep, unsigned int *alignp)```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;* &#36820;&#22238; boolean &#20540;&#30340;&#20989;&#25968;&#65292;&#21517;&#31216;&#20351;&#29992;&#21028;&#26029;&#21160;&#35789; is/does &#24320;&#22836; &#10;&#10;```BOOL NSDecimalIsNotANumber(const NSDecimal *decimal)</span><br></pre></td></tr></table></figure>
-<h3 id="Naming_Instance_Variables_and_Data_Types_实例变量与数据类型命名">Naming Instance Variables and Data Types 实例变量与数据类型命名</h3><pre><code>这一节描述实例变量，常量，异常以及通知的命名约定。
-</code></pre><h3 id="Instance_Variables_实例变量">Instance Variables 实例变量</h3><p>在为类添加实例变量是要注意：</p>
-<ul>
-<li>避免创建 public 实例变量</li>
-<li>使用 @private，@protected 显式限定实例变量的访问权限</li>
-<li>确保实例变量名简明扼要地描述了它所代表的属性</li>
-</ul>
-<p>如果实例变量别设计为可被访问的，确保编写了访问方法</p>
-<h3 id="Constants_常量">Constants 常量</h3><p>常量命名规则根据常量创建的方式不同而大不同。</p>
-<h3 id="枚举常量">枚举常量</h3><ul>
-<li>使用枚举来定义一组相关的整数常量</li>
-<li><p>枚举常量与其 typedef 命名遵守函数命名规则。如：来自 NSMatrix.h 中的例子：（本例中的 typedef tag（_NSMatrixMode）不是必须的）</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	typedef <span class="class"><span class="keyword">enum</span> <span class="title">_NSMatrixMode</span> &#123;</span></span><br><span class="line">	<span class="constant">NSRadioModeMatrix</span>       = <span class="number">0</span>,</span><br><span class="line">    <span class="constant">NSHighlightModeMatrix</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="constant">NSListModeMatrix</span>           = <span class="number">2</span>,</span><br><span class="line">    <span class="constant">NSTrackModeMatrix</span>        = <span class="number">3</span></span><br><span class="line">&#125; <span class="constant">NSMatrixMode</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>位掩码常量可以使用不具名枚举。如：</p>
-</li>
-<li>enum {<br>  NSBorderlessWindowMask         = 0,<br>  NSTitledWindowMask                 = 1 &lt;&lt; 0,<br>  NSClosableWindowMask            = 1 &lt;&lt; 1,<br>  NSMiniaturizableWindowMask  = 1 &lt;&lt; 2,<br>  NSResizableWindowMask          = 1 &lt;&lt; 3<br>};</li>
-</ul>
-<h3 id="const_常量">const 常量</h3><ul>
-<li>使用 const 来修饰浮点常量或彼此没有关联的整数常量 </li>
-<li>枚举常量命名规则与函数命名规则相同。const 常量命名范例：<br>const float NSLightGray;</li>
-</ul>
-<h3 id="其他常量">其他常量</h3><ul>
-<li>通常不使用 #define 来创建常量。如上面所述，整数常量请使用枚举，浮点数常量请使用 const</li>
-<li>使用大写字母来定义预处理编译宏。如：#ifdef DEBUG</li>
-<li>编译器定义的宏名首尾都有双下划线。如：<strong>MACH</strong></li>
-<li>为 notification 名及 dictionary key 定义字符串常量，从而能够利用编译器的拼写检查，减少书写错误。Cocoa  框架提供了很多这样的范例：<br>APPKIT_EXTERN NSString *NSPrintCopies;<br>实际的字符串值在实现文件中赋予。（注意：APPKIT_EXTERN 宏等价于Objective-C 中 extern）</li>
-</ul>
-<h3 id="Exceptions_and_Notifications_异常与通知">Exceptions and Notifications 异常与通知</h3><p>异常与通知的命名遵循相似的规则，但是它们有各自推荐的使用模式。</p>
-<h3 id="异常">异常</h3><p>虽然你可以处于任何目的而使用异常（由 NSException 类及相关类实现），Cocoa 通常不使用异常来处理常规的，可预料的错误。在这些情形下，使用诸如 nil, NULL, NO或错误代码之类的返回值。异常的典型应用类似数组越界之类的编程错误。<br>异常由具有如下形式的全局 NSString 对象标识：<br>[Prefix] + UniquePartOfName + Exception<br>UniquePartOfName 部分是有连续的首字符大写的单词组成。例如：<br>NSColorListIOException<br>NSColorListNotEditableException<br>NSDraggingException<br>NSFontUnavailableException<br>NSIllegalSelectorException</p>
-<h3 id="通知">通知</h3><p>如果一个类有委托，那它的大部分通知可能由其委托的委托方法来处理。这些通知的名称应该能够反应其响应的委托方法。比如，当应用程序提交 NSApplicationDidBecomeActiveNotification 通知时，全局 NSApplication 对象的委托会注册从而能够接收 applicaitonDidBecomeActive: 消息。<br>通知由具有如下形式的全局 NSString 对象标识：<br>[相关联类的名称] + [Did 或 Will] + [UniquePartOfName] + Notification<br>例如：<br>NSApplicationDidBecomeActiveNotification<br>NSWindowDidMiniaturizeNotification<br>NSTextViewDidChangeSelectionNotification<br>NSColorPanelColorDidChangeNotification</p>
-<blockquote>
-<p>可接受的缩略语<br>在设计编程接口时，通常名称不要缩写。然而，下面列出的缩写要么是固定下来的要么是过去被广泛使用的，所以你可以继续使用。关于缩写有一些额外的注意事项：</p>
-<ul>
-<li>标准 C 库中长期使用的缩写形式是可以接受的。如：”alloc”，”getc”</li>
-<li>你可以在参数名中更自由地使用缩写。如：imageRep，col（column），obj，otherWin<br>alloc<br>Allocate<br>msg<br>Message<br>alt<br>Alternate<br>nib<br>Interface Builder archive<br>app<br>Application<br>pboard<br>Pasteboard<br>calc<br>Calculate<br>rect<br>Rectangle<br>dealloc<br>Deallocate<br>Rep<br>Representation<br>func<br>Function<br>temp<br>Temporary<br>horiz<br>Horizontal<br>vert<br>Vertical<br>info<br>Information<br>init<br>Initialize<br>max<br>Maximum</li>
-</ul>
-</blockquote>
-<p>常见的缩写：<br>ASCII，PDF，XML，HTML，URL，RTF，HTTP，TIFF<br>JPG，GIF，LZW，ROM，RGB，CMYK，MIDI，FTP</p>
-<h1 id="框架开发者小贴士与技巧">框架开发者小贴士与技巧</h1><h2 id="Initialize_初始化">Initialize 初始化</h2><h3 id="类初始化">类初始化</h3><p>在 initialize 类方法中，能够编写实现一些延迟执行且只被一次的代码，initialize 类方法是由运行时系统在该类响应任何其他消息之前调用的。典型的应用是在其中设置类的版本信息。运行时系统向每个类发送 initialize 消息，即使该类没有实现 initialize，也会调用其基类的某个 initialize 方法。因此一个类的 initialize 方法可能会因为存在继承类的缘故被执行多次。因此有必要使用一定的技巧来防止只执行一次的代码被多次执行。如：NSFoo 类的 initialize 方法实现可能如下：</p>
-<ul>
-<li>(id) initialize<br>{<br>  if (self == [NSFoo class])<br>  {<pre><code><span class="comment">// 初始化代码</span>
-</code></pre>  }<br>  return self;<br>}<br>不应当显式调用 initialize 方法。如果你需要激活 initialize 方法，使用 [NSFoo self] 形式的调用。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/Cocoa-编码规范中文版/" data-id="cihlypwg700073es6wdjybgh5" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/Google-Objective-C-Style-Guide-中文版/" data-id="cihlyu07y000d46s6v87e15pb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1847,10 +1620,14 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
   
     <article id="post-aotuManLady-编码规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/25/aotuManLady-编码规范/" class="article-date">
-  <time datetime="2015-11-25T01:36:02.000Z" itemprop="datePublished">2015-11-25</time>
+    <a href="/2015/11/30/aotuManLady-编码规范/" class="article-date">
+  <time datetime="2015-11-30T13:00:35.000Z" itemprop="datePublished">2015-11-30</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/规范-配置categories/">规范# 配置categories</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -1859,7 +1636,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/25/aotuManLady-编码规范/">AotumanLady 编程规范</a>
+      <a class="article-title" href="/2015/11/30/aotuManLady-编码规范/">AotumanLady 编程规范</a>
     </h1>
   
 
@@ -2000,7 +1777,253 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/aotuManLady-编码规范/" data-id="cihlypwfz00033es6h1zdj2hr" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/aotuManLady-编码规范/" data-id="cihlyu07u000746s6rn450gcc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Bulid-Configuration" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/30/Bulid-Configuration/" class="article-date">
+  <time datetime="2015-11-30T08:00:38.000Z" itemprop="datePublished">2015-11-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Xcode-配置categories/">Xcode# 配置categories</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/30/Bulid-Configuration/">Bulid Configuration</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Build_Configuration">Build Configuration</h2><p>Xcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。</p>
+<p><img src="http://i12.tietuku.com/5416d9b6ae0ff918.jpg" alt="你好"></p>
+<p>为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ test_debug ）、测试服务器( debug )、预发布线上服务器（Beta）、线上服务器( release ).如何能够不去修改代码的情况下去快速切换调试模式呢 ？<br>幸好有 bulid configuration！</p>
+<h2 id="配置_bulid_configuration">配置 bulid configuration</h2><h3 id="1-添加_configuration">1.添加 configuration</h3><p>假定我们需要四个不同的调试环境。</p>
+<p>按照优先级 从低到高的顺序：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="class">.test_debug</span>   		<span class="comment">//开发测试环境   </span></span><br><span class="line"><span class="number">2</span><span class="class">.debug</span>			  	<span class="comment">//开发环境</span></span><br><span class="line"><span class="number">3</span><span class="class">.beta</span>				<span class="comment">//预发布线上环境(企业版) 	</span></span><br><span class="line"><span class="number">3</span><span class="class">.release</span>			<span class="comment">//线上环境</span></span><br></pre></td></tr></table></figure>
+<p>其中 test_debug 和 debug 是 可以做断点调试；<br>beta 和 release 是不可以做断点调试的。</p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83583695.jpg" alt=""></p>
+<h3 id="2-查看_configuration">2.查看 configuration</h3><p>添加完第1步的Configuration之后，在Edit Scheme里就会看到新添加的配置项</p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/92987100.jpg" alt=""></p>
+<h3 id="3-更改Preprocessor_Macros">3.更改Preprocessor Macros</h3><p>第1步里我们直接复制了Debug / Release 的配置项，那这里的值就会有问题，需要自己设置。</p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/54816366.jpg" alt=""></p>
+<h3 id="4-在程序配置项里面对应你所设置的_configuration_定义不同的API_接口。">4.在程序配置项里面对应你所设置的 configuration 定义不同的API 接口。</h3><p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/40676889.jpg" alt=""></p>
+<p><strong>切换不同的 编译模式，会根据宏定义打印相应的API。</strong></p>
+<h2 id="配置不同的_APPIcon">配置不同的 APPIcon</h2><h3 id="1-使用_Asset_Catalog，配置不同环境下的appIcon">1.使用 Asset Catalog，配置不同环境下的appIcon</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="class">.test_debug</span>   		<span class="comment">//开发测试环境   </span></span><br><span class="line"><span class="number">2</span><span class="class">.debug</span>			  	<span class="comment">//开发环境</span></span><br><span class="line"><span class="number">3</span><span class="class">.beta</span>				<span class="comment">//预发布线上环境(企业版) 	</span></span><br><span class="line"><span class="number">3</span><span class="class">.release</span>			<span class="comment">//线上环境</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/79036640.jpg" alt=""></p>
+<p><strong>不同环境下运行得到的 icon 就会有所差异</strong></p>
+<h2 id="配置不同的_APP_Name">配置不同的 APP Name</h2><h3 id="1-Target_-_Build_Settings里点+号，添加一个User-Defined_Setting">1.Target - Build Settings里点+号，添加一个User-Defined Setting</h3><h3 id="2-比如我们请一个叫APP_DISPLAY_NAME的key值，下面BETA叫BETA，DEVELOP叫DEVELOP，_Release还是用系统原配置。">2.比如我们请一个叫APP_DISPLAY_NAME的key值，下面BETA叫BETA，DEVELOP叫DEVELOP， Release还是用系统原配置。</h3><h3 id="3-进到Target_-_Info里，修改Bundle_name为$(APP_DISPLAY_NAME)">3.进到Target - Info里，修改Bundle name为$(APP_DISPLAY_NAME)</h3><p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/28361769.jpg" alt=""></p>
+<p>效果如下：</p>
+<ul>
+<li>test_debug           //开发测试环境   </li>
+</ul>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/81085209.jpg" alt=""></p>
+<ul>
+<li>debug                  //开发环境</li>
+</ul>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83542990.jpg" alt=""></p>
+<ul>
+<li>beta                //预发布线上环境(企业版)</li>
+</ul>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/87529378.jpg" alt=""></p>
+<ul>
+<li>release            //线上环境</li>
+</ul>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/2910837.jpg" alt=""></p>
+<p>参考文档：<a href="http://www.jianshu.com/p/51a2bbe877aa" target="_blank" rel="external">简书</a></p>
+<p>Demo: <a href="https://github.com/lc10915819/AddBuildConfiguration" target="_blank" rel="external">这里</a></p>
+<p>很好的 markdown 图片上传工具 <a href="http://yotuku.cn/?utm_source=doubangroup#!/" target="_blank" rel="external">url</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihlyu083000k46s6lchpfpyk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-CocoaPods-Podfile-语法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/30/CocoaPods-Podfile-语法/" class="article-date">
+  <time datetime="2015-11-30T02:21:09.000Z" itemprop="datePublished">2015-11-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Xcode-配置categories/">Xcode# 配置categories</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/30/CocoaPods-Podfile-语法/">CocoaPods Podfile 语法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Pod_Commands">Pod Commands</h2><p><code>pod search &lt;open source&gt;</code></p>
+<p>ag:<br><code>pod search AFNetworking</code></p>
+<p>在cocoapods这个目录中搜索。也可以在 <code>http://cocoapods.org</code>中搜索第三方库。</p>
+<h2 id="Podfile">Podfile</h2><h3 id="1-pod_‘objection’’version’;">1.pod ‘objection’’version’;</h3><ul>
+<li>pod ‘MCDateExtensions’,不指定版本，在pod update时会获取最新的版本；</li>
+<li>pod ‘MCDateExtensions’’~&gt;1.0.0’，获取的版本信息是[1.0.0, 1.1.0). ~&gt;是参照ruby的语法的，~&gt;x.y.z, 的意思是版本号 x,y 固定，但可以大于等于 z。</li>
+</ul>
+<p><strong>通常版本号的命名有其惯例：x major 版本号升级表示有 API 发生不向后的兼容性变动，y minor 版本号升级表示有功能新增，z tiny 版本号升级表示 bugs 修正。</strong> 因此 “~&gt; x.y.z” 可以让我們保有升级弹性，又不致于升級太多让程序发生不兼容错误;</p>
+<h3 id="2-本地导入">2.本地导入</h3><p>从本地pod files</p>
+<p><code>pod &#39;AFNetworking&#39;, :path =&gt; &#39;~/Documents/AFNetworking&#39;</code></p>
+<p>此目录下一定要有.podspec文档</p>
+<h3 id="3-从git_server端pod_files">3.从git server端pod files</h3><ul>
+<li>从分支导入</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>, :git =&gt; <span class="string">'https://github.com/gowalla/AFNetworking.git'</span>, :branch =&gt; ‘develop’</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从commit 导入</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>, :git =&gt; <span class="string">'https://github.com/gowalla/AFNetworking.git'</span>, :commit =&gt; <span class="string">'082f8319af'</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-子模块导入">4.子模块导入</h3><p>pod ‘ShareKit/Facebook’ 支持子模块的导入。</p>
+<h3 id="5-注释">5.注释</h3><p>单行注释： #</p>
+<p>多行注释:</p>
+<p>=begin    </p>
+<p>codes to comment </p>
+<p>=end</p>
+<h3 id="6-版本介绍">6.版本介绍</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>      <span class="comment">//不显式指定依赖库版本，表示每次都获取最新版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'2.0'</span>     <span class="comment">//只使用2.0版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt; 2.0'</span>     <span class="comment">//使用高于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt;= 2.0'</span>     <span class="comment">//使用大于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt; 2.0'</span>     <span class="comment">//使用小于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt;= 2.0'</span>     <span class="comment">//使用小于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 0.1.2'</span>     <span class="comment">//使用大于等于0.1.2但小于0.2的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0.1'</span>     <span class="comment">//使用大于等于0.1但小于1.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0'</span>     <span class="comment">//高于0的版本，写这个限制和什么都不写是一个效果，都表示使用最新版本</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-Podfile-lock文件">7.Podfile.lock文件</h3><p>Podfile.lock文件对团队协作很重要，我们需要将它添加到版本管理中。</p>
+<h3 id="8-Podfile_文件位置">8.Podfile 文件位置</h3><p>事实上Podfile文件可以放在任意一个目录下，需要做的是在Podfile中指定工程的路径，和原来相比，Podfile文件就在最开始的位置增加了一行，具体内容如下</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xcodeproj <span class="string">"/Users/wangzz/Desktop/CocoaPodsTest/CocoaPodsTest.xcodeproj"</span>  </span><br><span class="line">  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span></span><br></pre></td></tr></table></figure>
+<h3 id="9-Podfile和target">9.Podfile和target</h3><ol>
+<li>多个target中使用相同的Pods依赖库</li>
+</ol>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">link_with <span class="string">'CocoaPodsTest'</span>, <span class="string">'Second'</span>  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>不同的target使用完全不同的Pods依赖库</li>
+</ol>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">target <span class="symbol">:<span class="string">'CocoaPodsTest'</span></span> <span class="keyword">do</span>  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span>  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">  </span><br><span class="line">target <span class="symbol">:<span class="string">'Second'</span></span> <span class="keyword">do</span>  </span><br><span class="line">pod <span class="string">'OpenUDID'</span>, <span class="string">'~&gt; 1.0.0'</span>  </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>更多内容 点击 <a href="http://www.cnblogs.com/ouyangfang/p/4173544.html" target="_blank" rel="external">这里</a></p>
+<p><a href="http://guides.cocoapods.org/using/index.html" target="_blank" rel="external">Cocoapods 官网引导</a></p>
+<p><a href="http://blog.csdn.net/wzzvictory/article/details/19178709" target="_blank" rel="external">王中周 CSDN 博客</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihlyu080000f46s66z6ncw25" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ReactiveCocoa" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/27/ReactiveCocoa/" class="article-date">
+  <time datetime="2015-11-27T07:21:55.000Z" itemprop="datePublished">2015-11-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS-配置categories/">iOS# 配置categories</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/27/ReactiveCocoa/">ReactiveCocoa</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>ReactiveCocoa  信号<span class="comment">(signal)</span>主导一切。
+</code></pre><h2 id="ReactiveCocoa_原理">ReactiveCocoa 原理</h2><blockquote>
+<p>action、delegate、KVO、callback 的组合，从而来实现 功能的 连接、过滤和组合。</p>
+</blockquote>
+<h2 id="一步步去实现_RAC">一步步去实现 RAC</h2><h3 id="1-使用_RAC_实现_UITextfield_最简单的事件监听">1.使用 RAC 实现 UITextfield 最简单的事件监听</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//监听输入</span></span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span> subscribeNext:^(<span class="keyword">id</span> word)&#123;</span><br><span class="line">       <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,word);</span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
+<p>类似于</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)textField:(<span class="built_in">UITextField</span> *)textField shouldChangeCharactersInRange:(<span class="built_in">NSRange</span>)range replacementString:(<span class="built_in">NSString</span> *)string;  </span><br><span class="line"> <span class="comment">// return NO to not change text</span></span><br></pre></td></tr></table></figure>
+<p>每一次改变都会触发 block 事件，并打印出文本框的内容。</p>
+<p>return</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.359</span> RWReactivePlayground[<span class="number">9193</span>:a0b] i</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.436</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.541</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is </span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.695</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is t</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.831</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is th</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.878</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is thi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.901</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.009</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> </span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.142</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> m</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.236</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> ma</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.335</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> mag</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.439</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> magi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.535</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> magic</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.774</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> magic?</span><br></pre></td></tr></table></figure>
+<h3 id="2-使用_RAC_对输入内容进行过滤">2.使用 RAC 对输入内容进行过滤</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *usernameSourceSignal =  <span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span>;</span><br><span class="line"></span><br><span class="line">  RACSignal *filteredUsername = [usernameSourceSignal filter:^<span class="built_in">BOOL</span>(<span class="keyword">id</span> value) &#123;</span><br><span class="line">      <span class="built_in">NSString</span> *text = value;</span><br><span class="line">      <span class="keyword">return</span> text<span class="variable">.length</span> &gt; <span class="number">3</span>;</span><br><span class="line">  &#125;];</span><br><span class="line">  </span><br><span class="line">  [filteredUsername subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">      </span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,x);</span><br><span class="line">  </span><br><span class="line">  &#125;];</span><br></pre></td></tr></table></figure>
+<p>简写</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[self.userTextField.rac_textSignal filter:<span class="comment">^BOOL</span><span class="list">(<span class="keyword">id</span> value)</span> <span class="collection">&#123;</span><br><span class="line"> </span><br><span class="line">    NSString *text = value;</span><br><span class="line">    return text.length &gt; <span class="number">3</span><span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">&#125;</span>]</span></span><br><span class="line"></span><br><span class="line">subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">&#123;</span><br><span class="line">    </span><br><span class="line">       NSLog<span class="list">(@<span class="string">"%@"</span>,x)</span><span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">&#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>1&gt; 在输入的过程中，每一次的 block 调用 都会触发 Filter 的 过滤，然后返回给 returnRAC 一个值；<br>2&gt; returnRAC 通过 自身的 描述方法 </p>
+<p><code>subscribeNext(void (^)(id x))nextBlock</code> </p>
+<p>去对得到的结果进行处理。</p>
+<p>从后续的 demo 就会发现，其实是<strong>信息流</strong>的传递和处理。</p>
+<p>只有当输入的长度 &gt; 3 才会打印输出。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.335</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is t</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.478</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is th</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.526</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is thi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.548</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.676</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> </span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.798</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> m</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.926</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> ma</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.987</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> mag</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">52.141</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> magi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">52.229</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> magic</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">52.486</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> magic?</span><br></pre></td></tr></table></figure>
+<h3 id="3-_上面_Return_的类型_要和_下面_Receive_的类型保持一致">3. 上面 Return 的类型 要和 下面 Receive 的类型保持一致</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[self.userTextField.rac_textSignal</span><br><span class="line">   map:<span class="comment">^id</span><span class="list">(<span class="keyword">NSString</span> *text)</span><span class="collection">&#123;</span><br><span class="line">       return @<span class="list">(<span class="keyword">text.length</span>)</span><span class="comment">;</span></span><br><span class="line">   &#125;</span>]</span></span><br><span class="line">  filter:<span class="comment">^BOOL</span><span class="list">(<span class="keyword">NSNumber</span> *length)</span><span class="collection">&#123;</span><br><span class="line">      return<span class="collection">[length integerValue]</span> &gt; <span class="number">3</span><span class="comment">;</span></span><br><span class="line">  &#125;</span>]</span></span><br><span class="line"> subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span><span class="collection">&#123;</span><br><span class="line">     NSLog<span class="list">(@<span class="string">"%@"</span>, x)</span><span class="comment">;</span></span><br><span class="line"> &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>RETURN </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">54.566</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">4</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">54.725</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">5</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">54.853</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">6</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.061</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">7</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.197</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">8</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.300</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">9</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.462</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">10</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.558</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">11</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.646</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">12</span></span><br></pre></td></tr></table></figure>
+<p>Why? 为什么不再打印 输入文本了？</p>
+<p>因为信息流在 </p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map:^<span class="property">id</span>(NSString *<span class="type">text</span>)&#123;</span><br><span class="line"><span class="command">          return</span> @(<span class="type">text</span>.<span class="property">length</span>);</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
+<p>已经改变了后续信号源的类型。</p>
+<h3 id="4-_map_OR_filter_？">4. map OR filter ？</h3><p>先看看 map 和 filter 的实现差异性。</p>
+<p>filter:</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)filter:(BOOL (^)(id <span class="keyword">value</span>))block &#123;</span><br><span class="line">	NSCParameterAssert(block <span class="comment">!= nil);</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">Class</span> <span class="keyword">class</span> = self.<span class="keyword">class</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> [[self flattenMap:^ id (id <span class="keyword">value</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (block(<span class="keyword">value</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> [<span class="keyword">class</span> <span class="keyword">return</span>:<span class="keyword">value</span>];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">class</span>.empty;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;] setNameWithFormat:@<span class="string">"[%@] -filter:"</span>, self.<span class="keyword">name</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>map:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (instancetype)map:(<span class="keyword">id</span> (^)(<span class="keyword">id</span> value))block &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(block != <span class="literal">nil</span>);</span><br><span class="line"></span><br><span class="line">	Class class = <span class="keyword">self</span><span class="variable">.class</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> [[<span class="keyword">self</span> flattenMap:^(<span class="keyword">id</span> value) &#123;</span><br><span class="line">		<span class="keyword">return</span> [class <span class="keyword">return</span>:block(value)];</span><br><span class="line">	&#125;] setNameWithFormat:<span class="string">@"[%@] -map:"</span>, <span class="keyword">self</span><span class="variable">.name</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很相似，除了 filter 多了一个 <code>else</code> ,其余完全一样。<br>到底在什么时候选择什么样的方法呢？</p>
+<p><strong>map：改变输入源类型的时候 调用。</strong></p>
+<p><strong>filter:限制输入源的长度、颜色等时候调用。</strong></p>
+<h3 id="5-用_signal_去控制一切">5.用 signal 去控制一切</h3><p>代码你应该最喜欢吧？</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *validUsernameSignal =</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span></span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">      <span class="keyword">return</span> @([<span class="keyword">self</span> isValidUsername:text]);</span><br><span class="line">  &#125;];</span><br><span class="line">  <span class="comment">//得到验证用户名正确性的信号</span></span><br><span class="line"></span><br><span class="line">RACSignal *validPasswordSignal =</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.pswTextfield</span><span class="variable">.rac_textSignal</span></span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">     <span class="keyword">return</span> @([<span class="keyword">self</span> isValidPassword:text]);</span><br><span class="line"> &#125;];  </span><br><span class="line"> <span class="comment">//得到验证密码正确性的信号</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">RAC(<span class="keyword">self</span><span class="variable">.pswTextfield</span>,backgroundColor) =</span><br><span class="line">[validPasswordSignal</span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">     <span class="keyword">return</span> [passwordValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"> &#125;];</span><br><span class="line"> <span class="comment">//针对返回的信号去改变 控件的显示方式</span></span><br><span class="line"></span><br><span class="line">RAC(<span class="keyword">self</span><span class="variable">.userTextField</span>,backgroundColor) =</span><br><span class="line">[validUsernameSignal</span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *usernameValid)&#123;</span><br><span class="line">     <span class="keyword">return</span> [usernameValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"> &#125;];</span><br><span class="line"> <span class="comment">// me too~</span></span><br></pre></td></tr></table></figure>
+<p>一种不可取的控件改变实现方式</p>
+<p>BAD ! BAD ! BAD !</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[validPasswordSignal</span><br><span class="line">  map:<span class="comment">^id</span><span class="list">(<span class="keyword">NSNumber</span> *passwordValid)</span><span class="collection">&#123;</span><br><span class="line">    return<span class="collection">[passwordValid boolValue]</span> ? <span class="collection">[UIColor clearColor]</span>:<span class="collection">[UIColor yellowColor]</span><span class="comment">;</span></span><br><span class="line">  &#125;</span>]</span></span><br><span class="line">  subscribeNext:^<span class="list">(<span class="keyword">UIColor</span> *color)</span><span class="collection">&#123;</span><br><span class="line">    self.passwordTextField.backgroundColor = color;</span><br><span class="line">  &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>能用 RAC 的宏， why not？</p>
+<p>RAC：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hexcolor">#def</span>ine <span class="function"><span class="title">RAC</span><span class="params">(TARGET, ...)</span></span> \</span><br><span class="line">    <span class="function"><span class="title">metamacro_if_eq</span><span class="params">(<span class="number">1</span>, metamacro_argcount(__VA_ARGS__)</span></span>) \</span><br><span class="line">        (<span class="function"><span class="title">RAC_</span><span class="params">(TARGET, __VA_ARGS__, nil)</span></span>) \</span><br><span class="line">        (<span class="function"><span class="title">RAC_</span><span class="params">(TARGET, __VA_ARGS__)</span></span>)</span><br></pre></td></tr></table></figure>
+<h3 id="6-用_UITextfield_的返回信号_去处理其他事件（_UIButton_）">6.用 UITextfield 的返回信号 去处理其他事件（ UIButton ）</h3><p>code：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *validUsernameSignal =</span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span></span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">         <span class="keyword">return</span> @([<span class="keyword">self</span> isValidUsername:text]);</span><br><span class="line">     &#125;];</span><br><span class="line">   </span><br><span class="line">   RACSignal *validPasswordSignal =</span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.pswTextfield</span><span class="variable">.rac_textSignal</span></span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">        <span class="keyword">return</span> @([<span class="keyword">self</span> isValidPassword:text]);</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   RAC(<span class="keyword">self</span><span class="variable">.pswTextfield</span>,backgroundColor) =</span><br><span class="line">   [validPasswordSignal</span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">        <span class="keyword">return</span> [passwordValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   RAC(<span class="keyword">self</span><span class="variable">.userTextField</span>,backgroundColor) =</span><br><span class="line">   [validUsernameSignal</span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *usernameValid)&#123;</span><br><span class="line">        <span class="keyword">return</span> [usernameValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">RACSignal *signUpActiveSingle = [RACSignal combineLatest:@[validUsernameSignal,validPasswordSignal] reduce:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span>*usernameValid, <span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> @([usernameValid boolValue]&amp;&amp;[passwordValid boolValue]);</span><br><span class="line">   </span><br><span class="line">&#125;];</span><br><span class="line">   </span><br><span class="line">   [signUpActiveSingle subscribeNext:^(<span class="built_in">NSNumber</span> *signupActive) &#123;</span><br><span class="line">      </span><br><span class="line">       <span class="keyword">self</span><span class="variable">.signinButton</span><span class="variable">.enabled</span> = [signupActive boolValue];</span><br><span class="line">       </span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
+<p>上面的代码使用 <code>combineLatest:reduce:</code> 方法把<code>validUsernameSignal</code> 和 <code>validPasswordSignal</code>  产生的最新的值聚合在一起，并生成一个新的信号。每次这两个源信号的任何一个产生新值时，reduce block都会执行，block的返回值会发给下一个信号。</p>
+<p>对聚合好的信号，然后去控制 UIButton 界面。</p>
+<h3 id="7-使用_RAC_替代_Button_事件">7.使用 RAC 替代 Button 事件</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[self.signinButton rac_signalForControlEvents:UIControlEventTouchUpInside]</span></span><br><span class="line">    </span><br><span class="line">    subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">&#123;</span><br><span class="line">       </span><br><span class="line">        NSLog<span class="list">(@<span class="string">"button clicked"</span>)</span><span class="comment">;</span></span><br><span class="line">    &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>项目地址：<a href="https://github.com/lc10915819/ReactiveCocoaDemo" target="_blank" rel="external">ReactiveCocoaDemo</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihlyu07w000a46s6blx40zby" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2023,7 +2046,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Xcode-配置categories/">Xcode# 配置categories</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Xcode-配置categories/">Xcode# 配置categories</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS-配置categories/">iOS# 配置categories</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术-配置categories/">技术# 配置categories</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术方案-配置categories/">技术方案# 配置categories</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/规范-配置categories/">规范# 配置categories</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试-配置categories/">面试# 配置categories</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -2048,23 +2071,23 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       <ul>
         
           <li>
-            <a href="/2015/11/30/Bulid-Configuration/">Bulid Configuration</a>
+            <a href="/2015/11/30/AotumanLady-iOS-App-开发准备工作/">AotumanLady iOS App 开发准备工作</a>
           </li>
         
           <li>
-            <a href="/2015/11/30/CocoaPods-Podfile-语法/">CocoaPods Podfile 语法</a>
+            <a href="/2015/11/30/AotumanLady-iOS编程规范/">AotumanLady iOS编程规范</a>
           </li>
         
           <li>
-            <a href="/2015/11/27/ReactiveCocoa/">ReactiveCocoa</a>
+            <a href="/2015/11/30/Cocoa-编码规范中文版/">Cocoa 编码规范中文版</a>
           </li>
         
           <li>
-            <a href="/2015/11/26/AotumanLady-iOS编程规范/">AotumanLady iOS编程规范</a>
+            <a href="/2015/11/30/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
           </li>
         
           <li>
-            <a href="/2015/11/26/iOS-面试题②/">iOS 面试题②</a>
+            <a href="/2015/11/30/AotumanLady-写作规范/">AotumanLady 写作规范</a>
           </li>
         
       </ul>
