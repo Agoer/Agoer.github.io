@@ -65,6 +65,82 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CocoaPods-Podfile-语法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/30/CocoaPods-Podfile-语法/" class="article-date">
+  <time datetime="2015-11-30T02:21:09.000Z" itemprop="datePublished">2015-11-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/30/CocoaPods-Podfile-语法/">CocoaPods Podfile 语法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Pod_Commands">Pod Commands</h2><p><code>pod search &lt;open source&gt;</code></p>
+<p>ag:<br><code>pod search AFNetworking</code></p>
+<p>在cocoapods这个目录中搜索。也可以在<a href="http://cocoapods.org中搜索第三方库。" target="_blank" rel="external">http://cocoapods.org中搜索第三方库。</a></p>
+<h2 id="Podfile">Podfile</h2><h3 id="1-pod_‘objection’’version’;">1.pod ‘objection’’version’;</h3><ul>
+<li>pod ‘MCDateExtensions’,不指定版本，在pod update时会获取最新的版本；</li>
+<li>pod ‘MCDateExtensions’’~&gt;1.0.0’，获取的版本信息是[1.0.0, 1.1.0). ~&gt;是参照ruby的语法的，~&gt;x.y.z, 的意思是版本号 x,y 固定，但可以大于等于 z。</li>
+</ul>
+<p><strong>通常版本号的命名有其惯例：x major 版本号升级表示有 API 发生不向后的兼容性变动，y minor 版本号升级表示有功能新增，z tiny 版本号升级表示 bugs 修正。</strong> 因此 “~&gt; x.y.z” 可以让我們保有升级弹性，又不致于升級太多让程序发生不兼容错误;</p>
+<h3 id="2-本地导入">2.本地导入</h3><p>从本地pod files</p>
+<p><code>pod &#39;AFNetworking&#39;, :path =&gt; &#39;~/Documents/AFNetworking&#39;</code></p>
+<p>此目录下一定要有.podspec文档</p>
+<h3 id="3-从git_server端pod_files">3.从git server端pod files</h3><ul>
+<li>从分支导入</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>, :git =&gt; <span class="string">'https://github.com/gowalla/AFNetworking.git'</span>, :branch =&gt; ‘develop’</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从commit 导入</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>, :git =&gt; <span class="string">'https://github.com/gowalla/AFNetworking.git'</span>, :commit =&gt; <span class="string">'082f8319af'</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-子模块导入">4.子模块导入</h3><p>pod ‘ShareKit/Facebook’ 支持子模块的导入。</p>
+<h3 id="5-注释">5.注释</h3><p>单行注释： #</p>
+<p>多行注释:</p>
+<pre><code>=<span class="ruby"><span class="keyword">begin</span>    </span>
+</code></pre><p>codes to comment </p>
+<p>   =end</p>
+<h3 id="6-版本介绍">6.版本介绍</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>      <span class="comment">//不显式指定依赖库版本，表示每次都获取最新版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'2.0'</span>     <span class="comment">//只使用2.0版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt; 2.0'</span>     <span class="comment">//使用高于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt;= 2.0'</span>     <span class="comment">//使用大于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt; 2.0'</span>     <span class="comment">//使用小于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt;= 2.0'</span>     <span class="comment">//使用小于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 0.1.2'</span>     <span class="comment">//使用大于等于0.1.2但小于0.2的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0.1'</span>     <span class="comment">//使用大于等于0.1但小于1.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0'</span>     <span class="comment">//高于0的版本，写这个限制和什么都不写是一个效果，都表示使用最新版本</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-Podfile-lock文件">7.Podfile.lock文件</h3><p>Podfile.lock文件对团队协作很重要，我们需要将它添加到版本管理中。</p>
+<h3 id="8-Podfile_文件位置">8.Podfile 文件位置</h3><p>事实上Podfile文件可以放在任意一个目录下，需要做的是在Podfile中指定工程的路径，和原来相比，Podfile文件就在最开始的位置增加了一行，具体内容如下</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xcodeproj <span class="string">"/Users/wangzz/Desktop/CocoaPodsTest/CocoaPodsTest.xcodeproj"</span>  </span><br><span class="line">  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span></span><br></pre></td></tr></table></figure>
+<h3 id="9-Podfile和target">9.Podfile和target</h3><ol>
+<li>多个target中使用相同的Pods依赖库</li>
+</ol>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">link_with <span class="string">'CocoaPodsTest'</span>, <span class="string">'Second'</span>  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>不同的target使用完全不同的Pods依赖库</li>
+</ol>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">target <span class="symbol">:<span class="string">'CocoaPodsTest'</span></span> <span class="keyword">do</span>  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span>  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">  </span><br><span class="line">target <span class="symbol">:<span class="string">'Second'</span></span> <span class="keyword">do</span>  </span><br><span class="line">pod <span class="string">'OpenUDID'</span>, <span class="string">'~&gt; 1.0.0'</span>  </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>更多内容 点击 <a href="http://www.cnblogs.com/ouyangfang/p/4173544.html" target="_blank" rel="external">这里</a></p>
+<p><a href="http://guides.cocoapods.org/using/index.html" target="_blank" rel="external">Cocoapods 官网引导</a></p>
+<p><a href="http://blog.csdn.net/wzzvictory/article/details/19178709" target="_blank" rel="external">王中周 CSDN 博客</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihlen5xt0006wis6ui07gk9f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ReactiveCocoa" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/27/ReactiveCocoa/" class="article-date">
@@ -139,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihhixej400041as61fs4ftyc" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihlen5xk0004wis669ft7jbu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -614,7 +690,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihhixejh00091as6mparfzaf" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS编程规范/" data-id="cihlen5xy000awis6dvnr7ffx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -695,7 +771,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihhixein00001as66n12l6kd" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihlen5x40000wis617tik6uh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -754,7 +830,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihhixeit00011as6spm3nbyj" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihlen5xe0001wis6wa2fsktf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -801,7 +877,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihhixeji000a1as6klforpuw" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/AotumanLady-iOS-App-开发准备工作/" data-id="cihlen5xz000bwis6hz2k4jpo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1475,7 +1551,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihhixej600051as64m8nqukc" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/Google-Objective-C-Style-Guide-中文版/" data-id="cihlen5xm0005wis6n01upoi3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1681,7 +1757,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/Cocoa-编码规范中文版/" data-id="cihhixej800061as6vmeaj42o" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/Cocoa-编码规范中文版/" data-id="cihlen5xu0007wis695ynfpog" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1846,7 +1922,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/aotuManLady-编码规范/" data-id="cihhixej200031as6psbdod02" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/aotuManLady-编码规范/" data-id="cihlen5xi0003wis61hlgl99e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1914,66 +1990,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihhixejb00081as6vhy6n1lo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-AotumanLady-写作规范" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/24/AotumanLady-写作规范/" class="article-date">
-  <time datetime="2015-11-24T09:27:24.000Z" itemprop="datePublished">2015-11-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/24/AotumanLady-写作规范/">AotumanLady 写作规范</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="文案风格">文案风格</h3><ul>
-<li>请确认没有错别字。</li>
-<li>谐音错别字也不可以使用。比如 「童鞋」、「菇凉」 等。</li>
-<li>扼要表达，不可拖拉。</li>
-</ul>
-<h3 id="中英文、数字混合时空格的使用">中英文、数字混合时空格的使用</h3><ul>
-<li><p>英文和非标点的中文之间需要添加一个空格</p>
-<p>  right:<br><code>我们是 AutoManLady 的一部分。</code></p>
-<p>  error:<br><code>我们是AutoManLady的一部分。</code></p>
-</li>
-<li><p>数字与非标点的中文之间需要有一个空格</p>
-<p>  best:<br><code>我们一共有一百位员工。</code></p>
-<p>  right:<br><code>我们一共有 100 位员工。</code></p>
-<p>  error:<br><code>我们一共有100位员工。</code></p>
-</li>
-<li><p>数字与单位之间需要一个空格</p>
-<p>  best:<br><code>5 GB</code></p>
-<p>  right:<br><code>5GB</code></p>
-</li>
-<li><p>特殊名词的大小写</p>
-<pre><code>Android、iOS、iPhone、Google、Apple
-</code></pre></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/24/AotumanLady-写作规范/" data-id="cihhixej900071as6mk3as737" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/25/AotumanLady-代码分支管理规范/" data-id="cihlen5xw0009wis65yyegj4n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2002,7 +2019,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">11</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -2012,6 +2029,10 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/30/CocoaPods-Podfile-语法/">CocoaPods Podfile 语法</a>
+          </li>
         
           <li>
             <a href="/2015/11/27/ReactiveCocoa/">ReactiveCocoa</a>
@@ -2027,10 +2048,6 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
         
           <li>
             <a href="/2015/11/26/iOS-面试题①/">iOS 面试题①</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/26/AotumanLady-iOS-App-开发准备工作/">AotumanLady iOS App 开发准备工作</a>
           </li>
         
       </ul>
