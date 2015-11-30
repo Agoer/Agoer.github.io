@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Bulid Configuration | 李二狗的技术博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Build ConfigurationXcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。
+
+为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ develop_debug ）、测试服务器( debug )、线上服务器( release ).如何能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bulid Configuration">
+<meta property="og:url" content="http://www.lichaner.com/2015/11/30/Bulid-Configuration/index.html">
+<meta property="og:site_name" content="李二狗的技术博客">
+<meta property="og:description" content="Build ConfigurationXcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。
+
+为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ develop_debug ）、测试服务器( debug )、线上服务器( release ).如何能">
+<meta property="og:image" content="http://i12.tietuku.com/5416d9b6ae0ff918.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83583695.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/92987100.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/54816366.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/40676889.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/25588960.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/28361769.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/81085209.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83542990.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/22519419.jpg">
+<meta property="og:image" content="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/85204463.jpg">
+<meta property="og:updated_time" content="2015-11-30T10:50:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bulid Configuration">
+<meta name="twitter:description" content="Build ConfigurationXcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。
+
+为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ develop_debug ）、测试服务器( debug )、线上服务器( release ).如何能">
+  
+    <link rel="alternative" href="/atom.xml" title="李二狗的技术博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李二狗的技术博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">有时会傻笑</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.lichaner.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Bulid-Configuration" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/30/Bulid-Configuration/" class="article-date">
+  <time datetime="2015-11-30T08:00:38.000Z" itemprop="datePublished">2015-11-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Bulid Configuration
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Build_Configuration">Build Configuration</h2><p>Xcode默认会有2个编译模式，一个是Debug，一个是Release。Release下不能调试程序，编译时有做编译优化，会比用Debug打包出来的运行快，另外包也会更小。</p>
+<p><img src="http://i12.tietuku.com/5416d9b6ae0ff918.jpg" alt="你好"></p>
+<p>为什么会有这样的编译模式？如果我有三个不同的API地址，分别对应 开发测试服务器（ develop_debug ）、测试服务器( debug )、线上服务器( release ).如何能够不去修改代码的情况下去快速切换调试模式呢 ？<br>幸好有 bulid configuration！</p>
+<h2 id="配置_bulid_configuration">配置 bulid configuration</h2><h3 id="1-添加_configuration">1.添加 configuration</h3><p>假定我们需要三个不同的调试环境。</p>
+<p>按照优先级 从低到高的顺序：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="class">.test_debug</span>   		<span class="comment">//开发测试环境   </span></span><br><span class="line"><span class="number">2</span><span class="class">.debug</span>			  	<span class="comment">//开发环境</span></span><br><span class="line"><span class="number">3</span><span class="class">.beta</span>				<span class="comment">//预发布线上环境(企业版) 	</span></span><br><span class="line"><span class="number">3</span><span class="class">.release</span>			<span class="comment">//线上环境</span></span><br></pre></td></tr></table></figure>
+<p>其中 test_debug 和 debug 是 可以做断点调试；<br>beta 和 release 是不可以做断点调试的。</p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83583695.jpg" alt=""></p>
+<h3 id="2-查看_configuration">2.查看 configuration</h3><p>添加完第1步的Configuration之后，在Edit Scheme里就会看到新添加的配置项</p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/92987100.jpg" alt=""></p>
+<h3 id="3-更改Preprocessor_Macros">3.更改Preprocessor Macros</h3><p>第1步里我们直接复制了Debug / Release 的配置项，那这里的值就会有问题，需要自己设置。</p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/54816366.jpg" alt=""></p>
+<h3 id="4-在程序配置项里面对应你所设置的_configuration_定义不同的API_接口。">4.在程序配置项里面对应你所设置的 configuration 定义不同的API 接口。</h3><p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/40676889.jpg" alt=""></p>
+<p><strong>切换不同的 编译模式，会根据宏定义打印相应的API。</strong></p>
+<h2 id="配置不同的_APPIcon">配置不同的 APPIcon</h2><h3 id="1-使用_Asset_Catalog，配置不同环境下的appIcon">1.使用 Asset Catalog，配置不同环境下的appIcon</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="class">.test_debug</span>   		<span class="comment">//开发测试环境   </span></span><br><span class="line"><span class="number">2</span><span class="class">.debug</span>			  	<span class="comment">//开发环境</span></span><br><span class="line"><span class="number">3</span><span class="class">.beta</span>				<span class="comment">//预发布线上环境(企业版) 	</span></span><br><span class="line"><span class="number">3</span><span class="class">.release</span>			<span class="comment">//线上环境</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/25588960.jpg" alt=""></p>
+<p><strong>不同环境下运行得到的 icon 就会有所差异</strong></p>
+<h2 id="配置不同的_APP_Name">配置不同的 APP Name</h2><h3 id="1-Target_-_Build_Settings里点+号，添加一个User-Defined_Setting">1.Target - Build Settings里点+号，添加一个User-Defined Setting</h3><h3 id="2-比如我们请一个叫APP_DISPLAY_NAME的key值，下面BETA叫BETA，DEVELOP叫DEVELOP，_Release还是用系统原配置。">2.比如我们请一个叫APP_DISPLAY_NAME的key值，下面BETA叫BETA，DEVELOP叫DEVELOP， Release还是用系统原配置。</h3><h3 id="3-进到Target_-_Info里，修改Bundle_name为$(APP_DISPLAY_NAME)">3.进到Target - Info里，修改Bundle name为$(APP_DISPLAY_NAME)</h3><p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/28361769.jpg" alt=""></p>
+<p>效果如下：</p>
+<ul>
+<li>test_debug           //开发测试环境   </li>
+</ul>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/81085209.jpg" alt=""></p>
+<ul>
+<li>debug                  //开发环境</li>
+</ul>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/83542990.jpg" alt=""></p>
+<ul>
+<li>beta                //预发布线上环境(企业版)</li>
+</ul>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/22519419.jpg" alt=""></p>
+<ul>
+<li>release            //线上环境</li>
+</ul>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-11-30/85204463.jpg" alt=""></p>
+<p>参考文档：<a href="http://www.jianshu.com/p/51a2bbe877aa" target="_blank" rel="external">简书</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihlu3y8t0008g2s6cfrd6d6i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/30/CocoaPods-Podfile-语法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CocoaPods Podfile 语法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/11/30/Bulid-Configuration/">Bulid Configuration</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/30/CocoaPods-Podfile-语法/">CocoaPods Podfile 语法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/27/ReactiveCocoa/">ReactiveCocoa</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/26/AotumanLady-iOS编程规范/">AotumanLady iOS编程规范</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/26/iOS-面试题②/">iOS 面试题②</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 lichan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
