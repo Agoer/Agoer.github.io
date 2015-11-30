@@ -7,26 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Pod Commandspod search &amp;lt;open source&amp;gt;
 ag:pod search AFNetworking
-在cocoapods这个目录中搜索。也可以在http://cocoapods.org中搜索第三方库。
+在cocoapods这个目录中搜索。也可以在 http://cocoapods.org中搜索第三方库。
 Podfile1.pod ‘objection’’version’;
-pod ‘MCDateExtensions’,不指定版本，在pod update时会获取">
+pod ‘MCDateExtensions’,不指定版本，在pod update时会获">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CocoaPods Podfile 语法">
 <meta property="og:url" content="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/index.html">
 <meta property="og:site_name" content="李二狗的技术博客">
 <meta property="og:description" content="Pod Commandspod search &amp;lt;open source&amp;gt;
 ag:pod search AFNetworking
-在cocoapods这个目录中搜索。也可以在http://cocoapods.org中搜索第三方库。
+在cocoapods这个目录中搜索。也可以在 http://cocoapods.org中搜索第三方库。
 Podfile1.pod ‘objection’’version’;
-pod ‘MCDateExtensions’,不指定版本，在pod update时会获取">
-<meta property="og:updated_time" content="2015-11-30T03:37:04.000Z">
+pod ‘MCDateExtensions’,不指定版本，在pod update时会获">
+<meta property="og:updated_time" content="2015-11-30T03:39:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods Podfile 语法">
 <meta name="twitter:description" content="Pod Commandspod search &amp;lt;open source&amp;gt;
 ag:pod search AFNetworking
-在cocoapods这个目录中搜索。也可以在http://cocoapods.org中搜索第三方库。
+在cocoapods这个目录中搜索。也可以在 http://cocoapods.org中搜索第三方库。
 Podfile1.pod ‘objection’’version’;
-pod ‘MCDateExtensions’,不指定版本，在pod update时会获取">
+pod ‘MCDateExtensions’,不指定版本，在pod update时会获">
   
     <link rel="alternative" href="/atom.xml" title="李二狗的技术博客" type="application/atom+xml">
   
@@ -100,7 +100,7 @@ pod ‘MCDateExtensions’,不指定版本，在pod update时会获取">
       
         <h2 id="Pod_Commands">Pod Commands</h2><p><code>pod search &lt;open source&gt;</code></p>
 <p>ag:<br><code>pod search AFNetworking</code></p>
-<p>在cocoapods这个目录中搜索。也可以在<a href="http://cocoapods.org中搜索第三方库。" target="_blank" rel="external">http://cocoapods.org中搜索第三方库。</a></p>
+<p>在cocoapods这个目录中搜索。也可以在 <code>http://cocoapods.org</code>中搜索第三方库。</p>
 <h2 id="Podfile">Podfile</h2><h3 id="1-pod_‘objection’’version’;">1.pod ‘objection’’version’;</h3><ul>
 <li>pod ‘MCDateExtensions’,不指定版本，在pod update时会获取最新的版本；</li>
 <li>pod ‘MCDateExtensions’’~&gt;1.0.0’，获取的版本信息是[1.0.0, 1.1.0). ~&gt;是参照ruby的语法的，~&gt;x.y.z, 的意思是版本号 x,y 固定，但可以大于等于 z。</li>
@@ -120,9 +120,9 @@ pod ‘MCDateExtensions’,不指定版本，在pod update时会获取">
 <h3 id="4-子模块导入">4.子模块导入</h3><p>pod ‘ShareKit/Facebook’ 支持子模块的导入。</p>
 <h3 id="5-注释">5.注释</h3><p>单行注释： #</p>
 <p>多行注释:</p>
-<pre><code>=<span class="ruby"><span class="keyword">begin</span>    </span>
-</code></pre><p>codes to comment </p>
-<p>   =end</p>
+<p>=begin    </p>
+<p>codes to comment </p>
+<p>=end</p>
 <h3 id="6-版本介绍">6.版本介绍</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>      <span class="comment">//不显式指定依赖库版本，表示每次都获取最新版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'2.0'</span>     <span class="comment">//只使用2.0版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt; 2.0'</span>     <span class="comment">//使用高于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt;= 2.0'</span>     <span class="comment">//使用大于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt; 2.0'</span>     <span class="comment">//使用小于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt;= 2.0'</span>     <span class="comment">//使用小于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 0.1.2'</span>     <span class="comment">//使用大于等于0.1.2但小于0.2的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0.1'</span>     <span class="comment">//使用大于等于0.1但小于1.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0'</span>     <span class="comment">//高于0的版本，写这个限制和什么都不写是一个效果，都表示使用最新版本</span></span><br></pre></td></tr></table></figure>
 <h3 id="7-Podfile-lock文件">7.Podfile.lock文件</h3><p>Podfile.lock文件对团队协作很重要，我们需要将它添加到版本管理中。</p>
 <h3 id="8-Podfile_文件位置">8.Podfile 文件位置</h3><p>事实上Podfile文件可以放在任意一个目录下，需要做的是在Podfile中指定工程的路径，和原来相比，Podfile文件就在最开始的位置增加了一行，具体内容如下</p>
@@ -142,7 +142,7 @@ pod ‘MCDateExtensions’,不指定版本，在pod update时会获取">
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihlen5xt0006wis6ui07gk9f" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihleps340006x6s6ejqyg1hs" class="article-share-link">Share</a>
       
       
     </footer>
