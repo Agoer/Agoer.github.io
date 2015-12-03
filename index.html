@@ -65,6 +65,72 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ipa-查看以及相关" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/03/ipa-查看以及相关/" class="article-date">
+  <time datetime="2015-12-03T08:31:28.000Z" itemprop="datePublished">2015-12-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/03/ipa-查看以及相关/">ipa 查看以及相关</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天想提取一些素材，便去下载了 蘑菇街 的ipa包。在以前没有 assets.images 图片集合包之前，大家的图片都是存放在文件夹里面。iOS7 以后便有了这个集合图片库。虽然图片不能暴露，但是图片还是有办法提取的。</p>
+<h2 id="ipa包打开">ipa包打开</h2><ul>
+<li>通过更改包后缀从  <strong>.ipa</strong> -&gt; <strong>.zip</strong>,进行压缩之后</li>
+</ul>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-12-3/9348831.jpg" alt=""></p>
+<ol>
+<li>iTunesArtwork 用浏览器打开，是1024的app icon。</li>
+<li>iTunesMetadata.plist<br><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-12-3/10124334.jpg" alt=""></li>
+<li>META-INF目录:存放的是签名信息,app 越狱手机上使用可能就是在研究这个文件夹。</li>
+<li>资源存放文件 Payload</li>
+</ol>
+<h2 id="Padyload_包详情">Padyload 包详情</h2><ul>
+<li>icon 和 bundle<br><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-12-3/24434195.jpg" alt=""></li>
+</ul>
+<p>特别注意 Assets.car 文件，这就是图片资源存储位置。</p>
+<ul>
+<li>nib文件和本地存储文件 plist.info 文件<br><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-12-3/91631658.jpg" alt=""></li>
+</ul>
+<p>这么多的nib~~~。如果想了解一个 app 的配置文件，可以打开 plist.info 文件。关于分享、网络安全版本号等等都在里面。</p>
+<p><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-12-3/6661214.jpg" alt=""></p>
+<h2 id="如何打开_Assets-car_文件？">如何打开 Assets.car 文件？</h2><p>我们想要的资源文件就在这个压缩包里面。<br>通过 git一位朋友的 app来解压吧。</p>
+<p>app下载地址（xcode 运行 mac 环境）：<a href="https://github.com/devcxm/iOS-Images-Extractor" target="_blank" rel="external">car文件解压工具</a></p>
+<ol>
+<li><p>安装<br><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-12-3/41394491.jpg" alt=""></p>
+</li>
+<li><p>解压<br><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-12-3/49223901.jpg" alt=""></p>
+<p> 详情：<br><img src="http://7xos4w.com1.z0.glb.clouddn.com/15-12-3/65013930.jpg" alt=""></p>
+</li>
+</ol>
+<p>那么 就请随意的使用吧~~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lichaner.com/2015/12/03/ipa-查看以及相关/" data-id="cihq0dq4e00009ps6og0lsrtm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-aotuManLady-编码规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/30/aotuManLady-编码规范/" class="article-date">
@@ -224,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/aotuManLady-编码规范/" data-id="cihlz1y6900065ys60rta1nk5" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/aotuManLady-编码规范/" data-id="cihq0dq5400079ps6t7r10x10" class="article-share-link">Share</a>
       
       
     </footer>
@@ -902,7 +968,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/Google-Objective-C-Style-Guide-中文版/" data-id="cihlz1y6e000c5ys6u5ure0bo" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/Google-Objective-C-Style-Guide-中文版/" data-id="cihq0dq57000d9ps6i5b2z6t5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -953,7 +1019,7 @@ NSUInteger numberOfItems = <span class="keyword">array</span>.count;  // <span c
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-iOS-App-开发准备工作/" data-id="cihlz1y6x000r5ys68osio4qa" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-iOS-App-开发准备工作/" data-id="cihq0dq5l000s9ps6n24tu0ti" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1432,7 +1498,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-iOS编程规范/" data-id="cihlz1y6v000p5ys6h4fauhib" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-iOS编程规范/" data-id="cihq0dq5j000q9ps6kmp5eik5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1504,7 +1570,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-代码分支管理规范/" data-id="cihlz1y6t000n5ys6kxwzi4w9" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-代码分支管理规范/" data-id="cihq0dq5i000o9ps65y7n3gw6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1714,7 +1780,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/Cocoa-编码规范中文版/" data-id="cihlz1y6n000h5ys6or6zch7p" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/Cocoa-编码规范中文版/" data-id="cihq0dq5a000i9ps61msl19mo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1777,7 +1843,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-写作规范/" data-id="cihlz1y6q000l5ys6rc3isfnn" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/AotumanLady-写作规范/" data-id="cihq0dq5g000m9ps6mvhme47i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1855,7 +1921,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihlz1y6o000j5ys6s3lxb6dp" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/Bulid-Configuration/" data-id="cihq0dq5c000k9ps6p69kv92u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1935,95 +2001,7 @@ class CrossPlatformAPI {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihlz1y6l000e5ys6malfmkgt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ReactiveCocoa" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/27/ReactiveCocoa/" class="article-date">
-  <time datetime="2015-11-27T07:21:55.000Z" itemprop="datePublished">2015-11-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/27/ReactiveCocoa/">ReactiveCocoa</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>ReactiveCocoa  信号<span class="comment">(signal)</span>主导一切。
-</code></pre><h2 id="ReactiveCocoa_原理">ReactiveCocoa 原理</h2><blockquote>
-<p>action、delegate、KVO、callback 的组合，从而来实现 功能的 连接、过滤和组合。</p>
-</blockquote>
-<h2 id="一步步去实现_RAC">一步步去实现 RAC</h2><h3 id="1-使用_RAC_实现_UITextfield_最简单的事件监听">1.使用 RAC 实现 UITextfield 最简单的事件监听</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//监听输入</span></span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span> subscribeNext:^(<span class="keyword">id</span> word)&#123;</span><br><span class="line">       <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,word);</span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
-<p>类似于</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)textField:(<span class="built_in">UITextField</span> *)textField shouldChangeCharactersInRange:(<span class="built_in">NSRange</span>)range replacementString:(<span class="built_in">NSString</span> *)string;  </span><br><span class="line"> <span class="comment">// return NO to not change text</span></span><br></pre></td></tr></table></figure>
-<p>每一次改变都会触发 block 事件，并打印出文本框的内容。</p>
-<p>return</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.359</span> RWReactivePlayground[<span class="number">9193</span>:a0b] i</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.436</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.541</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is </span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.695</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is t</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.831</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is th</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.878</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is thi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">50.901</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.009</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> </span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.142</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> m</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.236</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> ma</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.335</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> mag</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.439</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> magi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.535</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> magic</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">24</span> <span class="number">14</span>:<span class="number">48</span>:<span class="number">51.774</span> RWReactivePlayground[<span class="number">9193</span>:a0b] is <span class="keyword">this</span> magic?</span><br></pre></td></tr></table></figure>
-<h3 id="2-使用_RAC_对输入内容进行过滤">2.使用 RAC 对输入内容进行过滤</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *usernameSourceSignal =  <span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span>;</span><br><span class="line"></span><br><span class="line">  RACSignal *filteredUsername = [usernameSourceSignal filter:^<span class="built_in">BOOL</span>(<span class="keyword">id</span> value) &#123;</span><br><span class="line">      <span class="built_in">NSString</span> *text = value;</span><br><span class="line">      <span class="keyword">return</span> text<span class="variable">.length</span> &gt; <span class="number">3</span>;</span><br><span class="line">  &#125;];</span><br><span class="line">  </span><br><span class="line">  [filteredUsername subscribeNext:^(<span class="keyword">id</span> x) &#123;</span><br><span class="line">      </span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,x);</span><br><span class="line">  </span><br><span class="line">  &#125;];</span><br></pre></td></tr></table></figure>
-<p>简写</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[self.userTextField.rac_textSignal filter:<span class="comment">^BOOL</span><span class="list">(<span class="keyword">id</span> value)</span> <span class="collection">&#123;</span><br><span class="line"> </span><br><span class="line">    NSString *text = value;</span><br><span class="line">    return text.length &gt; <span class="number">3</span><span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">&#125;</span>]</span></span><br><span class="line"></span><br><span class="line">subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">&#123;</span><br><span class="line">    </span><br><span class="line">       NSLog<span class="list">(@<span class="string">"%@"</span>,x)</span><span class="comment">;</span></span><br><span class="line">    </span><br><span class="line">&#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>1&gt; 在输入的过程中，每一次的 block 调用 都会触发 Filter 的 过滤，然后返回给 returnRAC 一个值；<br>2&gt; returnRAC 通过 自身的 描述方法 </p>
-<p><code>subscribeNext(void (^)(id x))nextBlock</code> </p>
-<p>去对得到的结果进行处理。</p>
-<p>从后续的 demo 就会发现，其实是<strong>信息流</strong>的传递和处理。</p>
-<p>只有当输入的长度 &gt; 3 才会打印输出。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.335</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is t</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.478</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is th</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.526</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is thi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.548</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.676</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> </span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.798</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> m</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.926</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> ma</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">51.987</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> mag</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">52.141</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> magi</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">52.229</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> magic</span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">08</span>:<span class="number">17</span>:<span class="number">52.486</span> RWReactivePlayground[<span class="number">9654</span>:a0b] is <span class="keyword">this</span> magic?</span><br></pre></td></tr></table></figure>
-<h3 id="3-_上面_Return_的类型_要和_下面_Receive_的类型保持一致">3. 上面 Return 的类型 要和 下面 Receive 的类型保持一致</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[self.userTextField.rac_textSignal</span><br><span class="line">   map:<span class="comment">^id</span><span class="list">(<span class="keyword">NSString</span> *text)</span><span class="collection">&#123;</span><br><span class="line">       return @<span class="list">(<span class="keyword">text.length</span>)</span><span class="comment">;</span></span><br><span class="line">   &#125;</span>]</span></span><br><span class="line">  filter:<span class="comment">^BOOL</span><span class="list">(<span class="keyword">NSNumber</span> *length)</span><span class="collection">&#123;</span><br><span class="line">      return<span class="collection">[length integerValue]</span> &gt; <span class="number">3</span><span class="comment">;</span></span><br><span class="line">  &#125;</span>]</span></span><br><span class="line"> subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span><span class="collection">&#123;</span><br><span class="line">     NSLog<span class="list">(@<span class="string">"%@"</span>, x)</span><span class="comment">;</span></span><br><span class="line"> &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>RETURN </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">54.566</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">4</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">54.725</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">5</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">54.853</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">6</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.061</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">7</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.197</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">8</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.300</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">9</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.462</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">10</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.558</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">11</span></span><br><span class="line"><span class="number">2013</span>-<span class="number">12</span>-<span class="number">26</span> <span class="number">12</span>:<span class="number">06</span>:<span class="number">55.646</span> RWReactivePlayground[<span class="number">10079</span>:a0b] <span class="number">12</span></span><br></pre></td></tr></table></figure>
-<p>Why? 为什么不再打印 输入文本了？</p>
-<p>因为信息流在 </p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map:^<span class="property">id</span>(NSString *<span class="type">text</span>)&#123;</span><br><span class="line"><span class="command">          return</span> @(<span class="type">text</span>.<span class="property">length</span>);</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
-<p>已经改变了后续信号源的类型。</p>
-<h3 id="4-_map_OR_filter_？">4. map OR filter ？</h3><p>先看看 map 和 filter 的实现差异性。</p>
-<p>filter:</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)filter:(BOOL (^)(id <span class="keyword">value</span>))block &#123;</span><br><span class="line">	NSCParameterAssert(block <span class="comment">!= nil);</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">Class</span> <span class="keyword">class</span> = self.<span class="keyword">class</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> [[self flattenMap:^ id (id <span class="keyword">value</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (block(<span class="keyword">value</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> [<span class="keyword">class</span> <span class="keyword">return</span>:<span class="keyword">value</span>];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">class</span>.empty;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;] setNameWithFormat:@<span class="string">"[%@] -filter:"</span>, self.<span class="keyword">name</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>map:</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (instancetype)map:(<span class="keyword">id</span> (^)(<span class="keyword">id</span> value))block &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(block != <span class="literal">nil</span>);</span><br><span class="line"></span><br><span class="line">	Class class = <span class="keyword">self</span><span class="variable">.class</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> [[<span class="keyword">self</span> flattenMap:^(<span class="keyword">id</span> value) &#123;</span><br><span class="line">		<span class="keyword">return</span> [class <span class="keyword">return</span>:block(value)];</span><br><span class="line">	&#125;] setNameWithFormat:<span class="string">@"[%@] -map:"</span>, <span class="keyword">self</span><span class="variable">.name</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>很相似，除了 filter 多了一个 <code>else</code> ,其余完全一样。<br>到底在什么时候选择什么样的方法呢？</p>
-<p><strong>map：改变输入源类型的时候 调用。</strong></p>
-<p><strong>filter:限制输入源的长度、颜色等时候调用。</strong></p>
-<h3 id="5-用_signal_去控制一切">5.用 signal 去控制一切</h3><p>代码你应该最喜欢吧？</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *validUsernameSignal =</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span></span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">      <span class="keyword">return</span> @([<span class="keyword">self</span> isValidUsername:text]);</span><br><span class="line">  &#125;];</span><br><span class="line">  <span class="comment">//得到验证用户名正确性的信号</span></span><br><span class="line"></span><br><span class="line">RACSignal *validPasswordSignal =</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.pswTextfield</span><span class="variable">.rac_textSignal</span></span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">     <span class="keyword">return</span> @([<span class="keyword">self</span> isValidPassword:text]);</span><br><span class="line"> &#125;];  </span><br><span class="line"> <span class="comment">//得到验证密码正确性的信号</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">RAC(<span class="keyword">self</span><span class="variable">.pswTextfield</span>,backgroundColor) =</span><br><span class="line">[validPasswordSignal</span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">     <span class="keyword">return</span> [passwordValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"> &#125;];</span><br><span class="line"> <span class="comment">//针对返回的信号去改变 控件的显示方式</span></span><br><span class="line"></span><br><span class="line">RAC(<span class="keyword">self</span><span class="variable">.userTextField</span>,backgroundColor) =</span><br><span class="line">[validUsernameSignal</span><br><span class="line"> map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *usernameValid)&#123;</span><br><span class="line">     <span class="keyword">return</span> [usernameValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line"> &#125;];</span><br><span class="line"> <span class="comment">// me too~</span></span><br></pre></td></tr></table></figure>
-<p>一种不可取的控件改变实现方式</p>
-<p>BAD ! BAD ! BAD !</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[validPasswordSignal</span><br><span class="line">  map:<span class="comment">^id</span><span class="list">(<span class="keyword">NSNumber</span> *passwordValid)</span><span class="collection">&#123;</span><br><span class="line">    return<span class="collection">[passwordValid boolValue]</span> ? <span class="collection">[UIColor clearColor]</span>:<span class="collection">[UIColor yellowColor]</span><span class="comment">;</span></span><br><span class="line">  &#125;</span>]</span></span><br><span class="line">  subscribeNext:^<span class="list">(<span class="keyword">UIColor</span> *color)</span><span class="collection">&#123;</span><br><span class="line">    self.passwordTextField.backgroundColor = color;</span><br><span class="line">  &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>能用 RAC 的宏， why not？</p>
-<p>RAC：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hexcolor">#def</span>ine <span class="function"><span class="title">RAC</span><span class="params">(TARGET, ...)</span></span> \</span><br><span class="line">    <span class="function"><span class="title">metamacro_if_eq</span><span class="params">(<span class="number">1</span>, metamacro_argcount(__VA_ARGS__)</span></span>) \</span><br><span class="line">        (<span class="function"><span class="title">RAC_</span><span class="params">(TARGET, __VA_ARGS__, nil)</span></span>) \</span><br><span class="line">        (<span class="function"><span class="title">RAC_</span><span class="params">(TARGET, __VA_ARGS__)</span></span>)</span><br></pre></td></tr></table></figure>
-<h3 id="6-用_UITextfield_的返回信号_去处理其他事件（_UIButton_）">6.用 UITextfield 的返回信号 去处理其他事件（ UIButton ）</h3><p>code：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">RACSignal *validUsernameSignal =</span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.userTextField</span><span class="variable">.rac_textSignal</span></span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">         <span class="keyword">return</span> @([<span class="keyword">self</span> isValidUsername:text]);</span><br><span class="line">     &#125;];</span><br><span class="line">   </span><br><span class="line">   RACSignal *validPasswordSignal =</span><br><span class="line">   [<span class="keyword">self</span><span class="variable">.pswTextfield</span><span class="variable">.rac_textSignal</span></span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSString</span> *text) &#123;</span><br><span class="line">        <span class="keyword">return</span> @([<span class="keyword">self</span> isValidPassword:text]);</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   RAC(<span class="keyword">self</span><span class="variable">.pswTextfield</span>,backgroundColor) =</span><br><span class="line">   [validPasswordSignal</span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">        <span class="keyword">return</span> [passwordValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   RAC(<span class="keyword">self</span><span class="variable">.userTextField</span>,backgroundColor) =</span><br><span class="line">   [validUsernameSignal</span><br><span class="line">    map:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span> *usernameValid)&#123;</span><br><span class="line">        <span class="keyword">return</span> [usernameValid boolValue] ? [<span class="built_in">UIColor</span> clearColor] : [<span class="built_in">UIColor</span> redColor];</span><br><span class="line">    &#125;];</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">RACSignal *signUpActiveSingle = [RACSignal combineLatest:@[validUsernameSignal,validPasswordSignal] reduce:^<span class="keyword">id</span>(<span class="built_in">NSNumber</span>*usernameValid, <span class="built_in">NSNumber</span> *passwordValid)&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> @([usernameValid boolValue]&amp;&amp;[passwordValid boolValue]);</span><br><span class="line">   </span><br><span class="line">&#125;];</span><br><span class="line">   </span><br><span class="line">   [signUpActiveSingle subscribeNext:^(<span class="built_in">NSNumber</span> *signupActive) &#123;</span><br><span class="line">      </span><br><span class="line">       <span class="keyword">self</span><span class="variable">.signinButton</span><span class="variable">.enabled</span> = [signupActive boolValue];</span><br><span class="line">       </span><br><span class="line">   &#125;];</span><br></pre></td></tr></table></figure>
-<p>上面的代码使用 <code>combineLatest:reduce:</code> 方法把<code>validUsernameSignal</code> 和 <code>validPasswordSignal</code>  产生的最新的值聚合在一起，并生成一个新的信号。每次这两个源信号的任何一个产生新值时，reduce block都会执行，block的返回值会发给下一个信号。</p>
-<p>对聚合好的信号，然后去控制 UIButton 界面。</p>
-<h3 id="7-使用_RAC_替代_Button_事件">7.使用 RAC 替代 Button 事件</h3><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[self.signinButton rac_signalForControlEvents:UIControlEventTouchUpInside]</span></span><br><span class="line">    </span><br><span class="line">    subscribeNext:^<span class="list">(<span class="keyword">id</span> x)</span> <span class="collection">&#123;</span><br><span class="line">       </span><br><span class="line">        NSLog<span class="list">(@<span class="string">"button clicked"</span>)</span><span class="comment">;</span></span><br><span class="line">    &#125;</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>项目地址：<a href="https://github.com/lc10915819/ReactiveCocoaDemo" target="_blank" rel="external">ReactiveCocoaDemo</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihlz1y6b00095ys6otxzk4dx" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihq0dq58000f9ps6jzdzwknd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2059,7 +2037,7 @@ class CrossPlatformAPI {
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -2069,6 +2047,10 @@ class CrossPlatformAPI {
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/03/ipa-查看以及相关/">ipa 查看以及相关</a>
+          </li>
         
           <li>
             <a href="/2015/11/30/aotuManLady-编码规范/">AotumanLady 编程规范</a>
@@ -2084,10 +2066,6 @@ class CrossPlatformAPI {
         
           <li>
             <a href="/2015/11/30/AotumanLady-iOS编程规范/">AotumanLady iOS编程规范</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/30/AotumanLady-代码分支管理规范/">AotumanLady 代码分支管理规范</a>
           </li>
         
       </ul>
