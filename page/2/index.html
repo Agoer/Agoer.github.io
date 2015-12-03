@@ -65,6 +65,86 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CocoaPods-Podfile-语法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/30/CocoaPods-Podfile-语法/" class="article-date">
+  <time datetime="2015-11-30T02:21:09.000Z" itemprop="datePublished">2015-11-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Xcode/">Xcode</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/30/CocoaPods-Podfile-语法/">CocoaPods Podfile 语法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Pod_Commands">Pod Commands</h2><p><code>pod search &lt;open source&gt;</code></p>
+<p>ag:<br><code>pod search AFNetworking</code></p>
+<p>在cocoapods这个目录中搜索。也可以在 <code>http://cocoapods.org</code>中搜索第三方库。</p>
+<h2 id="Podfile">Podfile</h2><h3 id="1-pod_‘objection’’version’;">1.pod ‘objection’’version’;</h3><ul>
+<li>pod ‘MCDateExtensions’,不指定版本，在pod update时会获取最新的版本；</li>
+<li>pod ‘MCDateExtensions’’~&gt;1.0.0’，获取的版本信息是[1.0.0, 1.1.0). ~&gt;是参照ruby的语法的，~&gt;x.y.z, 的意思是版本号 x,y 固定，但可以大于等于 z。</li>
+</ul>
+<p><strong>通常版本号的命名有其惯例：x major 版本号升级表示有 API 发生不向后的兼容性变动，y minor 版本号升级表示有功能新增，z tiny 版本号升级表示 bugs 修正。</strong> 因此 “~&gt; x.y.z” 可以让我們保有升级弹性，又不致于升級太多让程序发生不兼容错误;</p>
+<h3 id="2-本地导入">2.本地导入</h3><p>从本地pod files</p>
+<p><code>pod &#39;AFNetworking&#39;, :path =&gt; &#39;~/Documents/AFNetworking&#39;</code></p>
+<p>此目录下一定要有.podspec文档</p>
+<h3 id="3-从git_server端pod_files">3.从git server端pod files</h3><ul>
+<li>从分支导入</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>, :git =&gt; <span class="string">'https://github.com/gowalla/AFNetworking.git'</span>, :branch =&gt; ‘develop’</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从commit 导入</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>, :git =&gt; <span class="string">'https://github.com/gowalla/AFNetworking.git'</span>, :commit =&gt; <span class="string">'082f8319af'</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-子模块导入">4.子模块导入</h3><p>pod ‘ShareKit/Facebook’ 支持子模块的导入。</p>
+<h3 id="5-注释">5.注释</h3><p>单行注释： #</p>
+<p>多行注释:</p>
+<p>=begin    </p>
+<p>codes to comment </p>
+<p>=end</p>
+<h3 id="6-版本介绍">6.版本介绍</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'AFNetworking'</span>      <span class="comment">//不显式指定依赖库版本，表示每次都获取最新版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'2.0'</span>     <span class="comment">//只使用2.0版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt; 2.0'</span>     <span class="comment">//使用高于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&gt;= 2.0'</span>     <span class="comment">//使用大于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt; 2.0'</span>     <span class="comment">//使用小于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'&lt;= 2.0'</span>     <span class="comment">//使用小于或等于2.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 0.1.2'</span>     <span class="comment">//使用大于等于0.1.2但小于0.2的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0.1'</span>     <span class="comment">//使用大于等于0.1但小于1.0的版本  </span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt;0'</span>     <span class="comment">//高于0的版本，写这个限制和什么都不写是一个效果，都表示使用最新版本</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-Podfile-lock文件">7.Podfile.lock文件</h3><p>Podfile.lock文件对团队协作很重要，我们需要将它添加到版本管理中。</p>
+<h3 id="8-Podfile_文件位置">8.Podfile 文件位置</h3><p>事实上Podfile文件可以放在任意一个目录下，需要做的是在Podfile中指定工程的路径，和原来相比，Podfile文件就在最开始的位置增加了一行，具体内容如下</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xcodeproj <span class="string">"/Users/wangzz/Desktop/CocoaPodsTest/CocoaPodsTest.xcodeproj"</span>  </span><br><span class="line">  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span></span><br></pre></td></tr></table></figure>
+<h3 id="9-Podfile和target">9.Podfile和target</h3><ol>
+<li>多个target中使用相同的Pods依赖库</li>
+</ol>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">link_with <span class="string">'CocoaPodsTest'</span>, <span class="string">'Second'</span>  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>不同的target使用完全不同的Pods依赖库</li>
+</ol>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">target <span class="symbol">:<span class="string">'CocoaPodsTest'</span></span> <span class="keyword">do</span>  </span><br><span class="line">platform <span class="symbol">:ios</span>    </span><br><span class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span>    </span><br><span class="line">pod <span class="string">'SBJson'</span>, <span class="string">'~&gt; 4.0.0'</span>    </span><br><span class="line">    </span><br><span class="line">platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>    </span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span>  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line">  </span><br><span class="line">target <span class="symbol">:<span class="string">'Second'</span></span> <span class="keyword">do</span>  </span><br><span class="line">pod <span class="string">'OpenUDID'</span>, <span class="string">'~&gt; 1.0.0'</span>  </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>更多内容 点击 <a href="http://www.cnblogs.com/ouyangfang/p/4173544.html" target="_blank" rel="external">这里</a></p>
+<p><a href="http://guides.cocoapods.org/using/index.html" target="_blank" rel="external">Cocoapods 官网引导</a></p>
+<p><a href="http://blog.csdn.net/wzzvictory/article/details/19178709" target="_blank" rel="external">王中周 CSDN 博客</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lichaner.com/2015/11/30/CocoaPods-Podfile-语法/" data-id="cihq8zvjb000he6s608x0w6vh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ReactiveCocoa" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/27/ReactiveCocoa/" class="article-date">
@@ -143,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihq0fabj000aads6dtwkuh4z" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/27/ReactiveCocoa/" data-id="cihq8zvj7000de6s68bu3hx0h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -228,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihq0fab70001ads6jzk8itkd" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题②/" data-id="cihq8zvis0004e6s6v8nn9nfl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -291,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihq0fabc0004ads63oi0chd0" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/26/iOS-面试题①/" data-id="cihq8zviv0007e6s6q2o7ry0j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -336,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lichaner.com/2015/11/24/hello-world/" data-id="cihq0fabe0006ads62buvrf0f" class="article-share-link">Share</a>
+      <a data-url="http://www.lichaner.com/2015/11/24/hello-world/" data-id="cihq8zviy0009e6s6q3cuk1sl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -359,7 +439,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Xcode/">Xcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术方案/">技术方案</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/规范/">规范</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Xcode/">Xcode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术方案/">技术方案</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/规范/">规范</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -372,7 +452,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -382,6 +462,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/03/使用纯代码进行约束关联-Masonry实现-AutoLayout/">使用纯代码进行约束关联(Masonry实现 AutoLayout)</a>
+          </li>
         
           <li>
             <a href="/2015/12/03/ipa-查看以及相关/">ipa 查看以及相关</a>
@@ -397,10 +481,6 @@
         
           <li>
             <a href="/2015/11/30/AotumanLady-iOS-App-开发准备工作/">AotumanLady iOS App 开发准备工作</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/30/AotumanLady-iOS编程规范/">AotumanLady iOS编程规范</a>
           </li>
         
       </ul>
